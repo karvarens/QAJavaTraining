@@ -12,7 +12,7 @@ public class ArrayUtil {
      * this means that it will be found the next even number and swap with the second element
      * if the second element is odd. And so on for the next elements of the util
      */
-    public static void sortByOddAndEven() {
+    public static void sortByOddAndEven(int [] array) {
 //        TODO   implement
     }
 
