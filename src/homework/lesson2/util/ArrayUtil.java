@@ -1,4 +1,4 @@
-package homework.lesson2;
+package homework.lesson2.util;
 
 /**
  * This class contains utility methods for array

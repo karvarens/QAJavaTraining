@@ -1,4 +1,4 @@
-package homework.karenvardanyan.lesson2;
+package homework.lesson2.karenvardanyan.util;
 
 public class ArrayUtilTest {
 
