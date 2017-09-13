@@ -5,7 +5,7 @@ package homework.lesson2.avetikbabayan.util;
  * manipulation.
  */
 public class ArrayUtil {
-    //testAv
+    //testAvetik
     /**
      * Sorts the util elements by odd and even number
      * such that if first number is odd then second must be even number
