@@ -14,8 +14,10 @@ public class MathUtil {
      * @return the value <code>a<sup>b</sup></code>.
      */
     public static int pow(int a, int n) {
-        
-        return 0;
+            while (int i < n) {
+                a = a*a;
+        }
+        return a;
     }
 
     /**

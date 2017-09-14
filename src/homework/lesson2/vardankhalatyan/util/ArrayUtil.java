@@ -14,61 +14,55 @@ public class ArrayUtil {
      * @param array
      */
     public static void sortByOddAndEven(int[] array) {
+        int odds[] = {};
+        int evens[] = {};
+        int o = 0, e = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] % 2 != 0) {
-                if (array[i+1] % 2 == 0) {
-                    continue;
-                } else {
-                    int tmp = array[i+1];
-                    int j = i+1;
-                    while (array[j] % 2 == 0) {
-                        if (array[j+1] % 2 == 0) {
-                            array[i+1] = array[j+1];
-                            array[j+1] = tmp;
-                            j++;
-                        }
-                    }
-                }
-            }
-            if (array[i] % 2 == 0) {
-                if (array[i+1] % 2 != 0) {
-                    continue;
-                } else {
-                    int tmp = array[i+1];
-                    int j = i+1;
-                    while (array[j] % 2 != 0) {
-                        if (array[j+1] % 2 != 0) {
-                            array[i+1] = array[j+1];
-                            array[j+1] = tmp;
-                            j++;
-                        }
-                    }
-                }
+                odds[o] = array[i];
+                o++;
+            } else {
+                evens[e] = array[i];
+                e++;
             }
         }
+        for (int i = 0; i < array.length; i++) {
+            Boolean bul = true;
+            if (bul) {
+                array[i] = odds[o];
+                o++;
+                bul = false;
+            } else {
+                array[i] = evens[e];
+                e++;
+                bul = true;
+            }
+        }
+
+
     }
 
+
+
     public static int getMaximum(int[] array) {
-        int j = 0;
+        int j = array[0];
         for (int i = 0; i < array.length; i++) {
-            if (array[i+1] > array[i] ) {
-                j = array[i+1];
+            if (array[i] > j) {
+                j = array[i];
             }
         }
-//        TODO   implement
         return j;
     }
 
 
     public static int getMinimum(int[] array) {
-        int j = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] < array[i+1] ) {
+        int j = array[0];
+        for (int i = 0; i < array.length -1; i++) {
+            if (array[i] < j ) {
                 j = array[i];
             }
         }
-//        TODO implement
-        return j;   // this must be replaced by correct code
+        return j;
     }
 
     /**
@@ -78,8 +72,11 @@ public class ArrayUtil {
      * @return the sum of the specified util elements
      */
     public static int getSum(int[] array) {
-//        TODO implement
-        return 0;   // this must be replaced by correct code
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            j = j + array[i];
+        }
+        return j;   // this must be replaced by correct code
     }
 
 
@@ -90,8 +87,15 @@ public class ArrayUtil {
      * @return new created reversed array to the specified parameter "array"
      */
     public static int[] reverse(int[] array) {
-//        TODO implement
-        return null;   // this must be replaced by correct code
+        int rarray[] = {};
+        int j = array.length;
+        for (int i = 0; i < array.length; i++) {
+            rarray[j-1] = array[i];
+            System.out.println("i= " + i + "; " + array[i]);
+            System.out.println("j= " + j + "; " + rarray[j]);
+            j--;
+        }
+        return rarray;
     }
 
     /**
@@ -99,8 +103,11 @@ public class ArrayUtil {
      * @param array  an array: Elements order of wich must be reversed
      */
     public static void reverseInSameArray(int[] array) {
-//        TODO implement
-
+        int j = array.length - 1;
+        for (int i = 0; i < array.length; i++) {
+            swap(array, i, j);
+            j--;
+        }
     }
 
     /**
@@ -113,7 +120,9 @@ public class ArrayUtil {
     * @param j the index of the other element to be swapped.
     */
     private static void swap(int[] array, int i, int j) {
-        //todo: implement
+        int tmp = array[i];
+        array[i] = array[j];
+        array[j] = tmp;
     }
 
     public static void print(int[] a) {
@@ -126,7 +135,9 @@ public class ArrayUtil {
      * @param a the util to print
      */
     public static void print(int[] a, String delimiter) {
-        // todo implement
+        for (int i = 0; i < a.length; i++){
+            System.out.println(a[i] + " ");
+        }
     }
 
 
