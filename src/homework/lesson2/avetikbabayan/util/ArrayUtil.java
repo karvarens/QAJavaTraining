@@ -12,19 +12,43 @@ public class ArrayUtil {
      * this means that it will be found the next even number and swap with the second element
      * if the second element is odd. And so on for the next elements of the util
      */
+
+//    public static int Array (int[] array) {
+//
+    }
+
+    public static void main(String[] args) {
+        int[] arraya = new int[10];
+        arraya[0] = 15;
+        arraya[1] = 10;
+        arraya[2] = 25;
+        arraya[3] = 20;
+        arraya[4] = 50;
+        arraya[5] = -15;
+        arraya[6] = -50;
+        arraya[7] = 30;
+        arraya[8] = 16;
+        arraya[9] = 150;
+    }
     public static void sortByOddAndEven(int [] array) {
 //        TODO   implement
     }
 
     public static int getMaximum(int[] array) {
-//        TODO   implement
-        return 0;   // this must be replaced by correct code
+    int max = 0;
+         for (int arraya:array) {
+             if (max < arraya);
+             max = arraya;
+             return max;
+         }
     }
 
-
     public static int getMinimum(int[] array) {
-//        TODO implement
-        return 0;   // this must be replaced by correct code
+    int min = 0;
+        for (int arraya:array) {
+            if (min > arraya);
+            min = arraya;
+            return min;
     }
 
     /**
@@ -34,10 +58,11 @@ public class ArrayUtil {
      * @return the sum of the specified util elements
      */
     public static int getSum(int[] array) {
-//        TODO implement
-        return 0;   // this must be replaced by correct code
+        int sum = 0;
+    for (int arraya:array) {
+        sum = sum + arraya;
+        return sum;
     }
-
 
     /**
      * Creates the reversed to specified array new array and returns it.
@@ -45,10 +70,24 @@ public class ArrayUtil {
      * @param array  an array corresponding to which must be created reversed array
      * @return new created reversed array to the specified parameter "array"
      */
-    public static int[] reverse(int[] array) {
-//        TODO implement
-        return null;   // this must be replaced by correct code
+    public static int[] reverse (int[] arraya){
+            int[] reversed =new int[arraya.length];
+
+        for (int i = 0; i < arraya.length / 2; i++) {
+             reversed [i] = arraya[arraya.length - i - 1];
+                  }
+        }
+        return arraya[i];
     }
+
+    public int[] reverse3(int[] nums) {
+        int[] reversed = new int[nums.length];
+        for (int i=0; i<nums.length; i++) {
+            reversed[i] = nums[nums.length - 1 - i];
+        }
+        return reversed;
+    }
+
 
     /**
      * Reverses the elements order of the specified array
