@@ -12,9 +12,6 @@ public class ArrayUtil {
      * this means that it will be found the next even number and swap with the second element
      * if the second element is odd. And so on for the next elements of the util
      */
-
-//    public static int Array (int[] array) {
-//
     }
 
     public static void main(String[] args) {
@@ -57,7 +54,7 @@ public class ArrayUtil {
      * @param array specified int array
      * @return the sum of the specified util elements
      */
-    public static int getSum(int[] array) {
+    public static int[] getSum(int[] array) {
         int sum = 0;
     for (int arraya:array) {
         sum = sum + arraya;
@@ -70,32 +67,23 @@ public class ArrayUtil {
      * @param array  an array corresponding to which must be created reversed array
      * @return new created reversed array to the specified parameter "array"
      */
-    public static int[] reverse (int[] arraya){
+    public static int[] reverse (int[] arraya)
+    {
             int[] reversed =new int[arraya.length];
-
         for (int i = 0; i < arraya.length / 2; i++) {
              reversed [i] = arraya[arraya.length - i - 1];
                   }
-        }
-        return arraya[i];
-    }
-
-    public int[] reverse3(int[] nums) {
-        int[] reversed = new int[nums.length];
-        for (int i=0; i<nums.length; i++) {
-            reversed[i] = nums[nums.length - 1 - i];
-        }
         return reversed;
     }
 
-
-    /**
+       /**
      * Reverses the elements order of the specified array
      * @param array  an array: Elements order of wich must be reversed
      */
-    public static void reverseInSameArray(int[] array) {
-//        TODO implement
-
+    public static void reverseInSameArray(int[] arraya) {
+            for (int sw = 0; sw < (arraya.length / 2); sw++) {
+                    swap(arraya,sw,arraya.length - sw - 1);
+            }
     }
 
     /**
@@ -107,12 +95,15 @@ public class ArrayUtil {
     * @param i the index of one element to be swapped.
     * @param j the index of the other element to be swapped.
     */
-    private static void swap(int[] array, int i, int j) {
-        //todo: implement
+    private static void swap(int[] arraya, int i, int j) {
+         int change = arraya [i];
+         arraya [i] = arraya [j];
+         arraya [j] = change;
+    return array [i]; arraya [j];
     }
 
     public static void print(int[] a) {
-        print(a, " ");
+        print (a );
     }
 
     /**
@@ -120,10 +111,14 @@ public class ArrayUtil {
      *
      * @param a the util to print
      */
-    public static void print(int[] a, String delimiter) {
-        // todo implement
-    }
+    public static void print1 (int[] arrayi; String delimeter) {
+            for (int arra: arrayi) {
+                System.out.print(arra+ delimeter+" ");
+            }
+            System.out.println("");
 
-
+        }
 }
-      
+
+    private static void print(int[] a) {
+    }
