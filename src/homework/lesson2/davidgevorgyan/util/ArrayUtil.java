@@ -37,6 +37,7 @@ public class ArrayUtil {
 
         System.out.println("\nOdd Even sorted array #2: ");
         sortByOddAndEven(b);
+        print(b,";");
     }
 
 
@@ -55,7 +56,6 @@ public class ArrayUtil {
             else
                 j++;
         }
-        print(array,",");
     }
 
     /**
@@ -110,9 +110,11 @@ public class ArrayUtil {
      * @return new created reversed array to the specified parameter "array"
      */
     public static int[] reverse(int[] array) {
-        int [] a = array.clone();
-        reverseInSameArray(a);//todo
-
+        int l=array.length;
+        int [] a = new int[l];
+        for (int i = 0; i < l; i++) {
+            a[i]=array[l-1-i];
+        }
         return a;
     }
 
