@@ -14,8 +14,11 @@ public class MathUtil {
      * @return the value <code>a<sup>b</sup></code>.
      */
     public static int pow(int a, int n) {
-        
-        return 0;
+      int power = 1;
+        for (int i =0; i<n; i++) {
+            power = power *a;
+        }
+
     }
 
     /**
