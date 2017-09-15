@@ -1,4 +1,4 @@
-package homework.lesson2.util;
+package auditorium.util;
 
 /**
  * This class contains utility methods for array
@@ -85,7 +85,7 @@ public class ArrayUtil {
         // todo implement
     }
 
-    public static void print(int[][] a, String delimiter) {
+    public static void print(int[][] a) {
         // todo implement
     }
 }
