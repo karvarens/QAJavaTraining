@@ -3,7 +3,7 @@ package homework.lesson2.lilitsharkhatunyan.util;
 public class MathUtil {
     public static void main(String[] args) {
 
-        int [] arraySample = {2, 1, 3, 5, 4, 9, 8, 11};
+        int[] arraySample = {2, 1, 3, 5, 4, 9, 8, 11};
         ArrayUtil.sortByOddAndEven(arraySample);
         ArrayUtil.getMaximum(arraySample);
         ArrayUtil.getMinimum(arraySample);
@@ -21,7 +21,7 @@ public class MathUtil {
      * @return the value <code>a<sup>b</sup></code>.
      */
     public static int pow(int a, int n) {
-        
+
         return 0;
     }
 
@@ -33,7 +33,7 @@ public class MathUtil {
      * @return gcd of specified x and y numbers
      */
     public static int gcd(int x, int y) {
-        
+
         return 0;
     }
 

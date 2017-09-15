@@ -1,4 +1,5 @@
 package homework.lesson2.lilitsharkhatunyan.util;
+
 import java.util.Arrays;
 
 
@@ -14,9 +15,7 @@ public class ArrayUtil {
      * this means that it will be found the next even number and swap with the second element
      * if the second element is odd. And so on for the next elements of the util
      */
-    public static void sortByOddAndEven(int [] array) {
-
-        // int month_days[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    public static void sortByOddAndEven(int[] array) {
 
         // int [] arraySample = {2, 1, 3, 5, 4, 9, 8, 11};
 
@@ -25,36 +24,35 @@ public class ArrayUtil {
         for (int i = 0; i < length; i++) {
             int j = i + 1;
 
-                while ((array[i] % 2) == (array[j] % 2)) {
-                    j++;
-                    if (j >= length) {
-                        print(array);
-                        return;
-                    }
+            while ((array[i] % 2) == (array[j] % 2)) {
+                j++;
+                if (j >= length) {
+                    print(array);
+                    return;
                 }
+            }
 
-                if (j > i+1) {
-                    swap(array, i +1 , j);
-                }
+            if (j > i + 1) {
+                swap(array, i + 1, j);
+            }
         }
-
     }
 
     public static int getMaximum(int[] array) {
 
-        int [] arrayA = array;
+        int[] arrayA = array;
 
         Arrays.sort(arrayA);
         int length = arrayA.length;
 
-        System.out.println("Maximum number is: " + arrayA[length-1]);
+        System.out.println("Maximum number is: " + arrayA[length - 1]);
 
-        return arrayA[length-1];
+        return arrayA[length - 1];
     }
 
 
     public static int getMinimum(int[] array) {
-        int [] arrayA = array;
+        int[] arrayA = array;
 
         Arrays.sort(arrayA);
         System.out.println("Minimum number is: " + arrayA[0]);
@@ -70,12 +68,12 @@ public class ArrayUtil {
      */
     public static int getSum(int[] array) {
 
-        int [] arrayA = array;
+        int[] arrayA = array;
         int length = arrayA.length;
         int sum = 0;
 
-        for(int i = 0; i<length; i++){
-            sum += arrayA [i];
+        for (int i = 0; i < length; i++) {
+            sum += arrayA[i];
         }
 
         System.out.println("Sum of array elements is: " + sum);
@@ -87,18 +85,18 @@ public class ArrayUtil {
     /**
      * Creates the reversed to specified array new array and returns it.
      *
-     * @param array  an array corresponding to which must be created reversed array
+     * @param array an array corresponding to which must be created reversed array
      * @return new created reversed array to the specified parameter "array"
      */
     public static int[] reverse(int[] array) {
 
         int length = array.length;
-        int [] result = new int[length];
+        int[] result = new int[length];
 
 
-        for (int j = length-1; j >= 0 ; j--) {
+        for (int j = length - 1; j >= 0; j--) {
 
-            result [j] = array [length - j -1];
+            result[j] = array[length - j - 1];
 
         }
 
@@ -110,13 +108,14 @@ public class ArrayUtil {
 
     /**
      * Reverses the elements order of the specified array
-     * @param array  an array: Elements order of wich must be reversed
+     *
+     * @param array an array: Elements order of wich must be reversed
      */
     public static void reverseInSameArray(int[] array) {
 
         int length = array.length;
 
-        for (int i = 0; i < length /2 ; i++) {
+        for (int i = 0; i < length / 2; i++) {
             swap(array, i, length / 2);
 
         }
@@ -126,14 +125,14 @@ public class ArrayUtil {
     }
 
     /**
-    * Swaps the elements at the specified positions in the specified array.
-    * (If the specified positions are equal, invoking this method leaves
-    * the array unchanged.)
-    *
-    * @param array The array in which to swap elements.
-    * @param i the index of one element to be swapped.
-    * @param j the index of the other element to be swapped.
-    */
+     * Swaps the elements at the specified positions in the specified array.
+     * (If the specified positions are equal, invoking this method leaves
+     * the array unchanged.)
+     *
+     * @param array The array in which to swap elements.
+     * @param i     the index of one element to be swapped.
+     * @param j     the index of the other element to be swapped.
+     */
     private static void swap(int[] array, int i, int j) {
 
         int temp = array[i];
@@ -154,7 +153,7 @@ public class ArrayUtil {
 
     public static void print(int[] a, String delimiter) {
 
-        for (int i = 0; i < a.length; i++){
+        for (int i = 0; i < a.length; i++) {
             System.out.print(a[i] + delimiter);
         }
         System.out.println();
