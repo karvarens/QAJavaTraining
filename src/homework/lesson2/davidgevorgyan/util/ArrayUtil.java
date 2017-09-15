@@ -45,7 +45,7 @@ public class ArrayUtil {
     public static void sortByOddAndEvenDavid(int[] array) {
         long startTime = System.currentTimeMillis();
         for (int i = 0, j = 1; j < array.length;) {
-            if(Math.abs(array[i] % 2) != Math.abs(array[j] % 2)) {
+            if((array[i] + array[j]) % 2 != 0 ) {
                 swap(array, i + 1, j);
                 i++;
             }

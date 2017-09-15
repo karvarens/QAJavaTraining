@@ -5,33 +5,27 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArrayUtilTest {
-    @Test
-    void sortByOddAndEvenDavid() {
-        int[] array = new int[1000000];
-        int temp=array.length-2;
-        ArrayUtil.fillRandomArray(array,1000);
-        int i=0;
-        ArrayUtil.sortByOddAndEvenDavid(array);
-        while ((array[i] + array[i + 1]) % 2 != 0 && i<temp)
-            i++;
-        while ((array[i] + array[i + 1]) % 2 == 0 && i<temp)
-            i++;
-        assertEquals(temp,i);
-        }
-
-
-    @Test
-    void sortByOddAndEvenKaren() {
-        int[] array = new int[1000000];
-        int temp=array.length-2;
-        ArrayUtil.fillRandomArray(array,1000);
-        int i=0;
-        ArrayUtil.sortByOddandEvenKaren(array);
+    private void verifySortedByEvenOdd(int[] array){
+        int i = 0;
+        int temp = array.length - 2;
         while ((array[i] + array[i + 1]) % 2 != 0)
             i++;
-        while ((array[i] + array[i + 1]) % 2 == 0 && i<temp)
+        while ((array[i] + array[i + 1]) % 2 == 0 && i < temp)
             i++;
         assertEquals(temp,i);
+    }
+
+    @Test
+    void sortByOddAndEven() {
+        int[] a = new int[1000000];
+        ArrayUtil.fillRandomArray(a,1000);
+        int[] b = a.clone();
+
+        ArrayUtil.sortByOddAndEvenDavid(a);
+        verifySortedByEvenOdd(a);
+
+        ArrayUtil.sortByOddandEvenKaren(b);
+        verifySortedByEvenOdd(b);
     }
 
     @Test
