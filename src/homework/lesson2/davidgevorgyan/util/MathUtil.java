@@ -31,12 +31,12 @@ public class MathUtil {
      * @param n the exponent
      * @return the value <code>a<sup>b</sup></code>.
      */
-    public static int pow(int a, int n) {
-        int temp = 1;
+    public static int pow (int a, int n) {
+        int pow = 1;
         for (int i = 0; i < n ; i++) {
-            temp = temp * a;
+            pow = pow * a;
         }
-        return temp;
+        return pow;
     }
 
     /**
