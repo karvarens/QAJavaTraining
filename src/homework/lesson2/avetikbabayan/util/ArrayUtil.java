@@ -26,6 +26,41 @@ public class ArrayUtil {
         arraya[7] = 30;
         arraya[8] = 16;
         arraya[9] = 150;
+
+        int [] z;
+        System.out.println("Base:");
+        print(arraya, ";");
+
+        System.out.println("\n");
+
+        System.out.println("Swap sixth and seventh values :");
+        swap(arraya,5,6);
+        print(arraya, ";");
+
+        System.out.println("\n");
+
+        System.out.println("Reverse in another array:");
+        z=reverse(arraya);
+        print(z,";");
+
+        System.out.println("\n");
+
+        System.out.println(" Reverse in same array:");
+        reverseInSameArray(arraya);
+        print(arraya,";");
+
+        System.out.println("Min: "+getMinimum(arraya));
+
+
+        System.out.println("Total sum: "+ getSum(arraya));
+
+        System.out.println("Max: "+getMaximum(arraya));
+
+        int[] arrayb = new int[9];
+
+        System.out.println("Array2 is:");
+        print(arrayb,";");
+
     }
     public static void sortByOddAndEven(int [] array) {
 //        TODO   implement
@@ -36,37 +71,26 @@ public class ArrayUtil {
          for (int arraya:array) {
              if (max < arraya);
              max = arraya;
-             return max;
-         }
+             }
+        return max;
     }
 
     public static int getMinimum(int[] array) {
-    int min = 0;
-        for (int arraya:array) {
-            if (min > arraya);
+        int min = 0;
+        for (int arraya : array) {
+            if (min > arraya) ;
             min = arraya;
-            return min;
+        }
+        return min;
     }
 
-    /**
-     * Calculates the sum of specified <code>array</code>  elements
-     *
-     * @param array specified int array
-     * @return the sum of the specified util elements
-     */
-    public static int[] getSum(int[] array) {
-        int sum = 0;
-    for (int arraya:array) {
-        sum = sum + arraya;
-        return sum;
-    }
-
-    /**
-     * Creates the reversed to specified array new array and returns it.
-     *
-     * @param array  an array corresponding to which must be created reversed array
-     * @return new created reversed array to the specified parameter "array"
-     */
+     public static int getSum(int[] array) {
+         int sum = 0;
+         for (int arraya : array) {
+             sum = sum + arraya;
+         }
+         return sum;
+     }
     public static int[] reverse (int[] arraya)
     {
             int[] reversed =new int[arraya.length];
@@ -76,49 +100,27 @@ public class ArrayUtil {
         return reversed;
     }
 
-       /**
-     * Reverses the elements order of the specified array
-     * @param array  an array: Elements order of wich must be reversed
-     */
     public static void reverseInSameArray(int[] arraya) {
             for (int sw = 0; sw < (arraya.length / 2); sw++) {
                     swap(arraya,sw,arraya.length - sw - 1);
             }
     }
 
-    /**
-    * Swaps the elements at the specified positions in the specified array.
-    * (If the specified positions are equal, invoking this method leaves
-    * the array unchanged.)
-    *
-    * @param array The array in which to swap elements.
-    * @param i the index of one element to be swapped.
-    * @param j the index of the other element to be swapped.
-    */
-    private static void swap(int[] arraya, int i, int j) {
+    private static int swap(int[] arraya, int i, int j) {
          int change = arraya [i];
          arraya [i] = arraya [j];
          arraya [j] = change;
-    return array [i]; arraya [j];
+    return arraya [i,j];
+        }
+
+    public static void print(int[] arraya, String s) {
+        print (arraya, ";");
     }
 
-    public static void print(int[] a) {
-        print (a );
-    }
-
-    /**
-     * Prints all elements in an array by using specified delimiter between elements.
-     *
-     * @param a the util to print
-     */
-    public static void print1 (int[] arrayi; String delimeter) {
-            for (int arra: arrayi) {
-                System.out.print(arra+ delimeter+" ");
+    public static void print1 (int[] arraya) {
+            for (int arra: arraya) {
+                System.out.print(arra+ " ;");
             }
             System.out.println("");
-
         }
 }
-
-    private static void print(int[] a) {
-    }
