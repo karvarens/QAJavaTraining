@@ -49,7 +49,7 @@ public class MathUtil {
     public static int gcd(int x, int y) {
         int temp = 1;
         for (int i = 1; i <= minAbs(x,y); i++) {
-            if (x % i == 0 & y % i == 0)
+            if (x % i == 0 && y % i == 0)
                 temp = i;
         }
 
@@ -91,10 +91,8 @@ public class MathUtil {
      */
     public static int minAbs(int a, int b) {
 
-        if(abs (a) < abs (b))
-            return abs (a);
-        else
-            return abs (b);
+        return (abs (a) < abs (b)) ?  abs (a) : abs (b);
+
     }
 
     /**
@@ -115,7 +113,7 @@ public class MathUtil {
         while (number != 0)
         {
             reversedNum = reversedNum * 10 + number % 10;
-            number = number / 10;
+            number /= 10;
         }
         return reversedNum;
     }
