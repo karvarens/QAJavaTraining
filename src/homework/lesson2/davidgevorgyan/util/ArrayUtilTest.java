@@ -6,7 +6,32 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArrayUtilTest {
     @Test
-    void sortByOddAndEven() {
+    void sortByOddAndEvenDavid() {
+        int[] array = new int[1000000];
+        int temp=array.length-2;
+        ArrayUtil.fillRandomArray(array,1000);
+        int i=0;
+        ArrayUtil.sortByOddAndEvenDavid(array);
+        while ((array[i] + array[i + 1]) % 2 != 0 && i<temp)
+            i++;
+        while ((array[i] + array[i + 1]) % 2 == 0 && i<temp)
+            i++;
+        assertEquals(temp,i);
+        }
+
+
+    @Test
+    void sortByOddAndEvenKaren() {
+        int[] array = new int[1000000];
+        int temp=array.length-2;
+        ArrayUtil.fillRandomArray(array,1000);
+        int i=0;
+        ArrayUtil.sortByOddandEvenKaren(array);
+        while ((array[i] + array[i + 1]) % 2 != 0)
+            i++;
+        while ((array[i] + array[i + 1]) % 2 == 0 && i<temp)
+            i++;
+        assertEquals(temp,i);
     }
 
     @Test

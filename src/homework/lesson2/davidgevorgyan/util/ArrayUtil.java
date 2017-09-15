@@ -28,33 +28,57 @@ public class ArrayUtil {
         System.out.println("\nArray values summary is: "+getSum(a));
         System.out.println("\nArray minimal value is: "+getMinimum(a));
         System.out.println("\nArray maximal value is: "+getMaximum(a));
-
-        int[] b = new int[9];
+        int[] b = new int[1000000];
         fillRandomArray(b,1000);
-
-        System.out.println("\nOriginal array #2 is:");
-        print(b,";");
-
-        System.out.println("\nOdd Even sorted array #2: ");
-        sortByOddAndEven(b);
-        print(b,";");
+        int[] c = b.clone();
+        sortByOddAndEvenDavid(b);
+        sortByOddandEvenKaren(c);
     }
 
 
     /**
-     * Sorts the util elements by odd and even number
+     * Sorts the util elements by odd and even number. Algorithm by David.
      * such that if first number is odd then second must be even number
      * this means that it will be found the next even number and swap with the second element
      * if the second element is odd. And so on for the next elements of the util
      */
-    public static void sortByOddAndEven(int[] array) {
-        for (int j = 1, i = 0; j < array.length;) {
+    public static void sortByOddAndEvenDavid(int[] array) {
+        long startTime = System.currentTimeMillis();
+        for (int i = 0, j = 1; j < array.length;) {
             if(Math.abs(array[i] % 2) != Math.abs(array[j] % 2)) {
                 swap(array, i + 1, j);
                 i++;
             }
             else
                 j++;
+        }
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        System.out.println("David method time: " + elapsedTime);
+    }
+    /**
+     * Sorts the util elements by odd and even number. Algorithm by Karen.
+     * such that if first number is odd then second must be even number
+     * this means that it will be found the next even number and swap with the second element
+     * if the second element is odd. And so on for the next elements of the util
+     */
+    public static void sortByOddandEvenKaren(int[] array){
+        long startTime = System.currentTimeMillis();
+        int stepsCount = array.length - 2;
+        for (int i = 0; i < stepsCount; i++) {
+            int j = i + 1;
+            while ((array[i] + array[j]) % 2 == 0 ) {
+                j++;
+                if(j >= array.length){
+                    long stopTime = System.currentTimeMillis();
+                    long elapsedTime = stopTime - startTime;
+                    System.out.println("Karen method time: " + elapsedTime);
+                    return;
+                }
+            }
+            if(j > i + 1 ){
+                swap(array, i+1, j);
+            }
         }
     }
 
