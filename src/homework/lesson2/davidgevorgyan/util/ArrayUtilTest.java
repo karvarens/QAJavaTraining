@@ -51,29 +51,23 @@ public class ArrayUtilTest {
 
     @Test
     void reverse() {
+        int [] a = new int[20];
+        int [] b;
+        ArrayUtil.fillRandomArray(a,1000);
+        b=ArrayUtil.reverse(a);
+        for (int i = 0; i < 10 ; i++) {
+            assertEquals(true,a[i] == b[19 - i]);
+        }
     }
 
     @Test
     void reverseInSameArray() {
+        int [] a = new int[20];
+        ArrayUtil.fillRandomArray(a,1000);
+        int[] b = a.clone();
+        ArrayUtil.reverseInSameArray(a);
+        for (int i = 0; i < 10 ; i++) {
+            assertEquals(true,a[i] == b[19 - i]);
+        }
     }
-
-    @Test
-    void print() {
-    }
-
-    @Test
-    void print1() {
-    }
-
-    @Test
-    void fillRandomArray() {
-    }
-
-
-    public static void main(String[] args) {
-        // todo : Organize all test methods calls here
-    }
-
-
-    // todo add test methods
 }
