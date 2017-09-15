@@ -14,7 +14,7 @@ public class ArrayUtil {
      * @param array
      */
     public static void sortByOddAndEven(int[] array) {
-        int odds[] = {};
+        int odds[] = {};  // todo talk about array length
         int evens[] = {};
         int o = 0, e = 0;
         for (int i = 0; i < array.length; i++) {

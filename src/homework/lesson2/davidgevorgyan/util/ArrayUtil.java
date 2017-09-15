@@ -111,7 +111,7 @@ public class ArrayUtil {
      */
     public static int[] reverse(int[] array) {
         int [] a = array.clone();
-        reverseInSameArray(a);
+        reverseInSameArray(a);//todo
 
         return a;
     }
@@ -123,7 +123,7 @@ public class ArrayUtil {
      */
     public static void reverseInSameArray(int[] array) {
         for (int i = 0; i < (array.length / 2); i++) {
-            swap(array,i,array.length - i - 1);
+            swap(array, i, array.length - i - 1);
         }
     }
 
