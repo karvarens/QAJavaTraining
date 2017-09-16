@@ -7,33 +7,27 @@ import javax.swing.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArrayUtilTest {
-    @Test
-    void sortByOddAndEvenDavid() {
-        int[] array = new int[1000000];
-        int temp=array.length-2;
-        ArrayUtil.fillRandomArray(array,1000);
-        int i=0;
-        ArrayUtil.sortByOddAndEvenDavid(array);
-        while ((array[i] + array[i + 1]) % 2 != 0 && i<temp)
-            i++;
-        while ((array[i] + array[i + 1]) % 2 == 0 && i<temp)
-            i++;
-        assertEquals(temp,i);
-        }
-
-
-    @Test
-    void sortByOddAndEvenKaren() {
-        int[] array = new int[1000000];
-        int temp=array.length - 2;
-        ArrayUtil.fillRandomArray(array,1000);
-        int i=0;
-        ArrayUtil.sortByOddAndEvenKaren(array);
+    private void verifySortedByEvenOdd(int[] array){
+        int i = 0;
+        int temp = array.length - 2;
         while ((array[i] + array[i + 1]) % 2 != 0)
             i++;
-        while ((array[i] + array[i + 1]) % 2 == 0 && i<temp)
+        while ((array[i] + array[i + 1]) % 2 == 0 && i < temp)
             i++;
         assertEquals(temp,i);
+    }
+
+    @Test
+    void sortByOddAndEven() {
+        int[] a = new int[1000000];
+        ArrayUtil.fillRandomArray(a,1000);
+        int[] b = a.clone();
+
+        ArrayUtil.sortByOddAndEvenDavid(a);
+        verifySortedByEvenOdd(a);
+
+        ArrayUtil.sortByOddAndEvenKaren(b);
+        verifySortedByEvenOdd(b);
     }
 
     @Test
@@ -110,14 +104,24 @@ public class ArrayUtilTest {
 
     @Test
     void reverse() {
+        int [] a = new int[20];
+        int [] b;
+        ArrayUtil.fillRandomArray(a,1000);
+        b=ArrayUtil.reverse(a);
+        for (int i = 0; i < 10 ; i++) {
+            assertEquals(true,a[i] == b[19 - i]);
+        }
     }
 
     @Test
     void reverseInSameArray() {
-    }
-
-    @Test
-    void print() {
+        int [] a = new int[20];
+        ArrayUtil.fillRandomArray(a,1000);
+        int[] b = a.clone();
+        ArrayUtil.reverseInSameArray(a);
+        for (int i = 0; i < 10 ; i++) {
+            assertEquals(true,a[i] == b[19 - i]);
+        }
     }
 
     @Test
