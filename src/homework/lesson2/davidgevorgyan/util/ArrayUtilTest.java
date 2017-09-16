@@ -8,13 +8,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArrayUtilTest {
     private void verifySortedByEvenOdd(int[] array){
+        int count = array.length - 2;
         int i = 0;
-        int temp = array.length - 2;
-        while ((array[i] + array[i + 1]) % 2 != 0)
+        while (i < count && (array[i] + array[i + 1]) % 2 != 0) {
             i++;
-        while ((array[i] + array[i + 1]) % 2 == 0 && i < temp)
+        }
+        while (i < count && (array[i] + array[i + 1]) % 2 == 0) {
             i++;
-        assertEquals(temp,i);
+        }
+        assertEquals(count,i);
     }
 
     @Test
