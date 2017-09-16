@@ -32,7 +32,7 @@ public class ArrayUtil {
         fillRandomArray(b,1000);
         int[] c = b.clone();
         sortByOddAndEvenDavid(b);
-        sortByOddandEvenKaren(c);
+        sortByOddAndEvenKaren(c);
     }
 
 
@@ -56,13 +56,14 @@ public class ArrayUtil {
         long elapsedTime = stopTime - startTime;
         System.out.println("David method time: " + elapsedTime);
     }
+
     /**
      * Sorts the util elements by odd and even number. Algorithm by Karen.
      * such that if first number is odd then second must be even number
      * this means that it will be found the next even number and swap with the second element
      * if the second element is odd. And so on for the next elements of the util
      */
-    public static void sortByOddandEvenKaren(int[] array){
+    public static void sortByOddAndEvenKaren(int[] array){
         long startTime = System.currentTimeMillis();
         int stepsCount = array.length - 2;
         for (int i = 0; i < stepsCount; i++) {
@@ -77,7 +78,33 @@ public class ArrayUtil {
                 }
             }
             if(j > i + 1 ){
-                swap(array, i+1, j);
+                swap(array, i + 1, j);
+            }
+        }
+    }
+
+     public static void sortByOddAndEvenDavid0 (int[] array) {
+        for (int i = 0, j = 1; j < array.length;) {
+            if(Math.abs(array[i] % 2) != Math.abs(array[j] % 2)) {
+                swap(array, i + 1, j);
+                i++;
+            } else {
+                j++;
+            }
+        }
+    }
+
+    public static void sortByOddAndEvenKaren0 (int[] array) {
+        int stepsCount = array.length - 2;
+        for (int i = 0; i < stepsCount; i++) {
+            int j = i + 1;
+            while ((array[i] + array[j]) % 2 == 0 ) {
+                if(++j >= array.length){
+                    return;
+                }
+            }
+            if(j > i + 1 ){
+                swap(array, i + 1, j);
             }
         }
     }
@@ -192,13 +219,22 @@ public class ArrayUtil {
      *
      * @param a array name
      */
-    public static void fillRandomArray(int [] a,int mod)
-    {
+    public static void fillRandomArray(int [] a,int mod) {
         int length = a.length;
         Random generator = new Random();
         for (int i = 0; i < length; i++) {
             a[i] = generator.nextInt() % mod;
         }
+    }
+
+    public static int[] randomIntArray(int length, int n) {
+        int[] a = new int[length];
+        Random generator = new Random();
+
+        for (int i = 0; i < a.length; i++)
+            a[i] = generator.nextInt(n);
+
+        return a;
     }
 
 }
