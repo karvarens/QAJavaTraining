@@ -145,18 +145,11 @@ public class FigurePrinter {
 
     public static void drawEmptyRectangle(int width, int height , String printingSymbols) {
         for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                if (i == 0 || i == height - 1)
-                    System.out.print(printingSymbols + " ");
-                else if (i > 0 && j == 0 || i < height && j == width - 1)
-                    System.out.print(printingSymbols + " ");
-                else if (i > 0 && j > 0 || i < height - 1 && j < width - 1)
-                    for (int k = 0; k <= printingSymbols.length(); k++) {
-                        System.out.print(" ");
-                    }
+            if (i == 0 || i == height - 1)
+                printFullRow(width,printingSymbols);
+            else
+                printEmptyRow(width,printingSymbols);
             }
-            System.out.println("");
-        }
     }
 
     static  void  printEmptyRow(int length){
@@ -194,6 +187,6 @@ public class FigurePrinter {
         printFullRow(20,"~");
         drawRhombus(5);
         printFullRow(20,"~");
-        drawEmptyRectangle(4, 8, "$$$");
+        drawEmptyRectangle(3, 3, "@");
     }
 }
