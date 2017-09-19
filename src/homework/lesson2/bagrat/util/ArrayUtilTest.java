@@ -1,9 +1,11 @@
 package homework.lesson2.bagrat.util;
 
 
+import com.sun.deploy.util.ArrayUtil;
+
 public class ArrayUtilTest {
 
-    public static void main(String[] args) {
+ /*   public static void main(String[] args) {
         printTest();
         sortByOddAndEvenTest();
         getMaximumTest();
@@ -161,5 +163,5 @@ public class ArrayUtilTest {
 
         System.out.println("################################################################################");
         System.out.println();
-    }
+    }*/
 }
