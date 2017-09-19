@@ -13,12 +13,17 @@ public class ArrayUtil {
      * if the second element is odd. And so on for the next elements of the util
      */
     public static void sortByOddAndEven(int [] array) {
+
         for (int i = 0; i < array.length; i++) {
-            for (int j = i + 1; j < array.length; j++) {
+            int j = i + 1;
+            for (; j < array.length; j++) {
                 if (array[i] % 2 != array[j] % 2) {
                     swap(array, i + 1, j);
                     break;
                 }
+            }
+            if(j == array.length){
+                return;
             }
         }
     }

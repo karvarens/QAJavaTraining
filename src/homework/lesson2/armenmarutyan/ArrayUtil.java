@@ -1,6 +1,6 @@
 package homework.lesson2.armenmarutyan;
 
-public class ArrayUtil_Armen {
+public class ArrayUtil {
     /**
      * This class contains utility methods for array
      * manipulation.

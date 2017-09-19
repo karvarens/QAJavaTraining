@@ -1,6 +1,6 @@
 package homework.lesson2.armenmarutyan;
 
-public class MathUtil_Armen {
+public class MathUtil {
     public static void main(String[] args) {
         printIntAsBinary(5);
     }
