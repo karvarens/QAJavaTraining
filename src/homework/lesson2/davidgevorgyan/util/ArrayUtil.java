@@ -43,7 +43,6 @@ public class ArrayUtil {
      * if the second element is odd. And so on for the next elements of the util
      */
     public static void sortByOddAndEvenDavid(int[] array) {
-        long startTime = System.currentTimeMillis();
         for (int i = 0, j = 1; j < array.length;) {
             if((array[i] + array[j]) % 2 != 0 ) {
                 swap(array, i + 1, j);
@@ -52,9 +51,6 @@ public class ArrayUtil {
             else
                 j++;
         }
-        long stopTime = System.currentTimeMillis();
-        long elapsedTime = stopTime - startTime;
-        System.out.println("David method time: " + elapsedTime);
     }
 
     /**
@@ -71,9 +67,6 @@ public class ArrayUtil {
             while ((array[i] + array[j]) % 2 == 0 ) {
                 j++;
                 if(j >= array.length){
-                    long stopTime = System.currentTimeMillis();
-                    long elapsedTime = stopTime - startTime;
-                    System.out.println("Karen method time: " + elapsedTime);
                     return;
                 }
             }
