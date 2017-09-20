@@ -60,7 +60,6 @@ public class ArrayUtil {
      * if the second element is odd. And so on for the next elements of the util
      */
     public static void sortByOddAndEvenKaren(int[] array){
-        long startTime = System.currentTimeMillis();
         int stepsCount = array.length - 2;
         for (int i = 0; i < stepsCount; i++) {
             int j = i + 1;
