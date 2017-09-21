@@ -28,11 +28,13 @@ public class ArrayUtil {
         System.out.println("\nArray values summary is: "+getSum(a));
         System.out.println("\nArray minimal value is: "+getMinimum(a));
         System.out.println("\nArray maximal value is: "+getMaximum(a));
-        int[] b = new int[1000000];
+        int[] b = new int[10];
         fillRandomArray(b,1000);
         int[] c = b.clone();
         sortByOddAndEvenDavid(b);
+        print(b,";");
         sortByOddAndEvenKaren(c);
+        print(c,";");
     }
 
 
@@ -75,16 +77,7 @@ public class ArrayUtil {
         }
     }
 
-     public static void sortByOddAndEvenDavid0 (int[] array) {
-        for (int i = 0, j = 1; j < array.length;) {
-            if(Math.abs(array[i] % 2) != Math.abs(array[j] % 2)) {
-                swap(array, i + 1, j);
-                i++;
-            } else {
-                j++;
-            }
-        }
-    }
+
 
     public static void sortByOddAndEvenKaren0 (int[] array) {
         int stepsCount = array.length - 2;
