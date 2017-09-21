@@ -1,4 +1,4 @@
-package homework.lesson3.bagrat;
+package homework.lesson3.bagrat.loop;
 
 import homework.lesson2.bagrat.util.MathUtil;
 

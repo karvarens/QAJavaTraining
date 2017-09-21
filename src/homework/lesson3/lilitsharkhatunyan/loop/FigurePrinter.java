@@ -1,4 +1,4 @@
-package homework.lesson3.lilitsharkhatunyan;
+package homework.lesson3.lilitsharkhatunyan.loop;
 
 
 import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;

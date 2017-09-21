@@ -1,4 +1,4 @@
-package homework.lesson2.armenmarutyan;
+package homework.lesson2.armenmarutyan.util;
 
 public class ArrayUtil {
     /**
