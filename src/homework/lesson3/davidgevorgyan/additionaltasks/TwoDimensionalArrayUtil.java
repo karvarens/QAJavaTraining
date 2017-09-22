@@ -26,10 +26,10 @@ public class TwoDimensionalArrayUtil {
      */
     public static int[][] createSpiralMatrix (int size) {
         int matrix[][]= new int[size][size];
-        int count=size*size+1;
-        int x=-1;
-        int delta=0;
-        int y=size-1;
+        int count = size * size + 1;
+        int x = -1;
+        int delta = 0;
+        int y = size -1;
         for (int z = 1; z < size - 2; z++) {
             for (int i = 0; i < size - delta; i++) {
                 count--;
