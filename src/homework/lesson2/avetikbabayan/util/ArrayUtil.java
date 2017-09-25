@@ -57,7 +57,7 @@ package homework.lesson2.avetikbabayan.util;
              }
      }
 
-      private static int swap(int[] array, int i, int j) {
+      public static int swap(int[] array, int i, int j) {
            int change = array [i];
           array [i] = array [j];
           array [j] = change;
