@@ -3,11 +3,11 @@ package homework.lesson3.davidgevorgyan.additionaltasks;
 
 public class ArrayUtil {
     public static void main(String[] args) {
-        int[] array = new int[7];
-        homework.lesson2.davidgevorgyan.util.ArrayUtil.fillRandomArray(array,100);
-        homework.lesson2.davidgevorgyan.util.ArrayUtil.print(array," ");
-        shiftLeft(array, 2);
-        homework.lesson2.davidgevorgyan.util.ArrayUtil.print(array," ");
+        int[] a = new int[1_000_000];
+        homework.lesson2.davidgevorgyan.util.ArrayUtil.fillRandomArray(a,1000);
+        int[] b= a.clone();
+        shiftLeftWithArray(a, 999);
+        shiftLeftWithoutArray(b, 999);
 
     }
 
@@ -18,17 +18,36 @@ public class ArrayUtil {
      * {1, 2, 3, 4, 5, 6, 7} and shiftSize is 2,
      * after the method call order of array element should be
      * {3, 4, 5, 6, 7, 1, 2}
-     * @param a
+     * @param array
      * @param shiftSize
      */
-    public static void shiftLeft(int a[], int shiftSize) {
-        int length = a.length;
-        int b[] = a.clone();
+    public static void shiftLeftWithArray(int[] array, int shiftSize) {
+        int length = array.length;
+        int[] b= array.clone();
         for (int i = 0; i < length ; i++) {
             if (shiftSize > i)
-                a[length - shiftSize + i] = b[i];
+                array[length - shiftSize + i] = b[i];
             if (shiftSize + i < length)
-                a[i] = b[i + shiftSize];
+                array[i] = b[i + shiftSize];
         }
     }
+
+    /**
+     * Shifts each element of the specified array to left without temporary array
+     * @param array
+     * @param shiftSize
+     */
+    public static void shiftLeftWithoutArray(int[] array, int shiftSize) {
+        int timesShifted = 0;
+        while (timesShifted < shiftSize) {
+            int temp = array[0];
+            for (int i = 0; i < array.length - 1; i++) {
+                array[i] = array[i + 1];
+            }
+            array[array.length - 1] = temp;
+            timesShifted++;
+        }
+
+    }
+
 }
