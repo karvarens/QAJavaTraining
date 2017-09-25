@@ -75,7 +75,7 @@ public class ArrayUtilTest {
 
     private long getSortingTimeMillisDavidAlgorithm (int[] array) {
         long startTime =  System.currentTimeMillis();
-        ArrayUtil.sortByOddAndEvenDavid0(array);
+        ArrayUtil.sortByOddAndEvenDavid(array);
         long elapsedTime = System.currentTimeMillis() - startTime;
 
         verifySortedArray(array);

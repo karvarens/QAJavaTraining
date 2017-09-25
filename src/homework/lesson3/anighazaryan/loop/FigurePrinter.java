@@ -1,4 +1,4 @@
-package homework.lesson3.anighazaryan;
+package homework.lesson3.anighazaryan.loop;
 
 public class FigurePrinter {
     /**

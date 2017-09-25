@@ -14,30 +14,6 @@ public class ArrayUtil {
      * @param array
      */
     public static void sortByOddAndEven(int[] array) {
-        int odds[] = {};  // todo talk about array length
-        int evens[] = {};
-        int o = 0, e = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] % 2 != 0) {
-                odds[o] = array[i];
-                o++;
-            } else {
-                evens[e] = array[i];
-                e++;
-            }
-        }
-        for (int i = 0; i < array.length; i++) {
-            Boolean bul = true;
-            if (bul) {
-                array[i] = odds[o];
-                o++;
-                bul = false;
-            } else {
-                array[i] = evens[e];
-                e++;
-                bul = true;
-            }
-        }
 
 
     }
@@ -87,14 +63,8 @@ public class ArrayUtil {
      * @return new created reversed array to the specified parameter "array"
      */
     public static int[] reverse(int[] array) {
-        int rarray[] = {};
-        int j = array.length;
-        for (int i = 0; i < array.length; i++) {
-            rarray[j-1] = array[i];
-            System.out.println("i= " + i + "; " + array[i]);
-            System.out.println("j= " + j + "; " + rarray[j]);
-            j--;
-        }
+        int[] rarray = array.clone();
+        reverseInSameArray(rarray);
         return rarray;
     }
 
@@ -104,7 +74,7 @@ public class ArrayUtil {
      */
     public static void reverseInSameArray(int[] array) {
         int j = array.length - 1;
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < (array.length/2); i++) {
             swap(array, i, j);
             j--;
         }
@@ -126,6 +96,7 @@ public class ArrayUtil {
     }
 
     public static void print(int[] a) {
+
         print(a, " ");
     }
 
@@ -136,7 +107,7 @@ public class ArrayUtil {
      */
     public static void print(int[] a, String delimiter) {
         for (int i = 0; i < a.length; i++){
-            System.out.println(a[i] + " ");
+            System.out.print(a[i] + delimiter + " ");
         }
     }
 
