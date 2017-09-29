@@ -63,8 +63,8 @@ public class TwoDimensionalArrayUtil {
 
 
     public static void print(int[][] matrix) {
-        int max=matrix[0][matrix.length-1];
-        int maxDigitsCount=digitsCount(max);
+        int max = matrix[0][matrix.length - 1];
+        int maxDigitsCount = digitsCount(max);
         for ( int x[] : matrix) {
             for (int y : x) {
                 System.out.print(y);

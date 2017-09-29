@@ -40,11 +40,9 @@ public class ArrayUtil {
     public static void shiftLeftWithoutArray(int[] array, int shiftSize) {
         int timesShifted = 0;
         while (timesShifted < shiftSize) {
-            int temp = array[0];
             for (int i = 0; i < array.length - 1; i++) {
-                array[i] = array[i + 1];
+                homework.lesson2.davidgevorgyan.util.ArrayUtil.swap(array, i, i+1);
             }
-            array[array.length - 1] = temp;
             timesShifted++;
         }
 
