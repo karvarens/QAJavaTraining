@@ -15,8 +15,14 @@ public class ArrayUtil {
      * @param a
      * @param shiftSize
      */
-    public static void shiftLeft(int a[], int shiftSize) {
-
+    public static void shiftLeft(int array[], int shiftSize) {
+        int length = array.length;
+        if (shiftSize>length)
+            shiftSize = shiftSize
+        for (int i =0, i<length; i++) {
+            if (shiftSize > i)
+                array[length-shiftSize+i]=
+        }
     }
 
 
