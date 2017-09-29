@@ -1,6 +1,6 @@
-package homework.lesson2.avetikbabayan.util;
+//package homework.lesson2.avetikbabayan.util;
 
-public class ArrayUtilTest {
+//public class ArrayUtilTest {
 //
 //    public static int getMaximum () {
 //        int[] array = {10, 20, -50, -30, 100};
