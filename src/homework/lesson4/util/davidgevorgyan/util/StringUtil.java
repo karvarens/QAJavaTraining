@@ -1,0 +1,189 @@
+package homework.lesson4.util.davidgevorgyan.util;
+
+
+public class StringUtil {
+
+    /**
+     * Parses the specified inputText and divides it into tokens by the specified delimiter.
+     *
+     * @param inputText  the string to be splitted by the specified delimiter
+     * @param delimiter  the delimiter by which the specified inputText  will splitted.
+     * @return the array of strings computed by splitting this string
+     *          around matches of the given regular expression.
+     */
+    public static String[] split(String inputText, char delimiter) {
+        int size = countChar(inputText, delimiter);
+        String[] newStr = new String[size + 1];
+        for (int i = 0; i <= size; i++) {
+            newStr[i] = "";
+        }
+        char[] ch = inputText.toCharArray();
+        int startIndex = 0;
+        int j = 0;
+        for(int i = 0; i < inputText.length(); i++){
+            //case for all words except last one
+            if (ch[i] == delimiter){
+                newStr[j] = subString(inputText, startIndex, i);
+                j++;
+                startIndex = i + 1;
+            }
+            //case for latest word
+            if (i + 1 == inputText.length()) {
+                newStr[j] = subString(inputText, startIndex, i + 1);
+            }
+        }
+        return newStr;
+    }
+
+    /**
+    * Returns a new string that is a substring of the specified inputText. The
+    * substring begins at the specified <code>beginIndex and
+    * extends to the character at index <code>endIndex - 1.
+    * Thus the length of the substring is <code>endIndex-beginIndex.
+    * Examples:
+    * "hamburger".substring(4, 8) returns "urge"
+    * "smiles".substring(1, 5) returns "mile"
+    *
+    * @param      inputText    the string substring of which must be returned
+    * @param      startIndex   the beginning index, inclusive.
+    * @param      endIndex     the ending index, exclusive.
+    * @return     the specified substring.
+    * @exception IndexOutOfBoundsException  if the
+    *             beginIndex is negative, or
+    *             endIndex is larger than the length of
+    *             this String object, or
+    *             beginIndex is larger than
+    *             endIndex.
+    */
+    static public String subString(String inputText, int startIndex, int endIndex) {
+        if((startIndex > endIndex) || (startIndex > inputText.length()) || (endIndex > inputText.length())) {
+            throw new IndexOutOfBoundsException("startIndex/endIndex conflict is detected");
+        }
+        String newStr = "";
+            char[] ch = inputText.toCharArray();
+            for(int i = startIndex; i < inputText.length() && i < endIndex; i++){
+                newStr = newStr + ch[i];
+            }
+        return newStr;
+    }
+
+    /**
+     * Returns a copy of the specified str, with leading and trailing whitespace
+     * omitted.
+     * @param str the String will be trimmed.
+     * @return  A copy of the string with leading and trailing white
+     *          space removed, or this string if it has no leading or
+     *          trailing white space.
+     */
+    public static String trim(String str) {
+        int length = str.length();
+        int startIndex = 0;
+        int endIndex = 0;
+        char[] ch = str.toCharArray();
+        for(int i = 0; i < length; i++) {
+            if(ch[i]!=' ') {
+                startIndex = i;
+                break;
+            }
+        }
+        for(int i = length-1; i >= 0; i--) {
+            if(ch[i]!=' ') {
+                endIndex = i + 1;
+                break;
+            }
+        }
+        return subString (str, startIndex, endIndex);
+    }
+
+    /**
+     * Parses the string argument as a signed decimal integer. The
+     * characters in the string must all be decimal digits, except
+     * that the first character may be an ASCII minus sign.
+     *
+     * @param s a String containing the int representation to be parsed
+     * @return     the integer value represented by the argument in decimal.
+     * @exception NumberFormatException  if the string does not contain a
+     *               parsable integer.
+     */
+    public static int parseInt(String s) throws NumberFormatException {
+            int num = 0;
+            int mod = 1;
+
+            for(int i = 0; i < s.length(); i++)
+            {
+                //checking for positive or negative number
+                if (s.charAt(0) == '-' && i == 0){
+                    mod = -1;
+                    i++;
+                }
+                //checking for digits
+                if(((int)s.charAt(i) >= 48) && ((int)s.charAt(i) <= 57)) {
+                    num = num * 10 + ((int)s.charAt(i) - 48);
+                } else {
+                    throw new NumberFormatException();
+                }
+            }
+            return num * mod;
+    }
+
+    public static String toLowerCase(String text){
+        return changeCase(text,"toLowerCase");
+    }
+
+    public static String toUpperCase(String text){
+        return changeCase(text,"toUpperCase");
+    }
+
+    public static String changeCase(String text, String option){
+        char[] ch = text.toCharArray();
+        switch (option) {
+            //I think this part can be optimized
+            case "toUpperCase":
+                for (int i = 0; i < text.length(); i++) {
+                    if (ch[i] >= 97 && ch[i] <= 122) {
+                        ch[i] = (char) ((ch[i] - 32));
+                    }
+                }
+                break;
+            case "toLowerCase":
+                for(int i = 0; i < text.length(); i++) {
+                    if (ch[i] >= 65 && ch[i] <= 90) {
+                        ch[i] = (char) ((ch[i] + 32));
+                    }
+                }
+                break;
+            default:
+                for(int i = 0; i < text.length(); i++) {
+                    if (ch[i] >= 65 && ch[i] <= 90) {
+                        ch[i] = (char) ((ch[i] + 32));
+                        continue;
+                    }
+                    if (ch[i] >= 97 && ch[i] <= 122) {
+                        ch[i] = (char) ((ch[i] - 32));
+                    }
+                }
+                break;
+
+        }
+        String finalText = String.valueOf(ch);
+        return finalText;
+    }
+
+
+
+    public static String changeCaseInString(String text, int startIndex, int endIndex) {
+        String temp = subString(text, 0,startIndex) + changeCase(subString(text,startIndex,endIndex),"all") + subString(text,endIndex, text.length());
+        return temp;
+    }
+
+    private static int countChar(String inputText, char delimiter) {
+        int size=0;
+        char[] ch = inputText.toCharArray();
+        for(int i = 0; i < inputText.length(); i++) {
+            if (ch[i] == delimiter) {
+                size++;
+            }
+        }
+        return size;
+    }
+}
