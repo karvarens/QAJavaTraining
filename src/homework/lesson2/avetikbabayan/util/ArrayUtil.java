@@ -32,7 +32,6 @@ public class ArrayUtil {
         return sum;
     }
 
-
     public static int[] reverse (int[] array)
     {       int length = array.length;
         int[] reversed =new int[length];
@@ -77,6 +76,7 @@ public class ArrayUtil {
         System.out.println();
         swap(Array1, 3,5);
         print(Array1);
+        reverse(Array1);
         reverseInSameArray(Array1);
         print(Array1);
         System.out.println(getSum(Array1));

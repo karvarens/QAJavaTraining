@@ -1,25 +1,15 @@
-//package homework.lesson2.avetikbabayan.util;
+package homework.lesson2.avetikbabayan.util;
 
-//public class ArrayUtilTest {
-//
-//    public static int getMaximum () {
-//        int[] array = {10, 20, -50, -30, 100};
-//        System.out.println(ArrayUtil.getMaximum(array));
-//        return getMaximum();
-//    }
-//    public static int getMinimum () {
-//        int[] array = {2,16,-32,-8,8};
-//        System.out.println(ArrayUtil.getMinimum(array));
-//        return getMinimum();
-//    }
-//
+public class ArrayUtilTest {
 
-//    public static void main(String[] args)
-//    {
-//        ArrayUtil.getMaximum();
-//        ArrayUtil.getMinimum();
-//        ArrayUtil.getSum();
-//        ArrayUtil.reverse();
-//        ArrayUtil.reverseInSameArray();
-//        ArrayUtil.swap();
-//    }
+public static void main(String[] args) {
+    int[] ar = {12, 23, 34, 45};
+    ArrayUtil.getMaximum(ar);
+    System.out.print("Maximum is " + ArrayUtil.getMaximum(ar));
+    System.out.println("Minimum is " + ArrayUtil.getMinimum(ar));
+    System.out.println("Sum is " + ArrayUtil.getSum(ar));
+    ArrayUtil.reverseInSameArray(ar);
+    ArrayUtil.print(ar);
+    System.out.println("Swapped elements 2 and 3 are " + ArrayUtil.swap(ar, 2, 3));
+    }
+    }
