@@ -126,11 +126,6 @@ public class StringUtil {
             return num * mod;
     }
 
-    public static char changeCase(char letter){
-            letter = (char) (letter ^ 32);
-            return letter;
-    }
-
     public static String toUpperCase(String text){
         char[] ch = text.toCharArray();
 
@@ -160,11 +155,17 @@ public class StringUtil {
         char[] ch = temp.toCharArray();
 
         for (int i = 0; i < temp.length(); i++) {
-            if (ch[i] >= 65 && ch[i] <= 90 || ch[i] >= 97 && ch[i] <= 122) {
                 ch[i] = changeCase(ch[i]);
-            }
         }
         return subString(text, 0,startIndex) + String.valueOf(ch) + subString(text,endIndex, text.length()) ;
+    }
+
+    private static char changeCase(char ch) {
+        return isAlphabetic(ch) ? (char)(ch ^ 32) : ch;
+    }
+
+    private static boolean isAlphabetic(char ch) {
+        return ch <= 122 && ch >= 97 || ch <= 90 && ch >= 65;
     }
 
     private static int countChar(String inputText, char delimiter) {
