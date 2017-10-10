@@ -1,4 +1,4 @@
-package homework.lesson4.util.anighazaryan;
+package homework.lesson4.anighazaryan;
 
 
 public class StringUtil {
@@ -58,7 +58,6 @@ public class StringUtil {
     */
     static public String subString(String inputText, int startIndex, int endIndex) {
 
-        // todo
         if (inputText == null || startIndex >= endIndex) {
             return null;
         }
@@ -163,17 +162,23 @@ public class StringUtil {
         for (int i = 0; i < length; i++) {
             ascii = (int)charText[i];
             if(ascii <= 122 && ascii >= 97 ) {
-                ascii -= 32;
+                ascii -= 32;  // TODO  use ^ operator without
                 charText[i] = (char) ascii;
             }
         }
 
-        String newText = new String(charText);
-
-        return newText;
+        return new String(charText);
     }
 
-    private static String changeCase(String text, char startIndex, char endIndex) {
+    private static char changeCase(char ch) {
+        return isAlphabetic(ch) ? (char)(ch ^ 32) : ch;
+    }
+
+    static boolean isAlphabetic(char ch) {
+        return ch <= 122 && ch >= 97 || ch <= 90 && ch >= 65;
+    }
+
+    private static String changeCase(String text, int startIndex, int endIndex) {
 
         char[] charText = text.toCharArray();
         int length = charText.length;
@@ -195,25 +200,27 @@ public class StringUtil {
 
         int ascii;
 
-        char[] text3 = new char[j-i+1];
+        char[] resultChars = new char[j-i+1];
         int index = 0;
 
         for (int k = i; k <= j; k++) {
             ascii = (int)charText[k];
-            if(ascii <= 122 && ascii >= 97 ) {
-                ascii -= 32;
-                charText[k] = (char) ascii;
-            } else if (ascii <= 90 && ascii >= 65) {
-                ascii += 32;
-                charText[k] = (char) ascii;
+            if(ascii <= 122 && ascii >= 97 || ascii <= 90 && ascii >= 65) {
+                ascii ^= 32;
             }
-            text3[index] = charText[k];
+
+//            if(ascii <= 122 && ascii >= 97 ) {
+//                ascii -= 32;
+//                charText[k] = (char) ascii;
+//            } else if (ascii <= 90 && ascii >= 65) {
+//                ascii += 32;
+//                charText[k] = (char) ascii;
+//            }
+            resultChars[index] = charText[k];
             index ++;
         }
 
-        String newText = new String(text3);
-
-        return newText;
+        return new String(resultChars);
     }
 
     public static void main(String[] args) {

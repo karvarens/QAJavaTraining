@@ -1,4 +1,4 @@
-package homework.lesson4.util.davidgevorgyan.util;
+package homework.lesson4.davidgevorgyan.util;
 
 import org.junit.jupiter.api.Test;
 
