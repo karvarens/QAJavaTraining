@@ -89,7 +89,7 @@ public class ArrayUtil {
     * @param i the index of one element to be swapped.
     * @param j the index of the other element to be swapped.
     */
-    private static void swap(int[] array, int i, int j) {
+    public static void swap(int[] array, int i, int j) {
         int tmp = array[i];
         array[i] = array[j];
         array[j] = tmp;
