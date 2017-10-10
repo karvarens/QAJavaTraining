@@ -75,6 +75,8 @@ public class StringUtilTest {
     @Test
     public void changeCaseInString(){
         assertEquals("DavID gEVorgyan", StringUtil.changeCaseInString("David Gevorgyan",3,9));
+        assertEquals("DavID gEVorgyan", StringUtil.changeCaseInString("dAvID gEVorgyan",0,2));
+        assertEquals("DavID gEVorgyan", StringUtil.changeCaseInString("DavID gEVorgyAN",13,15));
     }
 
 }
