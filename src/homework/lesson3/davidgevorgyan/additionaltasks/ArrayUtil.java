@@ -1,6 +1,7 @@
 package homework.lesson3.davidgevorgyan.additionaltasks;
 
 
+
 public class ArrayUtil {
     public static void main(String[] args) {
         int[] a = new int[1_000_000];
@@ -23,13 +24,30 @@ public class ArrayUtil {
      */
     public static void shiftLeftWithArray(int[] array, int shiftSize) {
         int length = array.length;
+        if(shiftSize > length) {
+            shiftSize = shiftSize % length;
+        }
         int[] b= array.clone();
         for (int i = 0; i < length ; i++) {
-            if (shiftSize > i)
+            if (shiftSize > i) {
                 array[length - shiftSize + i] = b[i];
-            if (shiftSize + i < length)
+            }
+            if (shiftSize + i < length) {
                 array[i] = b[i + shiftSize];
+            }
         }
+
+        for (int i = 0; i < shiftSize ; i++) {
+            int tmp = array[0];
+            for (int j = 1; j < length; j++) {
+                // swap (array, j, j-1);
+            }
+            array[length- 1] = tmp;
+
+        }
+
+
+
     }
 
     /**
