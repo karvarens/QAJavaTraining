@@ -160,7 +160,11 @@ public class StringUtil {
         return resualt.toString();
     }
 
-    private static String changeCase(String text, char startIndex, char endIndex) {
+    private static char changeCase(char ch) {
+        return 0;
+    }
+
+    private static String changeCase(String text, int startIndex, int endIndex) {
         // TODO implement
         return null;
     }
