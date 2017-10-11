@@ -3,6 +3,7 @@ package homework.lesson2.util;
 
 public class MathUtil {
     public static void main(String[] args) {
+        printIntAsBinary(-1);
     }
 
     /**
@@ -52,7 +53,10 @@ public class MathUtil {
     }
 
     public static void printIntAsBinary(int n) {
-        //todo complete
+        for (int i = 31; i >= 0; i--) {
+            System.out.print(n >> i & 1);
+        }
+        System.out.println();
     }
 
     public static int reverse(int number) {

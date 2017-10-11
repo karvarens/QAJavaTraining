@@ -14,9 +14,9 @@ public class FigurePrinter {
      */
     public static void drawLeftUpTriangle(int length) {
 
-        if(length < 1) {
-            return;
-        }
+//        if(length < 1) {  Redundant code
+//            return;
+//        }
 
         for (int i = 1; i <= length; i++) {
             for (int j = 1; j <= i; j++) {
@@ -61,10 +61,10 @@ public class FigurePrinter {
      * for example when n = 4 , it must be such as
      * drawn below :
      * <p>
-     * * * * *
-     * * * *
-     * * *
-     * *
+     *  * * * *
+     *  * * *
+     *  * *
+     *  *
      *
      * @param length specified length of triangle will be drawn
      */

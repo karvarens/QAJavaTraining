@@ -21,7 +21,7 @@ public class ArrayUtilTest {
         System.out.println("rreverse");
         System.out.println("Reverse in the same array");
         ArrayUtil.reverseInSameArray(arrayMy);
-        ArrayUtil.print(arrayMy,";");
+        ArrayUtil.print(arrayMy,";  ");
     }
 
 }

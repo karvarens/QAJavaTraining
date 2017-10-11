@@ -78,9 +78,7 @@ public class MathUtil {
      * @return absolute number of specified n
      */
     public static int abs(int n) {
-        if(n < 0)
-            n = n * (-1);
-        return n;
+        return n < 0 ? -n : n;
     }
 
     /**
@@ -110,8 +108,7 @@ public class MathUtil {
      */
     public static int reverse(int number) {
         int reversedNum = 0;
-        while (number != 0)
-        {
+        while (number != 0) {
             reversedNum = reversedNum * 10 + number % 10;
             number /= 10;
         }

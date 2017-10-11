@@ -1,4 +1,4 @@
-package lesson4;
+package homework.lesson4.util;
 
 public class StringUtil {
 
@@ -11,39 +11,9 @@ public class StringUtil {
      *          around matches of the given regular expression.
      */
     public static String[] split(String inputText, char delimiter) {
-        int size = sizeOfText(inputText,delimiter);
-        String [] newStr = new String[size + 1];
-        for (int i = 0; i <= size; i++) {
-            newStr[i] = "";
-        }
-
-        for (int i = 0; i < newStr.length; i++) {
-            for (int j = 0; j < inputText.length(); j++) {
-                if (inputText.charAt(j) != delimiter){
-                    newStr[i] += inputText.charAt(j);
-                }else{
-                    i++;
-                }
-            }
-        }
-        for (String w : newStr) {
-            System.out.println(w);
-        }
-
         //TODO implement
-        return newStr;
+        return null;
     }
-
-    private static int sizeOfText(String inputText,char delimiter){
-        int size = 0;
-        for (int i = 0; i < inputText.length(); i++) {
-            if (inputText.charAt(i) == delimiter){
-                size++;
-            }
-        }
-        return size;
-    }
-
 
     /**
      * Returns a new string that is a substring of the specified inputText. The
@@ -66,19 +36,8 @@ public class StringUtil {
      *             endIndex.
      */
     static public String subString(String inputText, int startIndex, int endIndex) {
-        StringBuilder str = new StringBuilder();
-        for (int i = startIndex; i < inputText.length(); i++) {
-            if (startIndex < 0 || endIndex > inputText.length()){
-                throw new IndexOutOfBoundsException();
-            }
-
-            if (i < endIndex){
-                str.append(inputText.charAt(i));
-            }
-        }
-
         //TODO implement
-        return str.toString();
+        return null;
     }
 
     /**
@@ -90,14 +49,8 @@ public class StringUtil {
      *          trailing white space.
      */
     public static String trim(String str) {
-        String newString = "";
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) != ' '){
-                newString += str.charAt(i);
-            }
-        }
         //TODO: implement
-        return newString;
+        return null;
     }
 
     /**
@@ -111,56 +64,25 @@ public class StringUtil {
      *               parsable integer.
      */
     public static int parseInt(String s) {
-        int c = 0;
-        boolean b = false;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '-'){
-                c *= -1;
-                i++;
-                b = true;
-            }
-            if (s.charAt(i) >= '0' && s.charAt(i) <= '9'){
-                c *= 10;
-                if (b){
-                    c += ((int)s.charAt(i) - '0')*-1;
-                }else{
-                    c += (int)s.charAt(i) - '0';
-                }
 
-            }else{
-                throw new NumberFormatException();
-            }
-        }
-        return c; // TODO implement the method
+        return 0; // TODO implement the method
     }
 
     public static String toLowerCase(String text){
-        StringBuilder resualt = new StringBuilder();
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) >= 'A' && text.charAt(i) <= 'Z'){
-                resualt.append((char) (text.charAt(i) - 'A' + 'a'));
-            }else{
-                resualt.append(text.charAt(i));
-            }
-        }
         // TODO implement
-        return resualt.toString();
+        return null;
     }
 
     public static String toUpperCase(String text){
-        StringBuilder resualt = new StringBuilder();
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) >= 'a' && text.charAt(i) <= 'z'){
-                resualt.append((char) (text.charAt(i) + 'A' - 'a'));
-            }else{
-                resualt.append(text.charAt(i));
-            }
-        }
         // TODO implement
-        return resualt.toString();
+        return null;
     }
 
-    private static String changeCase(String text, char startIndex, char endIndex) {
+    private static char changeCase(char ch) {
+        return 0;
+    }
+
+    private static String changeCase(String text, int startIndex, int endIndex) {
         // TODO implement
         return null;
     }

@@ -5,7 +5,9 @@ package homework.lesson3.narekvagharshakyan.additionaltasks;
 public class TwoDimensionalArrayUtil {
 
     public static void main(String[] args) {
-        int[][] matrix = createSpiralMatrix(9);
+        int[][] matrix = createSpiralMatrix(8);
+        print(matrix);
+
     }
 
     /**
@@ -24,8 +26,6 @@ public class TwoDimensionalArrayUtil {
      * @param size size of columns and rows, should be odd number
      */
     public static int[][] createSpiralMatrix(int size) {
-
-
         int array[][] = new int[size][size];
         int step = 0;
 
@@ -35,7 +35,7 @@ public class TwoDimensionalArrayUtil {
         int column_down_start = 0;
         int column_down_end = size - 1;
 
-        int row_left_start = size - 1;
+        int row_left_start = size - 1;   //TODO: Java code convention violation. PLease use camelCase for instance, rowLeftStart
         int row_left_end = 0;
 
         int column_up_start = size - 1;
@@ -93,10 +93,9 @@ public class TwoDimensionalArrayUtil {
 
         }
 
-        print(array);
-        return null;
+//        print(array);
+        return array;
     }
-
 
     public static void print(int[][] matrix) {
         for (int kk = 0; kk < matrix.length; kk++) {
@@ -106,4 +105,5 @@ public class TwoDimensionalArrayUtil {
             System.out.println();
         }
     }
+
 }

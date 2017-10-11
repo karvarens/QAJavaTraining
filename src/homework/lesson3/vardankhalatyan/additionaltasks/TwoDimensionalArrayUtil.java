@@ -7,6 +7,7 @@ public class TwoDimensionalArrayUtil {
     public static void main(String[] args) {
 //        int[][] matrix = createSpiralMatrix(21);
 //        print(matrix);
+        createSpiralMatrix(1);
     }
 
     /**
@@ -22,10 +23,34 @@ public class TwoDimensionalArrayUtil {
      *   36 17 18 19 20 21 44
      *   37 38 39 40 41 42 43
      *
+     *   3  2  9
+     *   4  1  8
+     *   5  6  7
+     *
+     *   1 2 3 4 5 6 7 8 9
+     *
      * @param size size of columns and rows, should be odd number
      */
     public static int[][] createSpiralMatrix (int size) {
-        return null; // TODO implement
+
+        int[][] a = new int[3][3];
+        a[1][1] = 1;
+        a[0][1] = 2;
+        a[0][0] = 3;
+        a[1][0] = 4;
+        a[2][0] = 5;
+        a[2][1] = 6;
+        a[2][2] = 7;
+        a[1][2] = 8;
+        a[0][2] = 9;
+        for (int i =0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                System.out.print(a[i][j]);
+            }
+            System.out.println("");
+        }
+        return null;
+
     }
 
 
