@@ -130,7 +130,7 @@ public class StringUtil {
         char[] ch = text.toCharArray();
 
         for (int i = 0; i < text.length(); i++) {
-            if (ch[i] >= 97 && ch[i] <= 122) {
+            if (isUpperCase(ch[i])){
                 ch[i] = changeCase(ch[i]);
             }
         }
@@ -141,7 +141,7 @@ public class StringUtil {
         char[] ch = text.toCharArray();
 
         for (int i = 0; i < text.length(); i++) {
-            if (ch[i] >= 65 && ch[i] <= 90) {
+            if (isLowerCase(ch[i])){
                 ch[i] = changeCase(ch[i]);
             }
         }
@@ -160,12 +160,20 @@ public class StringUtil {
         return subString(text, 0,startIndex) + String.valueOf(ch) + subString(text,endIndex, text.length()) ;
     }
 
-    private static char changeCase(char ch) {
+    public static char changeCase(char ch) {
         return isAlphabetic(ch) ? (char)(ch ^ 32) : ch;
     }
 
-    private static boolean isAlphabetic(char ch) {
-        return ch <= 122 && ch >= 97 || ch <= 90 && ch >= 65;
+    public static boolean isUpperCase(char ch) {
+        return ch <= 122 && ch >= 97;
+    }
+
+    public static boolean isLowerCase(char ch) {
+        return ch <= 90 && ch >= 65;
+    }
+
+    public static boolean isAlphabetic(char ch) {
+        return isUpperCase(ch) || isLowerCase(ch);
     }
 
     private static int countChar(String inputText, char delimiter) {
