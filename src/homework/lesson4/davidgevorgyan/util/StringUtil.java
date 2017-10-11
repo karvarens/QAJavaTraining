@@ -126,54 +126,46 @@ public class StringUtil {
             return num * mod;
     }
 
-    public static String toLowerCase(String text){
-        return changeCase(text,"toLowerCase");
-    }
-
     public static String toUpperCase(String text){
-        return changeCase(text,"toUpperCase");
+        char[] ch = text.toCharArray();
+
+        for (int i = 0; i < text.length(); i++) {
+            if (ch[i] >= 97 && ch[i] <= 122) {
+                ch[i] = changeCase(ch[i]);
+            }
+        }
+        return String.valueOf(ch);
     }
 
-    public static String changeCase(String text, String option){
+    public static String toLowerCase(String text) {
         char[] ch = text.toCharArray();
-        switch (option) {
-            //I think this part can be optimized
-            case "toUpperCase":
-                for (int i = 0; i < text.length(); i++) {
-                    if (ch[i] >= 97 && ch[i] <= 122) {
-                        ch[i] = (char) ((ch[i] - 32));
-                    }
-                }
-                break;
-            case "toLowerCase":
-                for(int i = 0; i < text.length(); i++) {
-                    if (ch[i] >= 65 && ch[i] <= 90) {
-                        ch[i] = (char) ((ch[i] + 32));
-                    }
-                }
-                break;
-            default:
-                for(int i = 0; i < text.length(); i++) {
-                    if (ch[i] >= 65 && ch[i] <= 90) {
-                        ch[i] = (char) ((ch[i] + 32));
-                        continue;
-                    }
-                    if (ch[i] >= 97 && ch[i] <= 122) {
-                        ch[i] = (char) ((ch[i] - 32));
-                    }
-                }
-                break;
 
+        for (int i = 0; i < text.length(); i++) {
+            if (ch[i] >= 65 && ch[i] <= 90) {
+                ch[i] = changeCase(ch[i]);
+            }
         }
-        String finalText = String.valueOf(ch);
-        return finalText;
+        return String.valueOf(ch);
     }
 
 
 
     public static String changeCaseInString(String text, int startIndex, int endIndex) {
-        String temp = subString(text, 0,startIndex) + changeCase(subString(text,startIndex,endIndex),"all") + subString(text,endIndex, text.length());
-        return temp;
+        String temp = subString(text,startIndex,endIndex);
+        char[] ch = temp.toCharArray();
+
+        for (int i = 0; i < temp.length(); i++) {
+                ch[i] = changeCase(ch[i]);
+        }
+        return subString(text, 0,startIndex) + String.valueOf(ch) + subString(text,endIndex, text.length()) ;
+    }
+
+    private static char changeCase(char ch) {
+        return isAlphabetic(ch) ? (char)(ch ^ 32) : ch;
+    }
+
+    private static boolean isAlphabetic(char ch) {
+        return ch <= 122 && ch >= 97 || ch <= 90 && ch >= 65;
     }
 
     private static int countChar(String inputText, char delimiter) {
