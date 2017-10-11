@@ -139,9 +139,7 @@ public class FigurePrinter {
      *
      * @param width  specified width of rectangle will be drawn
      */
-    public static void drawEmptyRectangle(int width, int height){
-        drawEmptyRectangle(width, height, " *");
-    }
+    public static void drawEmptyRectangle(int width, int height){drawEmptyRectangle(width, height, " *");}
 
     public static void drawEmptyRectangle(int width, int height , String printingSymbols) {
         for (int i = 0; i < height; i++) {
