@@ -122,7 +122,6 @@ public class StringUtil {
      *               parsable integer.
      */
     public static int parseInt(String s) {
-
         // TODO implement the method
         char[] charText = s.toCharArray();
         int length = charText.length;
@@ -134,39 +133,27 @@ public class StringUtil {
         return 0;
     }
 
-    public static String toLowerCase(String text){
-
+    public static String toLowerCase(String text) {
         char[] charText = text.toCharArray();
-        int length = charText.length;
-
-        int ascii;
-        for (int i = 0; i < length; i++) {
-            ascii = (int)charText[i];
-            if(ascii <= 90 && ascii >= 65 ) {
-                ascii += 32;
-                charText[i] = (char) ascii;
+        int i = 0;
+        for (char current: charText) {
+            if(isUpperCase(current)) {
+                charText[i] = (char)(current ^ 32);
             }
+            i++;
         }
-
-        String newText = new String(charText);
-
-        return newText;
+        return new String(charText);
     }
 
-    public static String toUpperCase(String text){
-
+    public static String toUpperCase(String text) {
         char[] charText = text.toCharArray();
-        int length = charText.length;
-
-        int ascii;
-        for (int i = 0; i < length; i++) {
-            ascii = (int)charText[i];
-            if(ascii <= 122 && ascii >= 97 ) {
-                ascii -= 32;  // TODO  use ^ operator without
-                charText[i] = (char) ascii;
+        int i = 0;
+        for (char current: charText) {
+            if(isLowerCase(current)) {
+                charText[i] = (char)(current ^ 32);
             }
+            i++;
         }
-
         return new String(charText);
     }
 
@@ -174,50 +161,30 @@ public class StringUtil {
         return isAlphabetic(ch) ? (char)(ch ^ 32) : ch;
     }
 
-    static boolean isAlphabetic(char ch) {
-        return ch <= 122 && ch >= 97 || ch <= 90 && ch >= 65;
+    private static boolean isUpperCase(char ch) {
+        return ch >= 65 && ch <= 90;
+    }
+
+    private static boolean isLowerCase(char ch) {
+        return ch >= 97 && ch <= 122;
+    }
+
+    private static boolean isAlphabetic(char ch) {
+        return  ch >= 97 && ch <= 122 || ch >= 65 && ch <= 90;
     }
 
     private static String changeCase(String text, int startIndex, int endIndex) {
+        //TODO: validation of parameters later:
 
-        char[] charText = text.toCharArray();
-        int length = charText.length;
+        int length = endIndex - startIndex;
+        char[] resultChars = new char[length];
 
-        int i = 0;
-        int j = length - 1;
-
-        while (charText[i] != startIndex) {
-            i++;
-        }
-
-        while (charText[j] != endIndex) {
-            j--;
-        }
-
-        if ( i > j) {
-            return null;
-        }
-
-        int ascii;
-
-        char[] resultChars = new char[j-i+1];
-        int index = 0;
-
-        for (int k = i; k <= j; k++) {
-            ascii = (int)charText[k];
-            if(ascii <= 122 && ascii >= 97 || ascii <= 90 && ascii >= 65) {
-                ascii ^= 32;
+        for (int i = 0; i < length; i++) {
+            char ch = text.charAt(startIndex + i);
+            if(isAlphabetic(ch)) {
+                ch ^= 32;
             }
-
-//            if(ascii <= 122 && ascii >= 97 ) {
-//                ascii -= 32;
-//                charText[k] = (char) ascii;
-//            } else if (ascii <= 90 && ascii >= 65) {
-//                ascii += 32;
-//                charText[k] = (char) ascii;
-//            }
-            resultChars[index] = charText[k];
-            index ++;
+            resultChars[i] = ch;
         }
 
         return new String(resultChars);
@@ -238,9 +205,9 @@ public class StringUtil {
 
        // System.out.println(subString(text, 2, 5));
 
-        System.out.println(trim("  trimmed text    "));
-        System.out.println(toLowerCase("tEsTiNg lOwEr CaSe"));
-        System.out.println(toUpperCase("tEsTiNg UpPeR CaSe"));
-        System.out.println(changeCase("tEsTiNg cHanGe CaSe", 's', 'n'));
+//        System.out.println(trim("  trimmed text    "));
+//        System.out.println(toLowerCase("tEsTiNg lOwEr CaSe"));
+//        System.out.println(toUpperCase("tEsTiNg UpPeR CaSe"));
+        System.out.println(changeCase("tEsTiNg cHanGe CaSe", 5, 9));
     }
 }
