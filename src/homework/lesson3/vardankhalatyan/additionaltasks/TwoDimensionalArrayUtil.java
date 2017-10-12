@@ -7,8 +7,15 @@ public class TwoDimensionalArrayUtil {
     public static void main(String[] args) {
 //        int[][] matrix = createSpiralMatrix(21);
 //        print(matrix);
-        createSpiralMatrix(1);
+//        createSpiralMatrix(5);
+        int[][] matrix = new int[7][7];
+        drawSquare(matrix,3);
+        drawSquare(matrix,1);
+        drawSquare(matrix,5);
+        drawSquare(matrix,7);
+        ptintM(matrix);
     }
+
 
     /**
      *  Initializes two dimensional array such as explained below:
@@ -33,28 +40,52 @@ public class TwoDimensionalArrayUtil {
      */
     public static int[][] createSpiralMatrix (int size) {
 
-        int[][] a = new int[3][3];
-        a[1][1] = 1;
-        a[0][1] = 2;
-        a[0][0] = 3;
-        a[1][0] = 4;
-        a[2][0] = 5;
-        a[2][1] = 6;
-        a[2][2] = 7;
-        a[1][2] = 8;
-        a[0][2] = 9;
-        for (int i =0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
-                System.out.print(a[i][j]);
-            }
-            System.out.println("");
+        int nums = size * size;
+        int[][] matrix = new int[size][size];
+        for (int i = 1; i <=size; i++){
+            drawSquare(matrix,i);
         }
-        return null;
-
+        ptintM(matrix);
+        return matrix;
     }
 
 
-    public static void print(int[][] matrix) {
-        //TODO implement
+
+
+    private static void ptintM(int[][] a){
+        for (int i = 0; i < a.length; i++){
+            for (int j = 0; j < a.length; j++){
+                if (a[i][j] < 10){
+                    System.out.print(a[i][j] + "  ");
+
+                }else{
+                    System.out.print(a[i][j] + " ");
+                }
+            }
+            System.out.println();
+        }
     }
+
+    private static void drawSquare(int[][] a ,int radius){
+        int size = a.length;
+        int offset = (size - radius)/2;
+        int nums = radius * radius;
+        for (int i = offset; i < size - offset; i++){
+            a[i][size - offset-1] = nums;
+            nums--;
+        }
+        for (int i = size - offset - 2; i >= offset; i--){
+            a[size-offset-1][i] = nums;
+            nums--;
+        }
+        for (int i = size - offset - 2; i >= offset; i--){
+            a[i][offset] = nums;
+            nums--;
+        }
+        for (int i = offset + 1; i < size - offset - 1; i++){
+            a[offset][i] = nums;
+            nums--;
+        }
+    }
+
 }
