@@ -165,11 +165,11 @@ public class StringUtil {
     }
 
     public static boolean isUpperCase(char ch) {
-        return ch <= 122 && ch >= 97;
+        return ch >= 'a' && ch <= 'z';
     }
 
     public static boolean isLowerCase(char ch) {
-        return ch <= 90 && ch >= 65;
+        return ch >= 'A' && ch <= 'Z';
     }
 
     public static boolean isAlphabetic(char ch) {
