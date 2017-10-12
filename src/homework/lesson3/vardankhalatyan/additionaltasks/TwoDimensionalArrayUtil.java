@@ -1,7 +1,5 @@
 package homework.lesson3.vardankhalatyan.additionaltasks;
 
-
-
 public class TwoDimensionalArrayUtil {
 
     public static void main(String[] args) {
@@ -9,18 +7,26 @@ public class TwoDimensionalArrayUtil {
         printM(matrix);
         int[][] nmatrix = createSpiralMatrix(-1);
         printM(nmatrix);
+        int[][] ematrix = createSpiralMatrix(4);
+        printM(ematrix);
     }
 
     public static int[][] createSpiralMatrix (int size) {
         if (size < 1){
-            System.out.println("Please, specify positive array leght > 1");
+            System.out.println("Please, specify positive array leght(odd number) >= 1");
+            System.out.println("Returned empty two-dimensional array");
+            int[][] a = new int[0][0];
+            return a;
+        }
+        if (size%2==0){
+            System.out.println("Please, specify odd integer number");
             System.out.println("Returned empty two-dimensional array");
             int[][] a = new int[0][0];
             return a;
         }
         int[][] matrix = new int[size][size];
         int nums = size * size;
-        for (int i = 1; i <=size; i++){
+        for (int i = 1; i <=size; i+=2){
             drawSquare(matrix,i);
         }
         return matrix;
