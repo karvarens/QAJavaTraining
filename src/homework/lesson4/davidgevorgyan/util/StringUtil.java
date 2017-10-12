@@ -130,7 +130,7 @@ public class StringUtil {
         char[] ch = text.toCharArray();
 
         for (int i = 0; i < text.length(); i++) {
-            if (isUpperCase(ch[i])){
+            if (isLowerCase(ch[i])){
                 ch[i] = changeCase(ch[i]);
             }
         }
@@ -141,7 +141,7 @@ public class StringUtil {
         char[] ch = text.toCharArray();
 
         for (int i = 0; i < text.length(); i++) {
-            if (isLowerCase(ch[i])){
+            if (isUpperCase(ch[i])){
                 ch[i] = changeCase(ch[i]);
             }
         }
@@ -164,11 +164,11 @@ public class StringUtil {
         return isAlphabetic(ch) ? (char)(ch ^ 32) : ch;
     }
 
-    public static boolean isUpperCase(char ch) {
+    public static boolean isLowerCase(char ch) {
         return ch >= 'a' && ch <= 'z';
     }
 
-    public static boolean isLowerCase(char ch) {
+    public static boolean isUpperCase(char ch) {
         return ch >= 'A' && ch <= 'Z';
     }
 
