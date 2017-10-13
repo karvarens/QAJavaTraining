@@ -12,13 +12,11 @@ public class ArrayUtil {
      * {1, 2, 3, 4, 5, 6, 7} and shiftSize is 2,
      * after the method call order of array element should be
      * {3, 4, 5, 6, 7, 1, 2}
+     *
      * @param a
      * @param shiftSize
      */
-    public static void shiftLeft(int a[], int shiftSize) {
-
+    public static void shiftLeft(int array[], int shiftSize) {
+        //TODO
     }
-
-
-
 }

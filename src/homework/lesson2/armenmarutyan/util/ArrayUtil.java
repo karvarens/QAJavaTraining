@@ -30,13 +30,13 @@ public class ArrayUtil {
 
         public static int getMaximum(int[] array) {
             int max = array[0];
-            for (int i = 1; i < array.length; i++) {
+            int length = array.length;
+            for (int i = 1; i < length; i++) {
                 if (array[i] > max) {
                     max = array[i];
                 }
             }
-//
-            return max;   // this must be replaced by correct code
+            return max;
         }
 
 
@@ -73,24 +73,25 @@ public class ArrayUtil {
          * @return new created reversed array to the specified parameter "array"
          */
         public static int[] reverse(int array[]) {
-            for (int i = 0; i < array.length / 2; i++) {
-                int rev;
-                rev = array[i];
-                array[i] = array[array.length - 1 - i];
-                array[array.length -1-i] = rev;
-
+            int length = array.length;
+            int lastIndex = length - 1;
+            int [] result = new int[length];
+            for (int i = 0; i < length; i++) {
+                result[i] = array[lastIndex - i];
             }
-            return array;   // this must be replaced by correct code
+            return  result;
         }
 
-        /**
-         * Reverses the elements order of the specified array
-         * @param array  an array: Elements order of wich must be reversed
-         */
-        public static void reverseInSameArray(int[] array) {
-//        TODO implement
-
+    /**
+     * Reverses the elements order of the specified array
+     * @param array  an array: Elements order of wich must be reversed
+     */
+    public static void reverseInSameArray(int[] array) {
+        int lastIndex = array.length - 1;
+        for (int i = 0; i < array.length / 2; i++) {
+            swap(array, i, lastIndex - i);
         }
+    }
 
         /**
          * Swaps the elements at the specified positions in the specified array.

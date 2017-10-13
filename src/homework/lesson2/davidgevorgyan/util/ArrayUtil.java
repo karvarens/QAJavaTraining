@@ -146,10 +146,11 @@ public class ArrayUtil {
      * @return new created reversed array to the specified parameter "array"
      */
     public static int[] reverse(int[] array) {
-        int l=array.length;
+        int l = array.length;
+        int lastIndex  = l - 1;
         int [] a = new int[l];
         for (int i = 0; i < l; i++) {
-            a[i]=array[l-1-i];
+            a[i] = array[lastIndex - i];
         }
         return a;
     }
@@ -175,7 +176,7 @@ public class ArrayUtil {
     * @param i the index of one element to be swapped.
     * @param j the index of the other element to be swapped.
     */
-    private static void swap(int[] array, int i, int j) {
+    public static void swap(int[] array, int i, int j) {
         int s = array[i];
         array[i] = array[j];
         array[j] = s;
@@ -194,9 +195,9 @@ public class ArrayUtil {
      */
     public static void print(int[] array, String delimiter) {
         for (int a: array) {
-            System.out.print(a+delimiter+" ");
+            System.out.print(a + delimiter );
         }
-        System.out.println("");
+        System.out.println();
     }
 
 

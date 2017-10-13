@@ -5,7 +5,7 @@ package homework.lesson3.davidgevorgyan.additionaltasks;
 public class TwoDimensionalArrayUtil {
 
     public static void main(String[] args) {
-        int[][] matrix = createSpiralMatrix(21);
+        int[][] matrix = createSpiralMatrix(101);
         print(matrix);
     }
 
@@ -63,10 +63,22 @@ public class TwoDimensionalArrayUtil {
 
 
     public static void print(int[][] matrix) {
+        int max = matrix[0][matrix.length - 1];
+        int maxDigitsCount = digitsCount(max);
         for ( int x[] : matrix) {
-            for (int y : x)
-                System.out.print(y + "\t");
+            for (int y : x) {
+                System.out.print(y);
+                for (int i = digitsCount(y); i <= maxDigitsCount; i++) {
+                    System.out.print(" ");
+                }
+            }
             System.out.println();
         }
+    }
+
+
+    public static int digitsCount(int number) {
+        return (int) Math.log10(number) + 1;
+
     }
 }

@@ -5,7 +5,7 @@ public class ArrayUtilTest {
         // todo : Organize all test methods calls here
 
         int []a = {51,48,21,54};
-        //System.out.println(ArrayUtil.getMaximum(a));
+        System.out.println(ArrayUtil.getMaximum(a));
         //System.out.println(ArrayUtil.getMinimum(a));
 
        /* int [] ddd=ArrayUtil.reverse(a);
