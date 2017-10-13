@@ -59,12 +59,13 @@ public class StringUtil {
         if((startIndex > endIndex) || (startIndex > inputText.length()) || (endIndex > inputText.length())) {
             throw new IndexOutOfBoundsException("startIndex/endIndex conflict is detected");
         }
-        String newStr = "";
-            char[] ch = inputText.toCharArray();
-            for(int i = startIndex; i < inputText.length() && i < endIndex; i++){
-                newStr = newStr + ch[i];
+
+        int resultLength = endIndex - startIndex;
+            char[] resultChars = new char[resultLength];
+            for(int i = startIndex; i < resultLength; i++){
+                resultChars[i] = inputText.charAt(i + startIndex);
             }
-        return newStr;
+        return new String(resultChars);
     }
 
     /**
@@ -109,16 +110,15 @@ public class StringUtil {
             int num = 0;
             int mod = 1;
 
-            for(int i = 0; i < s.length(); i++)
-            {
+            for(int i = 0; i < s.length(); i++) {
                 //checking for positive or negative number
                 if (s.charAt(0) == '-' && i == 0){
                     mod = -1;
                     i++;
                 }
                 //checking for digits
-                if(((int)s.charAt(i) >= 48) && ((int)s.charAt(i) <= 57)) {
-                    num = num * 10 + ((int)s.charAt(i) - 48);
+                if(((int)s.charAt(i) >= '0') && ((int)s.charAt(i) <= '9')) {
+                    num = num * 10 + ((int)s.charAt(i) - '0');
                 } else {
                     throw new NumberFormatException();
                 }
@@ -178,9 +178,9 @@ public class StringUtil {
 
     private static int countChar(String inputText, char delimiter) {
         int size=0;
-        char[] ch = inputText.toCharArray();
+//        char[] ch = inputText.toCharArray();  // it is redundant var
         for(int i = 0; i < inputText.length(); i++) {
-            if (ch[i] == delimiter) {
+            if (inputText.charAt(i) == delimiter) {    //  if (ch[i] == delimiter) {
                 size++;
             }
         }
