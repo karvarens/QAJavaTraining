@@ -62,7 +62,7 @@ public class StringUtil {
 
         int resultLength = endIndex - startIndex;
         char[] resultChars = new char[resultLength];
-        for (int i = startIndex; i < resultLength; i++) {
+        for (int i = 0; i < resultLength; i++) {
             resultChars[i] = inputText.charAt(i + startIndex);
         }
         return new String(resultChars);
@@ -80,7 +80,7 @@ public class StringUtil {
     public static String trim(String str) {
         int length = str.length();
         int startIndex = 0;
-        int endIndex = length -1;
+        int endIndex = length;
 
         for (; str.charAt(startIndex) <= ' '; startIndex++) {
             if(startIndex == endIndex){
@@ -88,7 +88,7 @@ public class StringUtil {
             }
         }
 
-        for (; str.charAt(endIndex) <= ' '; endIndex--) {
+        for (; str.charAt(endIndex - 1) <= ' '; endIndex--) {
         }
 
         return subString(str, startIndex, endIndex);
