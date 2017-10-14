@@ -2,31 +2,39 @@ package homework.lesson5.davidgevorgyan.braceChecker;
 
 public class Stack {
 
-    private int[] values;
-    private int tos;
+    private Braces[] values;
+    private int topOfStack;
 
     public Stack(int size) {
-        values = new int[size];
-        tos = -1;
+        values = new Braces[size];
+        topOfStack = -1;
     }
 
-    public void push(int val) {
-        if(tos == values.length){
-            //TODO extend the values
-            int[] newValues = new int [values.length * 3 / 2];
-            System.arraycopy(values, 0, newValues, 0, values.length);
-            values = newValues;
+    public void push(Braces value) {
+        if(topOfStack == values.length){
+            values = enlarge(values);
         }
 
-        values[++tos] = val;
+        values[++topOfStack] = new Braces(value.index, value.symbol);
     }
 
-    public int pop(){
-//        TODO complete
-        return 0;
+    public void removeTopOfStack() {
+        topOfStack--;
     }
+
+    public Braces pop(){
+        return values[topOfStack];
+    }
+
+    private Braces[] enlarge(Braces[] values){
+        Braces[] newValues = new Braces [values.length * 3 / 2];
+        System.arraycopy(values, 0, newValues, 0, values.length);
+        values = newValues;
+        return values;
+    }
+
 
     public boolean isEmpty(){
-        return tos == -1;
+        return topOfStack == -1;
     }
 }
