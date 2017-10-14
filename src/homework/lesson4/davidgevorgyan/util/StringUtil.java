@@ -80,7 +80,7 @@ public class StringUtil {
     public static String trim(String str) {
         int length = str.length();
         int startIndex = 0;
-        int endIndex = length;
+        int endIndex = length - 1;
 
         for (; str.charAt(startIndex) <= ' '; startIndex++) {
             if(startIndex == endIndex){
@@ -88,10 +88,10 @@ public class StringUtil {
             }
         }
 
-        for (; str.charAt(endIndex - 1) <= ' '; endIndex--) {
+        for (; str.charAt(endIndex) <= ' '; endIndex--) {
         }
 
-        return subString(str, startIndex, endIndex);
+        return subString(str, startIndex, endIndex + 1);
     }
 
     /**
