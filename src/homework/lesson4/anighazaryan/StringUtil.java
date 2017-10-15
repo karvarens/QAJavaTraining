@@ -145,6 +145,11 @@ public class StringUtil {
         return new String(charText);
     }
 
+    /**
+     *
+     * @param text
+     * @return
+     */
     public static String toUpperCase(String text) {
         char[] charText = text.toCharArray();
         int i = 0;
@@ -170,7 +175,7 @@ public class StringUtil {
     }
 
     private static boolean isAlphabetic(char ch) {
-        return  ch >= 97 && ch <= 122 || ch >= 65 && ch <= 90;
+        return  ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z';
     }
 
     private static String changeCase(String text, int startIndex, int endIndex) {
@@ -179,10 +184,13 @@ public class StringUtil {
         int length = endIndex - startIndex;
         char[] resultChars = new char[length];
 
+        String result = "";
+
         for (int i = 0; i < length; i++) {
             char ch = text.charAt(startIndex + i);
             if(isAlphabetic(ch)) {
                 ch ^= 32;
+                result = result + (char)(ch ^ 32);
             }
             resultChars[i] = ch;
         }
