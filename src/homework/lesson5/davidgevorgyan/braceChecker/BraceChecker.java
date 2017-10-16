@@ -2,6 +2,7 @@ package homework.lesson5.davidgevorgyan.braceChecker;
 
 public class BraceChecker {
     private String text;
+    private Braces lastOpened;
 
     public BraceChecker(String text){
         this.text = text;
@@ -50,7 +51,7 @@ public class BraceChecker {
                     bracesStack.push(new Braces(i,tempChar));
                     break;
                 case '}':
-                    Braces lastOpened = bracesStack.pop();
+                    lastOpened = bracesStack.pop();
                     if (lastOpened == null || lastOpened.symbol != '{') {
                         return false;
                     }
