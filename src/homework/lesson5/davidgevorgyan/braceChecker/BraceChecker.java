@@ -41,30 +41,41 @@ public class BraceChecker {
 
     public boolean parse() {
         Stack bracesStack = new Stack();
-        char [] bracesOpeningTemplate = {'(' , '[', '{'};
-        char [] bracesClosingTemplate = {')' , ']', '}'};
-
         for (int i = 0; i < text.length(); i++) {
-            //TODO implement with switch operator
             char tempChar = text.charAt(i);
-            //Filling Stack
-            for (char templateBrace : bracesOpeningTemplate) {
-                if (tempChar == templateBrace) {
-                    bracesStack.push(new Braces(i,text.charAt(i)));//TODO ask for better solution
-                }
-            }
-            //Checking Stack
-            int braceIndexCounter = 0; //used for counting polar brace
-            for (char templateBrace : bracesClosingTemplate) {
-                 if (tempChar == templateBrace) {
-                    if (bracesStack.pop() == null) {
+            switch (tempChar) {
+                case '{':
+                case '(':
+                case '[':
+                    bracesStack.push(new Braces(i,tempChar));
+                    break;
+                case '}':
+                    Braces lastOpened = bracesStack.pop();
+                    if (lastOpened == null || lastOpened.symbol != '{') {
                         return false;
                     }
-                    if (bracesStack.pop().symbol == bracesOpeningTemplate[braceIndexCounter]) {
-                            bracesStack.removeTopOfStack();
+                    else {
+                        bracesStack.removeTopOfStack();
                     }
-                }
-                braceIndexCounter++;
+                    break;
+                case ')':
+                    lastOpened = bracesStack.pop();
+                    if (lastOpened == null || lastOpened.symbol != '(') {
+                        return false;
+                    }
+                    else {
+                        bracesStack.removeTopOfStack();
+                    }
+                    break;
+                case ']':
+                    lastOpened = bracesStack.pop();
+                    if (lastOpened == null || lastOpened.symbol != '[') {
+                        return false;
+                    }
+                    else {
+                        bracesStack.removeTopOfStack();
+                    }
+                    break;
             }
         }
         return bracesStack.isEmpty();
