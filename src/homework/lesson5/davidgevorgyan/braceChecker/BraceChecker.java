@@ -8,6 +8,49 @@ public class BraceChecker {
         this.text = text;
     }
 
+    public boolean parse() {
+        Stack bracesStack = new Stack();
+        for (int i = 0; i < text.length(); i++) {
+            char tempChar = text.charAt(i);
+            switch (tempChar) {
+                case '{':
+                case '(':
+                case '[':
+                    bracesStack.push(new Braces(i,tempChar));
+                    break;
+                case '}':
+                    lastOpened = bracesStack.pop();
+                    if (lastOpened == null || lastOpened.symbol != '{') {
+                        return false;
+                        //TODo: It will be better to break the loop and then analise what kind og error we have,
+                    }
+                    else {
+                        bracesStack.removeTopOfStack();
+                    }
+                    break;
+                case ')':
+                    lastOpened = bracesStack.pop();
+                    if (lastOpened == null || lastOpened.symbol != '(') {
+                        return false;
+                    }
+                    else {
+                        bracesStack.removeTopOfStack();
+                    }
+                    break;
+                case ']':
+                    lastOpened = bracesStack.pop();
+                    if (lastOpened == null || lastOpened.symbol != '[') {
+                        return false;
+                    }
+                    else {
+                        bracesStack.removeTopOfStack();
+                    }
+                    break;
+            }
+        }
+        return bracesStack.isEmpty();
+    }
+
     public static class Braces {
         int index;
         char symbol;
@@ -40,45 +83,4 @@ public class BraceChecker {
         }
     }
 
-    public boolean parse() {
-        Stack bracesStack = new Stack();
-        for (int i = 0; i < text.length(); i++) {
-            char tempChar = text.charAt(i);
-            switch (tempChar) {
-                case '{':
-                case '(':
-                case '[':
-                    bracesStack.push(new Braces(i,tempChar));
-                    break;
-                case '}':
-                    lastOpened = bracesStack.pop();
-                    if (lastOpened == null || lastOpened.symbol != '{') {
-                        return false;
-                    }
-                    else {
-                        bracesStack.removeTopOfStack();
-                    }
-                    break;
-                case ')':
-                    lastOpened = bracesStack.pop();
-                    if (lastOpened == null || lastOpened.symbol != '(') {
-                        return false;
-                    }
-                    else {
-                        bracesStack.removeTopOfStack();
-                    }
-                    break;
-                case ']':
-                    lastOpened = bracesStack.pop();
-                    if (lastOpened == null || lastOpened.symbol != '[') {
-                        return false;
-                    }
-                    else {
-                        bracesStack.removeTopOfStack();
-                    }
-                    break;
-            }
-        }
-        return bracesStack.isEmpty();
-    }
 }
