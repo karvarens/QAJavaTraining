@@ -29,5 +29,11 @@ public class BraceCheckerTest {
         BraceChecker testSix=new BraceChecker("A text without brackets DEF");
         assertEquals(true,testSix.parse());
     }
+    @Test
+    public void parse2() {
+        BraceChecker testOne=new BraceChecker("()[][[]]]");
+        assertEquals(false,testOne.parse());
+
+    }
 }
 

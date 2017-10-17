@@ -1,51 +1,84 @@
 package homework.lesson5.davidgevorgyan.braceChecker;
 
 public class BraceChecker {
-    String text;
+    private String text;
+    private Braces lastOpened;
 
     public BraceChecker(String text){
         this.text = text;
     }
 
-    public boolean parse() {
-        Stack bracesStack = new Stack(text.length());
-        Braces temp;
-        char [] bracesOpeningTemplate = {'<', '(' , '[', '{'};
-        char [] bracesClosingTemplate = {'>', ')' , ']', '}'};
+    public static class Braces {
+        int index;
+        char symbol;
+        int rowNumber;
+        int indexInRow;
 
-        for (int i = 0; i < text.length(); i++) {
-            char tempChar = text.charAt(i);
-            //Filling Stack
-            for (char templateBrace : bracesOpeningTemplate) {
-                if (tempChar == templateBrace) {
-                    temp = new Braces(i, text.charAt(i));
-                    bracesStack.push(temp);
-                }
-            }
-            //Checking Stack
-            int braceIndexCounter=0; //used for counting polar brace
-            for (char templateBrace : bracesClosingTemplate) {
-                //try-catch to avoid -1 element calling
-                try {
-                    if (tempChar == templateBrace && bracesStack.pop().symbol == bracesOpeningTemplate[braceIndexCounter]) {
-                        bracesStack.removeTopOfStack();
-                    }
-                }
-                catch (ArrayIndexOutOfBoundsException exception){
-                    return false;
-                }
-                braceIndexCounter++;
+        Braces(int index, char symbol) {
+            this.index = validateIndex(index);
+            this.symbol = validateSymbol(symbol);
+        }
+
+        public void print(Braces value) {
+            System.out.println(value);
+        }
+
+        private int validateIndex(int index) {
+            if (index < 0) {
+                throw new IllegalArgumentException();
+            } else {
+                return index;
             }
         }
 
-
-        if (bracesStack.isEmpty()) {
-            return true;
+        private char validateSymbol(char symbol) {
+            if (symbol != '(' && symbol != '{' && symbol != '[') {
+                throw new IllegalArgumentException();
+            } else {
+                return symbol;
+            }
         }
-        else {
-            return false;
-        }
-
     }
 
+    public boolean parse() {
+        Stack bracesStack = new Stack();
+        for (int i = 0; i < text.length(); i++) {
+            char tempChar = text.charAt(i);
+            switch (tempChar) {
+                case '{':
+                case '(':
+                case '[':
+                    bracesStack.push(new Braces(i,tempChar));
+                    break;
+                case '}':
+                    lastOpened = bracesStack.pop();
+                    if (lastOpened == null || lastOpened.symbol != '{') {
+                        return false;
+                    }
+                    else {
+                        bracesStack.removeTopOfStack();
+                    }
+                    break;
+                case ')':
+                    lastOpened = bracesStack.pop();
+                    if (lastOpened == null || lastOpened.symbol != '(') {
+                        return false;
+                    }
+                    else {
+                        bracesStack.removeTopOfStack();
+                    }
+                    break;
+                case ']':
+                    lastOpened = bracesStack.pop();
+                    if (lastOpened == null || lastOpened.symbol != '[') {
+                        return false;
+                    }
+                    else {
+                        bracesStack.removeTopOfStack();
+                    }
+                    break;
+            }
+        }
+        return bracesStack.isEmpty();
+    }
 }

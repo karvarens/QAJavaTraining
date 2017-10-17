@@ -9,9 +9,9 @@ class StackTest {
     @Test
     void pushAndPop() {
         Stack stackTest = new Stack(3);
-        Braces bracesTest1 = new Braces(2, '(');
+        BraceChecker.Braces bracesTest1 = new BraceChecker.Braces(2, '(');
         stackTest.push(bracesTest1);
-        Braces bracesTest2 = new Braces(1, '[');
+        BraceChecker.Braces bracesTest2 = new BraceChecker.Braces(1, '[');
         stackTest.push(bracesTest2);
         assertEquals(bracesTest2.symbol,stackTest.pop().symbol);
         assertEquals(1,stackTest.pop().index);
@@ -21,9 +21,9 @@ class StackTest {
     @Test
     void removeTopOfStack() {
         Stack stackTest = new Stack(3);
-        Braces bracesTest1 = new Braces(2, '(');
+        BraceChecker.Braces bracesTest1 = new BraceChecker.Braces(2, '(');
         stackTest.push(bracesTest1);
-        Braces bracesTest2 = new Braces(1, '[');
+        BraceChecker.Braces bracesTest2 = new BraceChecker.Braces(1, '[');
         stackTest.push(bracesTest2);
         stackTest.removeTopOfStack();
         assertEquals(bracesTest1.symbol,stackTest.pop().symbol);
