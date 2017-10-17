@@ -6,13 +6,16 @@ public class StringUtil {
 
 
     public static void main(String[] args) {
-        String a = "Hello, World, How, are, you";
+        String a = "    Hello, World, How, are, you     ";
+        String b = "a987654";
+        System.out.println("!" + parseInt(b) + "!");
 //        System.out.println(a.length());
 //        System.out.println(subString(a, 22, 27) + "bla");
-        String[] b = split(a, ',');
-        for (int i = 0; i < b.length; i++) {
-            System.out.println(b[i]);
-        }
+//        String[] b = split(a, ',');
+//        for (int i = 0; i < b.length; i++) {
+//            System.out.println(b[i]);
+//        }
+//        System.out.println("!" + trim(a) + "!");
     }
 
 
@@ -41,7 +44,7 @@ public class StringUtil {
             if(a < 0) {
                 a = inputText.length();
             }
-            res[i] = subString(inputText, indexA, a);
+            res[i] = trim(subString(inputText, indexA, a));
             indexA = a+1;
         }
         return res;
@@ -92,8 +95,15 @@ public class StringUtil {
      *          trailing white space.
      */
     public static String trim(String str) {
+        String res = str;
+        while (res.charAt(0) == ' '){
+            res = subString(res, 1, res.length());
+        }
+        while (res.charAt(res.length()-1) == ' '){
+            res = subString(res, 0, res.length()-1);
+        }
 
-        return null;
+        return res;
     }
 
     /**
@@ -106,8 +116,62 @@ public class StringUtil {
      * @exception NumberFormatException  if the string does not contain a
      */
     public static int parseInt(String s) {
-
-        return 0; // TODO implement the method
+        int res = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(0) == '-'){
+                int sign = 1;
+                continue;
+            }
+            char ch = s.charAt(i);
+            int d = 0;
+            if (ch >= '0' && ch <= '9'){
+                switch (ch){
+                    case '0':
+                        res = (res * 10) + d;
+                        continue;
+                    case '1':
+                        d = 1;
+                        res = (res * 10) + d;
+                        continue;
+                    case '2':
+                        d = 2;
+                        res = (res * 10) + d;
+                        continue;
+                    case '3':
+                        d = 3;
+                        res = (res * 10) + d;
+                        continue;
+                    case '4':
+                        d = 4;
+                        res = (res * 10) + d;
+                        continue;
+                    case '5':
+                        d = 5;
+                        res = (res * 10) + d;
+                        continue;
+                    case '6':
+                        d = 6;
+                        res = (res * 10) + d;
+                        continue;
+                    case '7':
+                        d = 7;
+                        res = (res * 10) + d;
+                        continue;
+                    case '8':
+                        d = 8;
+                        res = (res * 10) + d;
+                        continue;
+                    case '9':
+                        d = 9;
+                        res = (res * 10) + d;
+                        continue;
+                }
+            }else{
+                System.out.println("Something went wrong");
+                break;
+            }
+        }
+        return res;
     }
 
     public static String toLowerCase(String text){
