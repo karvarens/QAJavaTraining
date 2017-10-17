@@ -8,6 +8,7 @@ public class ArrayUtilTest {
         System.out.println(ArrayUtil.getMaximum(a));
         //System.out.println(ArrayUtil.getMinimum(a));
 
+
        /* int [] ddd=ArrayUtil.reverse(a);
         for (int i = 0; i < ddd.length ; i++) {
             System.out.println(ddd[i]);
