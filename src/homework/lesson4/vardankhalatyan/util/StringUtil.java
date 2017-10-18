@@ -1,14 +1,19 @@
 package homework.lesson4.vardankhalatyan.util;
 
+import javax.swing.*;
+
 import static java.lang.Character.isAlphabetic;
 
 public class StringUtil {
 
 
     public static void main(String[] args) {
+
+
         String a = "    Hello, World, How, are, you     ";
-        String b = "a987654";
-        System.out.println("!" + parseInt(b) + "!");
+        String b = "p987654";
+        int parseResult = parseInt(b);
+        System.out.println("!" + parseResult + "!");
 //        System.out.println(a.length());
 //        System.out.println(subString(a, 22, 27) + "bla");
 //        String[] b = split(a, ',');
@@ -22,30 +27,30 @@ public class StringUtil {
     /**
      * Parses the specified inputText and divides it into tokens by the specified delimiter.
      *
-     * @param inputText  the string to be splitted by the specified delimiter
-     * @param delimiter  the delimiter by which the specified inputText  will splitted.
+     * @param inputText the string to be splitted by the specified delimiter
+     * @param delimiter the delimiter by which the specified inputText  will splitted.
      * @return the array of strings computed by splitting this string
-     *          around matches of the given regular expression.
+     * around matches of the given regular expression.
      */
     public static String[] split(String inputText, char delimiter) {
         int s = 0;
         for (int i = 0; i < inputText.length(); i++) {
-            if (inputText.charAt(i) == delimiter){
+            if (inputText.charAt(i) == delimiter) {
                 s++;
             }
         }
-        String[] res = new String[s+1];
+        String[] res = new String[s + 1];
 //        for (int i = 0; i < s; i++) {
 //            res[i] = "";
 //        }
         int indexA = 0;
         for (int i = 0; i <= s; i++) {
-            int a = inputText.indexOf(delimiter, indexA+2);
-            if(a < 0) {
+            int a = inputText.indexOf(delimiter, indexA + 2);
+            if (a < 0) {
                 a = inputText.length();
             }
             res[i] = trim(subString(inputText, indexA, a));
-            indexA = a+1;
+            indexA = a + 1;
         }
         return res;
 
@@ -60,16 +65,16 @@ public class StringUtil {
      * "hamburge r".substring(4, 8) returns "urge"
      * "smiles".substring(1, 5) returns "mile"
      *
-     * @param      inputText    the string substring of which must be returned
-     * @param      startIndex   the beginning index, inclusive.
-     * @param      endIndex     the ending index, exclusive.
-     * @return     the specified substring.
-     * @exception IndexOutOfBoundsException  if the
-     *             beginIndex is negative, or
-     *             endIndex is larger than the length of
-     *             this String object, or
-     *             beginIndex is larger than
-     *             endIndex.
+     * @param inputText  the string substring of which must be returned
+     * @param startIndex the beginning index, inclusive.
+     * @param endIndex   the ending index, exclusive.
+     * @return the specified substring.
+     * @throws IndexOutOfBoundsException if the
+     *                                   beginIndex is negative, or
+     *                                   endIndex is larger than the length of
+     *                                   this String object, or
+     *                                   beginIndex is larger than
+     *                                   endIndex.
      */
     static public String subString(String inputText, int startIndex, int endIndex) {
         char[] chAr = new char[inputText.length()];
@@ -89,18 +94,19 @@ public class StringUtil {
     /**
      * Returns a copy of the specified str, with leading and trailing whitespace
      * omitted.
+     *
      * @param str the String will be trimmed.
-     * @return  A copy of the string with leading and trailing white
-     *          space removed, or this string if it has no leading or
-     *          trailing white space.
+     * @return A copy of the string with leading and trailing white
+     * space removed, or this string if it has no leading or
+     * trailing white space.
      */
     public static String trim(String str) {
         String res = str;
-        while (res.charAt(0) == ' '){
+        while (res.charAt(0) == ' ') {
             res = subString(res, 1, res.length());
         }
-        while (res.charAt(res.length()-1) == ' '){
-            res = subString(res, 0, res.length()-1);
+        while (res.charAt(res.length() - 1) == ' ') {
+            res = subString(res, 0, res.length() - 1);
         }
 
         return res;
@@ -112,82 +118,43 @@ public class StringUtil {
      * that the first character may be an ASCII minus sign.
      *
      * @param s a String containing the int representation to be parsed
-     * @return     the integer value represented by the argument in decimal.
-     * @exception NumberFormatException  if the string does not contain a
+     * @return the integer value represented by the argument in decimal.
+     * @throws NumberFormatException if the string does not contain a
      */
     public static int parseInt(String s) {
         int res = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(0) == '-'){
-                int sign = 1;
-                continue;
-            }
+        int sign = s.charAt(0) == '-' ? -1 : 1;
+
+        int i = (sign == -1) ? 1 : 0;
+        for (; i < s.length(); i++) {
+
             char ch = s.charAt(i);
-            int d = 0;
-            if (ch >= '0' && ch <= '9'){
-                switch (ch){
-                    case '0':
-                        res = (res * 10) + d;
-                        continue;
-                    case '1':
-                        d = 1;
-                        res = (res * 10) + d;
-                        continue;
-                    case '2':
-                        d = 2;
-                        res = (res * 10) + d;
-                        continue;
-                    case '3':
-                        d = 3;
-                        res = (res * 10) + d;
-                        continue;
-                    case '4':
-                        d = 4;
-                        res = (res * 10) + d;
-                        continue;
-                    case '5':
-                        d = 5;
-                        res = (res * 10) + d;
-                        continue;
-                    case '6':
-                        d = 6;
-                        res = (res * 10) + d;
-                        continue;
-                    case '7':
-                        d = 7;
-                        res = (res * 10) + d;
-                        continue;
-                    case '8':
-                        d = 8;
-                        res = (res * 10) + d;
-                        continue;
-                    case '9':
-                        d = 9;
-                        res = (res * 10) + d;
-                        continue;
-                }
-            }else{
+            if (ch < '0' || ch > '9') {
                 System.out.println("Something went wrong");
-                break;
+                JOptionPane.showMessageDialog(null, "Number format violation in input string." , "Error", JOptionPane.INFORMATION_MESSAGE );
+                return Integer.MIN_VALUE;
+//                TODO: replace return statement by 'throw' later.
             }
+            res = (res * 10) + (ch - '0') ;
+
         }
-        return res;
+        return res * sign;
     }
 
-    public static String toLowerCase(String text){
-        for (int i = 0; i < text.length(); i++){
+    public static String toLowerCase(String text) {
+        for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
-            if(ch >= 'A' && ch <= 'Z'){
+            if (ch >= 'A' && ch <= 'Z') {
                 changeCase(ch);
             }
         }
         return text;
     }
 
-    public static String toUpperCase(String text){
-        for (int i = 0; i < text.length(); i++){
+    public static String toUpperCase(String text) {
+        for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
-            if(ch >= 'a' && ch <= 'z'){
+            if (ch >= 'a' && ch <= 'z') {
                 changeCase(ch);
             }
         }
@@ -199,7 +166,7 @@ public class StringUtil {
     }
 
     private static String changeCase(String text, int startIndex, int endIndex) {
-        for (int i = startIndex; i <= endIndex; i++){
+        for (int i = startIndex; i <= endIndex; i++) {
             changeCase(text.charAt(i));
         }
         return null;
