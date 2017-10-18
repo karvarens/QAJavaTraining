@@ -5,7 +5,7 @@ package homework.lesson3.narekvagharshakyan.additionaltasks;
 public class TwoDimensionalArrayUtil {
 
     public static void main(String[] args) {
-        int[][] matrix = createSpiralMatrix(8);
+        int[][] matrix = createSpiralMatrix(17);
         print(matrix);
 
     }
@@ -93,14 +93,17 @@ public class TwoDimensionalArrayUtil {
 
         }
 
-//        print(array);
         return array;
     }
 
+    //smart space
     public static void print(int[][] matrix) {
         for (int kk = 0; kk < matrix.length; kk++) {
             for (int pp = 0; pp < matrix.length; pp++) {
-                System.out.print("    " + matrix[kk][pp]);
+                for (int i = 0; i < 6 - String.valueOf(matrix[kk][pp]).length(); i++) {
+                    System.out.print(" ");
+                }
+                System.out.print(matrix[kk][pp]);
             }
             System.out.println();
         }

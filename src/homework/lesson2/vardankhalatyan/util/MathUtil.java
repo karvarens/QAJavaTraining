@@ -14,6 +14,9 @@ public class MathUtil {
      * @return the value <code>a<sup>b</sup></code>.
      */
     public static int pow(int a, int n) {
+        if (n == 0){
+            return 1;
+        }
         int i = 1;
         int x = a;
             while (i < n) {

@@ -83,12 +83,12 @@ public class StringUtil {
         int endIndex = length - 1;
 
         for (; str.charAt(startIndex) <= ' '; startIndex++) {
-            if(startIndex == endIndex){
+            if(startIndex == endIndex ){
                 return "";
             }
         }
 
-        for (; str.charAt(endIndex) <= ' '; endIndex--) {
+        for (; str.charAt(endIndex-1) <= ' '; endIndex--) {
         }
 
         return subString(str, startIndex, endIndex + 1);
