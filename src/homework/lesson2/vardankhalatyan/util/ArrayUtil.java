@@ -107,7 +107,7 @@ public class ArrayUtil {
      */
     public static void print(int[] a, String delimiter) {
         for (int i = 0; i < a.length; i++){
-            System.out.print(a[i] + delimiter + " ");
+            System.out.print(a[i] + delimiter);
         }
     }
 
