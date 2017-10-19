@@ -8,12 +8,9 @@ public class StringUtil {
 
 
     public static void main(String[] args) {
-
-
         String a = "    Hello, World, How, are, you     ";
-        String b = "p987654";
-        int parseResult = parseInt(b);
-        System.out.println("!" + parseResult + "!");
+        String b = "-987654";
+        System.out.println("!" + parseInt(b) + "!");
 //        System.out.println(a.length());
 //        System.out.println(subString(a, 22, 27) + "bla");
 //        String[] b = split(a, ',');
@@ -27,10 +24,10 @@ public class StringUtil {
     /**
      * Parses the specified inputText and divides it into tokens by the specified delimiter.
      *
-     * @param inputText the string to be splitted by the specified delimiter
-     * @param delimiter the delimiter by which the specified inputText  will splitted.
+     * @param inputText  the string to be splitted by the specified delimiter
+     * @param delimiter  the delimiter by which the specified inputText  will splitted.
      * @return the array of strings computed by splitting this string
-     * around matches of the given regular expression.
+     *          around matches of the given regular expression.
      */
     public static String[] split(String inputText, char delimiter) {
         int s = 0;
@@ -65,16 +62,16 @@ public class StringUtil {
      * "hamburge r".substring(4, 8) returns "urge"
      * "smiles".substring(1, 5) returns "mile"
      *
-     * @param inputText  the string substring of which must be returned
-     * @param startIndex the beginning index, inclusive.
-     * @param endIndex   the ending index, exclusive.
-     * @return the specified substring.
-     * @throws IndexOutOfBoundsException if the
-     *                                   beginIndex is negative, or
-     *                                   endIndex is larger than the length of
-     *                                   this String object, or
-     *                                   beginIndex is larger than
-     *                                   endIndex.
+     * @param      inputText    the string substring of which must be returned
+     * @param      startIndex   the beginning index, inclusive.
+     * @param      endIndex     the ending index, exclusive.
+     * @return     the specified substring.
+     * @exception IndexOutOfBoundsException  if the
+     *             beginIndex is negative, or
+     *             endIndex is larger than the length of
+     *             this String object, or
+     *             beginIndex is larger than
+     *             endIndex.
      */
     static public String subString(String inputText, int startIndex, int endIndex) {
         char[] chAr = new char[inputText.length()];
@@ -94,11 +91,10 @@ public class StringUtil {
     /**
      * Returns a copy of the specified str, with leading and trailing whitespace
      * omitted.
-     *
      * @param str the String will be trimmed.
-     * @return A copy of the string with leading and trailing white
-     * space removed, or this string if it has no leading or
-     * trailing white space.
+     * @return  A copy of the string with leading and trailing white
+     *          space removed, or this string if it has no leading or
+     *          trailing white space.
      */
     public static String trim(String str) {
         String res = str;
@@ -118,8 +114,8 @@ public class StringUtil {
      * that the first character may be an ASCII minus sign.
      *
      * @param s a String containing the int representation to be parsed
-     * @return the integer value represented by the argument in decimal.
-     * @throws NumberFormatException if the string does not contain a
+     * @return     the integer value represented by the argument in decimal.
+     * @exception NumberFormatException  if the string does not contain a
      */
     public static int parseInt(String s) {
         int res = 0;
