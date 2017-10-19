@@ -9,11 +9,14 @@ public class StackTest {
         st1.push(1);
         st1.push(2);
         st1.push(3);
-        st1.push(3);
-        st1.push(3);
-        st1.push(3);
-        st1.push(3);
-        st1.push(3);
+        st1.push(4);
+        st1.push(5);
+        System.out.println(st1.pop());
+        System.out.println(st1.pop());
+        System.out.println(st1.pop());
+        System.out.println(st1.pop());
+        System.out.println(st1.pop());
+        System.out.println(st1.pop());
     }
 
 }
