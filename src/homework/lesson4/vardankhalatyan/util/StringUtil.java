@@ -1,5 +1,7 @@
 package homework.lesson4.vardankhalatyan.util;
 
+import javax.swing.*;
+
 import static java.lang.Character.isAlphabetic;
 
 public class StringUtil {
@@ -7,7 +9,7 @@ public class StringUtil {
 
     public static void main(String[] args) {
         String a = "    Hello, World, How, are, you     ";
-        String b = "a987654";
+        String b = "-987654";
         System.out.println("!" + parseInt(b) + "!");
 //        System.out.println(a.length());
 //        System.out.println(subString(a, 22, 27) + "bla");
@@ -117,61 +119,19 @@ public class StringUtil {
      */
     public static int parseInt(String s) {
         int res = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(0) == '-'){
-                int sign = 1;
-                continue;
-            }
+        int sign = s.charAt(0) == '-' ? -1 : 1;
+        int i = sign == -1 ? 1 : 0;
+//        i = s.charAt(0) == '+' ? 1 : 0;
+        for (; i < s.length(); i++) {
             char ch = s.charAt(i);
-            int d = 0;
-            if (ch >= '0' && ch <= '9'){
-                switch (ch){
-                    case '0':
-                        res = (res * 10) + d;
-                        continue;
-                    case '1':
-                        d = 1;
-                        res = (res * 10) + d;
-                        continue;
-                    case '2':
-                        d = 2;
-                        res = (res * 10) + d;
-                        continue;
-                    case '3':
-                        d = 3;
-                        res = (res * 10) + d;
-                        continue;
-                    case '4':
-                        d = 4;
-                        res = (res * 10) + d;
-                        continue;
-                    case '5':
-                        d = 5;
-                        res = (res * 10) + d;
-                        continue;
-                    case '6':
-                        d = 6;
-                        res = (res * 10) + d;
-                        continue;
-                    case '7':
-                        d = 7;
-                        res = (res * 10) + d;
-                        continue;
-                    case '8':
-                        d = 8;
-                        res = (res * 10) + d;
-                        continue;
-                    case '9':
-                        d = 9;
-                        res = (res * 10) + d;
-                        continue;
-                }
-            }else{
-                System.out.println("Something went wrong");
-                break;
+            if (ch < '0' || ch > '9') {
+//                throw new NumberFormatException("Not an integer value. Please insert integer one!");
+                JOptionPane.showMessageDialog(null,"Please insert numbers only","ERROR", JOptionPane.ERROR_MESSAGE);
+                return Integer.MIN_VALUE;
             }
+            res = (res * 10) + (ch - '0');
         }
-        return res;
+        return res * sign;
     }
 
     public static String toLowerCase(String text){
