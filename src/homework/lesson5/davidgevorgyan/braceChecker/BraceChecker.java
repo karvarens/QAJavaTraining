@@ -3,6 +3,8 @@ package homework.lesson5.davidgevorgyan.braceChecker;
 public class BraceChecker {
     private String text;
     private Braces lastOpened;
+    private ParseResults parseResult=new ParseResults(true);
+
 
     public BraceChecker(String text) {
         this.text = text;
@@ -21,35 +23,55 @@ public class BraceChecker {
                     break;
                 case '}':
                     lastOpened = bracesStack.pop();
-                    if (lastOpened == null || lastOpened.symbol != '{') {
-                        return new ParseResults(false, i);
-                    } else {
+                    if (lastOpened == null) {
+                        parseResult.setResult(false,i);
+                        return parseResult;
+                    }
+                    else if(lastOpened.symbol != '{'){
+                        parseResult.setResult(false,lastOpened.index);
+                        return parseResult;
+                    }
+                    else{
                         bracesStack.removeTopOfStack();
                     }
                     break;
                 case ')':
                     lastOpened = bracesStack.pop();
-                    if (lastOpened == null || lastOpened.symbol != '(') {
-                        return new ParseResults(false, i);
-                    } else {
+                    if (lastOpened == null) {
+                        parseResult.setResult(false,i);
+                        return parseResult;
+                    }
+                    else if(lastOpened.symbol != '('){
+                        parseResult.setResult(false,lastOpened.index);
+                        return parseResult;
+                    }
+                    else{
                         bracesStack.removeTopOfStack();
                     }
                     break;
                 case ']':
                     lastOpened = bracesStack.pop();
-                    if (lastOpened == null || lastOpened.symbol != '[') {
-                        return new ParseResults(false, i);
-                    } else {
+                    if (lastOpened == null) {
+                        parseResult.setResult(false,i);
+                        return parseResult;
+                    }
+                    else if(lastOpened.symbol != '['){
+                        parseResult.setResult(false,lastOpened.index);
+                        return parseResult;
+                    }
+                    else{
                         bracesStack.removeTopOfStack();
                     }
                     break;
             }
         }
         if (bracesStack.isEmpty()) {
-            return new ParseResults(true);
+            parseResult.setResult(true);
+            return parseResult;
         }
         else {
-            return new ParseResults(false, lastOpened.index);
+            parseResult.setResult(false,lastOpened.index);
+            return parseResult;
         }
 
 
@@ -118,8 +140,7 @@ public class BraceChecker {
 
             ParseResults that = (ParseResults) o;
 
-            if (result != that.result) return false;
-            return position == that.position;
+            return result == that.result && position == that.position;
         }
     }
 }

@@ -30,7 +30,7 @@ public class BraceCheckerTest {
         BraceChecker testThree=new BraceChecker("A } text with only closing brackets})]");
         assertEquals(prototype,testThree.parse());
 
-        prototype.setResult(false,45);
+        prototype.setResult(false,2);
         BraceChecker testFour=new BraceChecker("[ { A text with invalid sequence of brackets ] }");
         assertEquals(prototype,testFour.parse());
 
