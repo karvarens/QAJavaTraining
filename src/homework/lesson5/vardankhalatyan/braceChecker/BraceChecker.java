@@ -17,11 +17,11 @@ public class BraceChecker {
     stackFive: is for '
      */
 
-    private Stack stackOne = new Stack[];
-    private Stack stackTwo = new Stack[];
-    private Stack stackThree = new Stack[];
-    private Stack stackFour = new Stack[];
-    private Stack stackFive = new Stack[];
+//    private Stack stackOne = new Stack[];
+//    private Stack stackTwo = new Stack[];
+//    private Stack stackThree = new Stack[];
+//    private Stack stackFour = new Stack[];
+//    private Stack stackFive = new Stack[];
 
 
     public BraceChecker(String fileName){
@@ -34,30 +34,30 @@ public class BraceChecker {
         //TODO add implementation
 
         String line;
-        BufferedReader file = new BufferedReader(new FileReader("text"));
-        line = file.readLine();
-        for (int i = 0; i < line.length(); i++) {
-            switch (line.charAt(i)){
-                case '{':
-                    stackThree.push(3);
-                case '[':
-                    stackTwo.push(2);
-                case '(':
-                    stackOne.push(1);
-                case '"':
-                    stackFour.push(4);
-//                case: '\'':
-//                    stackFive.push(5);
-                case '}':
-                    stackThree.pop();
-                case ']':
-                    stackTwo.pop();
-                case ')':
-                    stackThree.pop();
-            }
+      //  BufferedReader file = new BufferedReader(new FileReader("text"));
+      //  line = file.readLine();
+        for (int i = 0; i < text.length(); i++) {
+//            switch (text.charAt(i)){
+//                case '{':
+//                    stackThree.push(3);
+//                case '[':
+//                    stackTwo.push(2);
+//                case '(':
+//                    stackOne.push(1);
+//                case '"':
+//                    stackFour.push(4);
+////                case: '\'':
+////                    stackFive.push(5);
+//                case '}':
+//                    stackThree.pop();
+//                case ']':
+//                    stackTwo.pop();
+//                case ')':
+//                    stackThree.pop();
+//            }
         }
 
-        file.close();
+//        file.close();
         return isCorrect;
 
     }
