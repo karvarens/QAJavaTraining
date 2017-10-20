@@ -16,23 +16,31 @@ public class BraceCheckerTest {
 
     @Test
     public void parse() {
+        BraceChecker.ParseResults prototype = new BraceChecker.ParseResults(false);
+
         BraceChecker testOne=new BraceChecker("[A (;:valid text{ with } different types) [of] brackets]");
-        assertEquals(true,testOne.parse());
+        prototype.setResult(true,0);
+        assertEquals(prototype,testOne.parse());
+
+        prototype.setResult(false,3);
         BraceChecker testTwo=new BraceChecker("A[{( text with only opening brackets");
-        assertEquals(false,testTwo.parse());
+        assertEquals(prototype,testTwo.parse());
+
+        prototype.setResult(false,2);
         BraceChecker testThree=new BraceChecker("A } text with only closing brackets})]");
-        assertEquals(false,testThree.parse());
+        assertEquals(prototype,testThree.parse());
+
+        prototype.setResult(false,45);
         BraceChecker testFour=new BraceChecker("[ { A text with invalid sequence of brackets ] }");
-        assertEquals(false,testFour.parse());
-        BraceChecker testFive=new BraceChecker("");
-        assertEquals(true,testFive.parse());
+        assertEquals(prototype,testFour.parse());
+
+        BraceChecker testFive=new BraceChecker("()[][[]]");
+        prototype.setResult(true,0);
+        assertEquals(prototype,testFive.parse());
+
         BraceChecker testSix=new BraceChecker("A text without brackets DEF");
-        assertEquals(true,testSix.parse());
-    }
-    @Test
-    public void parse2() {
-        BraceChecker testOne=new BraceChecker("()[][[]]]");
-        assertEquals(false,testOne.parse());
+        prototype.setResult(true,0);
+        assertEquals(prototype,testSix.parse());
 
     }
 }

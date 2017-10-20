@@ -4,11 +4,11 @@ public class BraceChecker {
     private String text;
     private Braces lastOpened;
 
-    public BraceChecker(String text){
+    public BraceChecker(String text) {
         this.text = text;
     }
 
-    public boolean parse() {
+    public ParseResults parse() {
         Stack bracesStack = new Stack();
         for (int i = 0; i < text.length(); i++) {
             char tempChar = text.charAt(i);
@@ -16,46 +16,50 @@ public class BraceChecker {
                 case '{':
                 case '(':
                 case '[':
-                    bracesStack.push(new Braces(i,tempChar));
+                    lastOpened=new Braces(i, tempChar);
+                    bracesStack.push(lastOpened);
                     break;
                 case '}':
                     lastOpened = bracesStack.pop();
                     if (lastOpened == null || lastOpened.symbol != '{') {
-                        return false;
-                        //TODo: It will be better to break the loop and then analise what kind og error we have,
-                    }
-                    else {
+                        return new ParseResults(false, i);
+                    } else {
                         bracesStack.removeTopOfStack();
                     }
                     break;
                 case ')':
                     lastOpened = bracesStack.pop();
                     if (lastOpened == null || lastOpened.symbol != '(') {
-                        return false;
-                    }
-                    else {
+                        return new ParseResults(false, i);
+                    } else {
                         bracesStack.removeTopOfStack();
                     }
                     break;
                 case ']':
                     lastOpened = bracesStack.pop();
                     if (lastOpened == null || lastOpened.symbol != '[') {
-                        return false;
-                    }
-                    else {
+                        return new ParseResults(false, i);
+                    } else {
                         bracesStack.removeTopOfStack();
                     }
                     break;
             }
         }
-        return bracesStack.isEmpty();
+        if (bracesStack.isEmpty()) {
+            return new ParseResults(true);
+        }
+        else {
+            return new ParseResults(false, lastOpened.index);
+        }
+
+
     }
 
     public static class Braces {
         int index;
         char symbol;
-        int rowNumber;
-        int indexInRow;
+        int rowNumber = 0;
+        int indexInRow = 0;
 
         Braces(int index, char symbol) {
             this.index = validateIndex(index);
@@ -83,4 +87,39 @@ public class BraceChecker {
         }
     }
 
+    public static class ParseResults {
+        boolean result;
+        int position;
+
+        ParseResults(boolean result) {
+            this.result = result;
+        }
+
+        ParseResults(boolean result, int position) {
+            this.result = result;
+            this.position = position;
+        }
+
+        public void setResult(boolean result) {
+            this.result = result;
+        }
+
+        public void setResult(boolean result, int position) {
+            this.result = result;
+            this.position = position;
+
+        }
+
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            ParseResults that = (ParseResults) o;
+
+            if (result != that.result) return false;
+            return position == that.position;
+        }
+    }
 }

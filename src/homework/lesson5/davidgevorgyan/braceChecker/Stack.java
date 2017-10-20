@@ -16,7 +16,7 @@ public class Stack {
     }
 
     public void push(BraceChecker.Braces value) {
-        if(topOfStack == values.length){
+        if(topOfStack == values.length - 1){
              enlarge();
         }
 
