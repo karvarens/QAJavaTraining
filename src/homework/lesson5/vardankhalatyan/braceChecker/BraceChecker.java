@@ -37,7 +37,7 @@ public class BraceChecker {
                 case '{':
                 case '[':
                 case '(':
-                    globalStack.push(1);
+                    globalStack.push(ch);
                 case ')':
                 case ']':
                 case '}':
