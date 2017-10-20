@@ -20,8 +20,21 @@ public class Stack {
     }
 
     public int pop(){
-//        TODO complete
-        return 0;
+//        if (isEmpty()){
+//            JOptionPane.showMessageDialog(null,"Game Over - The Stack is empty","Warning", JOptionPane.WARNING_MESSAGE);
+//            return Integer.MIN_VALUE;
+//        }
+        if (tos == values.length * (1/3)){
+            int[] newValues = new int[values.length * 2/3];
+            System.arraycopy(values, 0, newValues, 0, newValues.length);
+            values = newValues;
+        }
+        try {
+            return values[tos--];
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("The Game is Over!");
+            return Integer.MIN_VALUE;
+        }
     }
 
     public boolean isEmpty(){
