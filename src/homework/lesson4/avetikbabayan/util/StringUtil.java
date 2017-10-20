@@ -136,7 +136,7 @@ public class StringUtil {
         return text;
 }
     private static char changeCase(char ch) {
-    return isAlphabetic(ch) ? (char) (ch ^ 32) : ch
+    return isAlphabetic(ch) ? (char) (ch ^ 32) : ch;
      }
     private static String changeCase(String text, int startIndex, int endIndex) {
         for (int i = startIndex; i <= endIndex; i++){

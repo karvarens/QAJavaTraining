@@ -1,14 +1,8 @@
 package homework.lesson5.vardankhalatyan.braceChecker;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.Reader;
-
 public class BraceChecker {
     //TODO add fields at your discretion
-
+    private Stack globalStack;
     /*
     stackOne: is for '('; ')'
     stackTwo: is for '['; ']'
@@ -25,7 +19,7 @@ public class BraceChecker {
 
 
     public BraceChecker(String fileName){
-
+        globalStack = new Stack(10);
     }
 
 
@@ -37,6 +31,28 @@ public class BraceChecker {
       //  BufferedReader file = new BufferedReader(new FileReader("text"));
       //  line = file.readLine();
         for (int i = 0; i < text.length(); i++) {
+            char ch = text.charAt(i);
+
+            switch (ch){
+                case '{':
+                case '[':
+                case '(':
+                    globalStack.push(1);
+                case ')':
+                case ']':
+                case '}':
+                    if (globalStack.isEmpty()){
+                        System.out.println("Syntax error: unused '" + text.charAt(i) + " sign");
+                        isCorrect = false;
+                        break;
+                    }
+                    char poped = (char)globalStack.pop();
+                    if (poped != '{'){
+                        System.out.println("Syntax error: " + text.charAt(i) +  " couple doesn't closed");
+                        isCorrect = false;
+                        break;
+                    }
+            }
 //            switch (text.charAt(i)){
 //                case '{':
 //                    stackThree.push(3);
@@ -56,6 +72,7 @@ public class BraceChecker {
 //                    stackThree.pop();
 //            }
         }
+
 
 //        file.close();
         return isCorrect;
