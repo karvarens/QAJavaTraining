@@ -1,12 +1,12 @@
 package homework.lesson5.davidgevorgyan.braceChecker;
 
 public class Stack {
-
+    private final static int DEFAULT_SIZE = 3;
     private BraceChecker.BracketItem[] values;
     private int topOfStack;
 
     Stack() {
-        values = new BraceChecker.BracketItem[3];   //TODO: see auditorium.braceChecker.Stack
+        values = new BraceChecker.BracketItem[DEFAULT_SIZE];
         topOfStack = -1;
     }
 

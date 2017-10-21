@@ -2,14 +2,14 @@ package homework.lesson5.davidgevorgyan.braceChecker;
 
 public class BraceChecker {
     private String text;
-    private BracketItem lastOpened;
-    private ParseResults parseResult = new ParseResults(ParseResultType.NO_ERROR);
+    private BracketItem currentBracketItem;
+    private ParseResult parseResult = new ParseResult(ParseResultType.NO_ERROR);
 
     public BraceChecker(String text) {
         this.text = text;
     }
 
-    public ParseResults parse() {
+    public ParseResult parse() {
         Stack bracesStack = new Stack(); //
         BracketItem closedBracketItem = null;
         int i = 0;
@@ -21,42 +21,44 @@ public class BraceChecker {
                 case '{':
                 case '(':
                 case '[':
-                    lastOpened = new BracketItem(i, currentChar);
-                    bracesStack.push(lastOpened);
+                    currentBracketItem = new BracketItem(i, currentChar);
+                    bracesStack.push(currentBracketItem);
                     break;
                 case '}':
-                    lastOpened = bracesStack.pop(); //normally the pop method should remove topof stack
-                    if (lastOpened == null || lastOpened.symbol != '{') {
+                    currentBracketItem = bracesStack.pop(); //normally the pop method should remove topof stack
+                    if (currentBracketItem == null || currentBracketItem.symbol != '{') {
                         closedBracketItem = new BracketItem(i, currentChar);
                         break lab;
                     }
+                    bracesStack.removeTopOfStack();
                     break;
                 case ')':
-                    lastOpened = bracesStack.pop();
-                    if (lastOpened == null || lastOpened.symbol != '(') {
+                    currentBracketItem = bracesStack.pop();
+                    if (currentBracketItem == null || currentBracketItem.symbol != '(') {
                         closedBracketItem = new BracketItem(i, currentChar);
                         break lab;
                     }
+                    bracesStack.removeTopOfStack();
                     break;
                 case ']':
-                    lastOpened = bracesStack.pop();
-                    if (lastOpened == null || lastOpened.symbol != '(') {
+                    currentBracketItem = bracesStack.pop();
+                    if (currentBracketItem == null || currentBracketItem.symbol != '[') {
                         closedBracketItem = new BracketItem(i, currentChar);
                         break lab;
                     }
+                    bracesStack.removeTopOfStack();
                     break;
             }
         }
 
         if (i < text.length()) {
-            if (lastOpened == null) {
-                parseResult = new ParseResults(ParseResultType.CLOSED_NOT_OPENED, null, closedBracketItem);
+            if (currentBracketItem == null) {
+                parseResult = new ParseResult(ParseResultType.CLOSED_NOT_OPENED, null, closedBracketItem);
             } else {
-                parseResult = new ParseResults(ParseResultType.CLOSED_NOT_OPENED, lastOpened, closedBracketItem);
-//          TODO: we should have one mor parameter for closed bracket.
+                parseResult = new ParseResult(ParseResultType.OPENED_BUT_CLOSED_WRONG_BRACKET, currentBracketItem, closedBracketItem);
             }
         } else if (!bracesStack.isEmpty()) {
-            parseResult = new ParseResults(ParseResultType.OPENED_NOT_CLOSED , lastOpened, null);
+            parseResult = new ParseResult(ParseResultType.OPENED_NOT_CLOSED , currentBracketItem, null);
             return parseResult;
         }
 
@@ -87,23 +89,37 @@ public class BraceChecker {
         }
 
         private char validateSymbol(char symbol) {
-            if (symbol != '(' && symbol != '{' && symbol != '[') {
+            if (symbol != '(' && symbol != '{' && symbol != '[' && symbol != ')' && symbol != '}' && symbol != ']' ) {
                 throw new IllegalArgumentException();
             } else {
                 return symbol;
             }
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            BracketItem that = (BracketItem) o;
+
+            if (index != that.index) return false;
+            if (symbol != that.symbol) return false;
+            return rowNumber == that.rowNumber && indexInRow == that.indexInRow;
+        }
     }
 
-    private static class ParseResultType {
+    public static class ParseResultType {
+        //TODO read and understand this part
         public static final ParseResultType  NO_ERROR = new ParseResultType (0);
         public static final ParseResultType CLOSED_NOT_OPENED = new ParseResultType (1);
-        public static final ParseResultType  CLOSED_WRONG_BRACKET = new ParseResultType (2);
+        public static final ParseResultType  OPENED_BUT_CLOSED_WRONG_BRACKET = new ParseResultType (2);
         public static final ParseResultType  OPENED_NOT_CLOSED = new ParseResultType (3);
 
-        private ParseResultType(int typeNember) {
-            this.typeNember = typeNember;
+        public ParseResultType(int typeNumber) {
+            this.typeNumber = typeNumber;
         }
+        public int typeNumber;
 
         @Override
         public boolean equals(Object o) {
@@ -112,36 +128,31 @@ public class BraceChecker {
 
             ParseResultType that = (ParseResultType) o;
 
-            return typeNember == that.typeNember;
+            return typeNumber == that.typeNumber;
         }
-
-        @Override
-        public int hashCode() {
-            return typeNember;
-        }
-
-        private int typeNember;
     }
 
-    public static class ParseResults {
+    public static class ParseResult {
         ParseResultType parseResultType;
         BracketItem opened;
         BracketItem closed;
 
-        public ParseResults(ParseResultType parseResultType) {
+        public ParseResult(ParseResultType parseResultType) {
             this(parseResultType, null, null);
         }
 
-        public ParseResults(ParseResultType parseResultType, BracketItem bracketItem) {
-            //TODO add validation
+        public ParseResult(ParseResultType parseResultType, BracketItem bracketItem) {
             if(parseResultType.equals(ParseResultType.OPENED_NOT_CLOSED)){
                 init(parseResultType, bracketItem, null);
-            } else {
+            } else if (parseResultType.equals(ParseResultType.CLOSED_NOT_OPENED)){
                 init(parseResultType, null, bracketItem);
+            }
+            else{
+                throw new IllegalArgumentException();
             }
         }
 
-        public ParseResults(ParseResultType parseResultType, BracketItem opened, BracketItem closed) {
+        public ParseResult(ParseResultType parseResultType, BracketItem opened, BracketItem closed) {
             init(parseResultType, opened, closed);
         }
 
@@ -156,12 +167,11 @@ public class BraceChecker {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
-            ParseResults that = (ParseResults) o;
+            ParseResult that = (ParseResult) o;
 
             if (parseResultType != null ? !parseResultType.equals(that.parseResultType) : that.parseResultType != null)
                 return false;
-            if (opened != null ? !opened.equals(that.opened) : that.opened != null) return false;
-            return closed != null ? closed.equals(that.closed) : that.closed == null;
+            return (opened != null ? opened.equals(that.opened) : that.opened == null) && (closed != null ? closed.equals(that.closed) : that.closed == null);
         }
     }
 }
