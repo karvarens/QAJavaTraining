@@ -13,21 +13,27 @@ public class BraceChecker {
         Stack bracesStack = new Stack(); //
         BracketItem closedBracketItem = null;
         int i = 0;
+        int rowNumber = 0;
+        int indexInRaw = 0;
         lab:
-        for (; i < text.length(); i++) {
+        for (; i < text.length(); i++, indexInRaw++) {
             char currentChar = text.charAt(i);
 
             switch (currentChar) {
+                case '\n':
+                    rowNumber++;
+                    indexInRaw = 0;
+                    break;
                 case '{':
                 case '(':
                 case '[':
-                    currentBracketItem = new BracketItem(i, currentChar);
+                    currentBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRaw);
                     bracesStack.push(currentBracketItem);
                     break;
                 case '}':
                     currentBracketItem = bracesStack.pop(); //normally the pop method should remove topof stack
                     if (currentBracketItem == null || currentBracketItem.symbol != '{') {
-                        closedBracketItem = new BracketItem(i, currentChar);
+                        closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRaw);
                         break lab;
                     }
                     bracesStack.removeTopOfStack();
@@ -35,7 +41,7 @@ public class BraceChecker {
                 case ')':
                     currentBracketItem = bracesStack.pop();
                     if (currentBracketItem == null || currentBracketItem.symbol != '(') {
-                        closedBracketItem = new BracketItem(i, currentChar);
+                        closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRaw);
                         break lab;
                     }
                     bracesStack.removeTopOfStack();
@@ -43,7 +49,7 @@ public class BraceChecker {
                 case ']':
                     currentBracketItem = bracesStack.pop();
                     if (currentBracketItem == null || currentBracketItem.symbol != '[') {
-                        closedBracketItem = new BracketItem(i, currentChar);
+                        closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRaw);
                         break lab;
                     }
                     bracesStack.removeTopOfStack();
@@ -76,6 +82,12 @@ public class BraceChecker {
             this.symbol = validateSymbol(symbol);
         }
 
+        BracketItem(int index, char symbol, int rowNumber, int indexInRow) {
+            this.index = validateIndex(index);
+            this.symbol = validateSymbol(symbol);
+            this.rowNumber = validateIndex(rowNumber);
+            this.indexInRow = validateIndex(indexInRow);
+        }
         public void print(BracketItem value) {
             System.out.println(value);
         }
@@ -173,5 +185,19 @@ public class BraceChecker {
                 return false;
             return (opened != null ? opened.equals(that.opened) : that.opened == null) && (closed != null ? closed.equals(that.closed) : that.closed == null);
         }
+    }
+
+    public static String ParseResultToString(ParseResult parseResult) {
+        switch (parseResult.parseResultType.typeNumber) {
+            case 0:
+                return "No Errors Found";
+            case 1:
+                return "An opening bracket is missed in " + (parseResult.closed.rowNumber + 1) + " row " + parseResult.closed.indexInRow + " character";
+            case 2:
+                return "Invalid sequence of brackets started from " + (parseResult.closed.rowNumber + 1) + " row " + (parseResult.closed.indexInRow + 1) + " character";
+            case 3:
+                return "A closing bracket is missed in " + (parseResult.opened.rowNumber + 1) + " row " + (parseResult.opened.indexInRow + 1) + " character";
+        }
+        return "Error";
     }
 }
