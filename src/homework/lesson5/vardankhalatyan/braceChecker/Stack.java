@@ -41,7 +41,7 @@ public class Stack {
 
     public boolean isEmpty(){
         if (tos < 0){
-            System.out.println("The Stack is empty");
+//            System.out.println("The Stack is empty");
             return tos == -1;
         }
         return false;
