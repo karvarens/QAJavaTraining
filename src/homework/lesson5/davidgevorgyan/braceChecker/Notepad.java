@@ -5,32 +5,38 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Notepad extends JFrame {
-    JTextArea textArea;
-    JButton verifyBraces;
-    JTextField textField;
+    private JTextArea textArea;
+    private JButton verifyBraces;
+    private JTextField textField;
+
     public Notepad() {
-        setLayout(new FlowLayout());
+//        setLayout(new FlowLayout());
 
     //Panel
         JPanel buttonsPanel = new JPanel(new FlowLayout());
     //TextArea
-        textArea = new JTextArea(15,50);
+        textArea = new JTextArea();
     //Pane
-        JScrollPane scroll = new JScrollPane ( textArea );
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.getViewport().add(textArea);
+
     //Button
         verifyBraces = new JButton("Verify Braces");
-        add(buttonsPanel);
         buttonsPanel.add(verifyBraces);
+        add(buttonsPanel, BorderLayout.NORTH);
+
     //Scroll
-        scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
-        this.add ( scroll );
+//        scrollPane.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+        add (scrollPane, BorderLayout.CENTER);
+
     //TextField
         textField = new JTextField("Result will be displayed here",50);
         textField.setEditable(false);
-        this.add(textField);
+        add(textField, BorderLayout.SOUTH);
+
     //Event Handler
-        event e = new event();
-        verifyBraces.addActionListener(e);
+//        event e = new event();
+//        verifyBraces.addActionListener(e);
 
     }
 
@@ -45,7 +51,7 @@ public class Notepad extends JFrame {
 
     public static void main(String[] args) {
         Notepad gui = new Notepad();
-        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         gui.setTitle("Notepad");
         gui.setBounds(400,400, 700, 400);
         gui.setVisible(true);
