@@ -56,7 +56,7 @@ public class StringUtil {
      *                                   endIndex.
      */
     static public String subString(String inputText, int startIndex, int endIndex) {
-        if ((startIndex > endIndex) || (startIndex > inputText.length()) || (endIndex > inputText.length())) {
+        if ((startIndex > endIndex) || (startIndex < 0) || (endIndex > inputText.length())) {
             throw new IndexOutOfBoundsException("startIndex/endIndex conflict is detected");
         }
 

@@ -32,22 +32,22 @@ public class StringUtil {
     public static String[] split(String inputText, char delimiter) {
         int s = 0;
         for (int i = 0; i < inputText.length(); i++) {
-            if (inputText.charAt(i) == delimiter){
+            if (inputText.charAt(i) == delimiter) {
                 s++;
             }
         }
-        String[] res = new String[s+1];
+        String[] res = new String[s + 1];
 //        for (int i = 0; i < s; i++) {
 //            res[i] = "";
 //        }
         int indexA = 0;
         for (int i = 0; i <= s; i++) {
-            int a = inputText.indexOf(delimiter, indexA+2);
-            if(a < 0) {
+            int a = inputText.indexOf(delimiter, indexA + 2);
+            if (a < 0) {
                 a = inputText.length();
             }
             res[i] = trim(subString(inputText, indexA, a));
-            indexA = a+1;
+            indexA = a + 1;
         }
         return res;
 
@@ -98,11 +98,11 @@ public class StringUtil {
      */
     public static String trim(String str) {
         String res = str;
-        while (res.charAt(0) == ' '){
+        while (res.charAt(0) == ' ') {
             res = subString(res, 1, res.length());
         }
-        while (res.charAt(res.length()-1) == ' '){
-            res = subString(res, 0, res.length()-1);
+        while (res.charAt(res.length() - 1) == ' ') {
+            res = subString(res, 0, res.length() - 1);
         }
 
         return res;
@@ -120,34 +120,37 @@ public class StringUtil {
     public static int parseInt(String s) {
         int res = 0;
         int sign = s.charAt(0) == '-' ? -1 : 1;
-        int i = sign == -1 ? 1 : 0;
-//        i = s.charAt(0) == '+' ? 1 : 0;
+
+        int i = (sign == -1) ? 1 : 0;
         for (; i < s.length(); i++) {
+
             char ch = s.charAt(i);
             if (ch < '0' || ch > '9') {
-//                throw new NumberFormatException("Not an integer value. Please insert integer one!");
-                JOptionPane.showMessageDialog(null,"Please insert numbers only","ERROR", JOptionPane.ERROR_MESSAGE);
+                System.out.println("Something went wrong");
+                JOptionPane.showMessageDialog(null, "Number format violation in input string." , "Error", JOptionPane.INFORMATION_MESSAGE );
                 return Integer.MIN_VALUE;
+//                TODO: replace return statement by 'throw' later.
             }
-            res = (res * 10) + (ch - '0');
+            res = (res * 10) + (ch - '0') ;
+
         }
         return res * sign;
     }
 
-    public static String toLowerCase(String text){
-        for (int i = 0; i < text.length(); i++){
+    public static String toLowerCase(String text) {
+        for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
-            if(ch >= 'A' && ch <= 'Z'){
+            if (ch >= 'A' && ch <= 'Z') {
                 changeCase(ch);
             }
         }
         return text;
     }
 
-    public static String toUpperCase(String text){
-        for (int i = 0; i < text.length(); i++){
+    public static String toUpperCase(String text) {
+        for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
-            if(ch >= 'a' && ch <= 'z'){
+            if (ch >= 'a' && ch <= 'z') {
                 changeCase(ch);
             }
         }
@@ -159,7 +162,7 @@ public class StringUtil {
     }
 
     private static String changeCase(String text, int startIndex, int endIndex) {
-        for (int i = startIndex; i <= endIndex; i++){
+        for (int i = startIndex; i <= endIndex; i++) {
             changeCase(text.charAt(i));
         }
         return null;

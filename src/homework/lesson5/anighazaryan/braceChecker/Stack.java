@@ -1,14 +1,9 @@
-package auditorium.braceChecker;
+package homework.lesson5.anighazaryan.braceChecker;
 
 public class Stack {
-    public final static int DEFAULT_SIZE = 16;
 
     private int[] values;
     private int tos;
-
-    public Stack() {
-        this(DEFAULT_SIZE);
-    }
 
     public Stack(int size) {
         values = new int[size];
@@ -31,7 +26,14 @@ public class Stack {
         return values[tos--];
     }
 
-    public boolean isEmpty() {
+    public int peek() {
+        if (tos == -1) {
+            return 0;
+        }
+        return values[tos];
+    }
+
+    public boolean isEmpty(){
         return tos == -1;
     }
 
@@ -40,4 +42,5 @@ public class Stack {
         System.arraycopy(values, 0, newValues, 0, values.length);
         values = newValues;
     }
+
 }

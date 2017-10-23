@@ -16,7 +16,14 @@ public class StackTest {
         System.out.println(st1.pop());
         System.out.println(st1.pop());
         System.out.println(st1.pop());
+        System.out.println(st1.lenght());
+        st1.isEmpty();
         System.out.println(st1.pop());
+        System.out.println(st1.lenght());
+        st1.isEmpty();
+        System.out.println(st1.pop());
+        System.out.println(st1.lenght());
+        st1.isEmpty();
     }
 
 }

@@ -3,10 +3,10 @@ package auditorium.classintro;
 import javax.swing.*;
 
 public class Rectangle {
-    static int maxWidth = 110;
+    private final static int maxWidth = 110;
 
     private int width;
-    int height;
+    private int height;
 
     Rectangle(){
     }
@@ -14,6 +14,10 @@ public class Rectangle {
     Rectangle(int width, int height) {
        this.height = height;
        this.width = width;
+    }
+
+    public static int getMaxWidth() {
+        return maxWidth;
     }
 
     void setWidth(int width) {
