@@ -35,12 +35,12 @@ public class Notepad extends JFrame {
         add(textField, BorderLayout.SOUTH);
 
     //Event Handler
-        event e = new event();
+        Event e = new Event();
         verifyBraces.addActionListener(e);
 
     }
 
-    public class event implements ActionListener{
+    public class Event implements ActionListener{
         public void actionPerformed(ActionEvent e){
             BraceChecker result = new BraceChecker(textArea.getText());
             String text = BraceChecker.ParseResultToString(result.parse());
