@@ -25,9 +25,6 @@ public class BraceChecker {
 
     public boolean parse(String text) {
         boolean isCorrect = true;
-        //TODO add implementation
-
-        String line;
       //  BufferedReader file = new BufferedReader(new FileReader("text"));
       //  line = file.readLine();
         for (int i = 0; i < text.length(); i++) {
@@ -41,65 +38,52 @@ public class BraceChecker {
                     break;
                 case ')':
                     if (globalStack.isEmpty()){
-                        System.out.println("Syntax error: unused '" + text.charAt(i) + " sign");
-                        isCorrect = false;
-                        break;
+                        System.out.println("Syntax error: unused '" + ch + " sign");
+                        return isCorrect = false;
                     }
                     char poped = (char)globalStack.pop();
                     if (poped != '('){
-                        System.out.println("Syntax error: " + text.charAt(i) +  " couple doesn't closed");
-                        isCorrect = false;
-                        break;
+                        System.out.println("Syntax error: " + ch +  " couple doesn't closed");
+                        return isCorrect = false;
                     }else {
                         break;
                     }
                 case ']':
                     if (globalStack.isEmpty()){
-                        System.out.println("Syntax error: unused '" + text.charAt(i) + " sign");
-                        isCorrect = false;
-                        break;
+                        System.out.println("Syntax error: unused " + ch + " sign");
+                        return isCorrect = false;
                     }
                     poped = (char)globalStack.pop();
                     if (poped != '['){
-                        System.out.println("Syntax error: " + text.charAt(i) +  " couple doesn't closed");
-                        isCorrect = false;
-                        break;
+                        System.out.println("Syntax error: " + ch +  " couple doesn't closed");
+                        return isCorrect = false;
                     }else {
                         break;
                     }
                 case '}':
                     if (globalStack.isEmpty()){
-                        System.out.println("Syntax error: unused '" + text.charAt(i) + " sign");
-                        isCorrect = false;
-                        break;
+                        System.out.println("Syntax error: unused '" + ch + " sign");
+                        return isCorrect = false;
                     }
                     poped = (char)globalStack.pop();
                     if (poped != '{'){
-                        System.out.println("Syntax error: " + text.charAt(i) +  " couple doesn't closed");
-                        isCorrect = false;
-                        break;
+                        System.out.println("Syntax error: " + ch +  " couple doesn't closed");
+                        return isCorrect = false;
                     }else {
                         break;
                     }
             }
-//            switch (text.charAt(i)){
-//                case '{':
-//                    stackThree.push(3);
-//                case '[':
-//                    stackTwo.push(2);
-//                case '(':
-//                    stackOne.push(1);
-//                case '"':
-//                    stackFour.push(4);
-////                case: '\'':
-////                    stackFive.push(5);
-//                case '}':
-//                    stackThree.pop();
-//                case ']':
-//                    stackTwo.pop();
-//                case ')':
-//                    stackThree.pop();
-//            }
+
+        }
+        if (!globalStack.isEmpty()){
+            char ch = (char)globalStack.pop();
+            switch (ch){
+                case '{':
+                case '(':
+                case '[':
+                    System.out.println("Syntax error: " + ch +  " couple opened, but not closed");
+                    return isCorrect = false;
+            }
         }
 
 
