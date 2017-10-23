@@ -35,8 +35,8 @@ public class Notepad extends JFrame {
         add(textField, BorderLayout.SOUTH);
 
     //Event Handler
-//        event e = new event();
-//        verifyBraces.addActionListener(e);
+        event e = new event();
+        verifyBraces.addActionListener(e);
 
     }
 

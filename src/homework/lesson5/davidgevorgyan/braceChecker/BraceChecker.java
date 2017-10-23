@@ -128,7 +128,7 @@ public class BraceChecker {
         public static final ParseResultType  OPENED_BUT_CLOSED_WRONG_BRACKET = new ParseResultType (2);
         public static final ParseResultType  OPENED_NOT_CLOSED = new ParseResultType (3);
 
-        public ParseResultType(int typeNumber) {
+        private ParseResultType(int typeNumber) {
             this.typeNumber = typeNumber;
         }
         public int typeNumber;
