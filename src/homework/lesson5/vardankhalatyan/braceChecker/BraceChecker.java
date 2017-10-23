@@ -38,18 +38,47 @@ public class BraceChecker {
                 case '[':
                 case '(':
                     globalStack.push(ch);
+                    break;
                 case ')':
-                case ']':
-                case '}':
                     if (globalStack.isEmpty()){
                         System.out.println("Syntax error: unused '" + text.charAt(i) + " sign");
                         isCorrect = false;
                         break;
                     }
                     char poped = (char)globalStack.pop();
+                    if (poped != '('){
+                        System.out.println("Syntax error: " + text.charAt(i) +  " couple doesn't closed");
+                        isCorrect = false;
+                        break;
+                    }else {
+                        break;
+                    }
+                case ']':
+                    if (globalStack.isEmpty()){
+                        System.out.println("Syntax error: unused '" + text.charAt(i) + " sign");
+                        isCorrect = false;
+                        break;
+                    }
+                    poped = (char)globalStack.pop();
+                    if (poped != '['){
+                        System.out.println("Syntax error: " + text.charAt(i) +  " couple doesn't closed");
+                        isCorrect = false;
+                        break;
+                    }else {
+                        break;
+                    }
+                case '}':
+                    if (globalStack.isEmpty()){
+                        System.out.println("Syntax error: unused '" + text.charAt(i) + " sign");
+                        isCorrect = false;
+                        break;
+                    }
+                    poped = (char)globalStack.pop();
                     if (poped != '{'){
                         System.out.println("Syntax error: " + text.charAt(i) +  " couple doesn't closed");
                         isCorrect = false;
+                        break;
+                    }else {
                         break;
                     }
             }

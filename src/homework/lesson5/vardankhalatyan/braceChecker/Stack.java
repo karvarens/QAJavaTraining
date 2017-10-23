@@ -30,7 +30,9 @@ public class Stack {
             values = newValues;
         }
         try {
-            return values[tos--];
+            char val = (char)values[tos--];
+            values[tos+1] = 0;
+            return val;
         }catch (IndexOutOfBoundsException e){
             System.out.println("The Game is Over!");
             return Integer.MIN_VALUE;
@@ -38,6 +40,14 @@ public class Stack {
     }
 
     public boolean isEmpty(){
-        return tos == -1;
+        if (tos < 0){
+            System.out.println("The Stack is empty");
+            return tos == -1;
+        }
+        return false;
+    }
+
+    public int lenght(){
+        return values.length;
     }
 }

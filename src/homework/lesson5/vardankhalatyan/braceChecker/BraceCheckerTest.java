@@ -5,7 +5,7 @@ package homework.lesson5.vardankhalatyan.braceChecker;
  */
 public class BraceCheckerTest {
     public static void main(String[] args) {
-        String str = "{this is [ testing ( string ) so ] it should pass }";
+        String str = "{this is [ testing ( string { ) so ] it should pass }";
         BraceChecker brch = new BraceChecker(str);
         if (brch.parse(str)){
             System.out.println("PASSED");
