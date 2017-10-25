@@ -187,7 +187,7 @@ public class BraceChecker {
         }
     }
 
-    public static String ParseResultToString(ParseResult parseResult) { //TODO : correct codding convention violation. methods and variables names should start with small letters
+    public static String parseResultToString(ParseResult parseResult) {
         switch (parseResult.parseResultType.typeNumber) {
             case 0:
                 return "No Errors Found";

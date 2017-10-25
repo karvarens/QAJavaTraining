@@ -10,8 +10,6 @@ public class Notepad extends JFrame {
     private JTextField textField;
 
     public Notepad() {
-//        setLayout(new FlowLayout());
-
     //Panel
         JPanel buttonsPanel = new JPanel(new FlowLayout());
     //TextArea
@@ -26,7 +24,6 @@ public class Notepad extends JFrame {
         add(buttonsPanel, BorderLayout.NORTH);
 
     //Scroll
-//        scrollPane.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
         add (scrollPane, BorderLayout.CENTER);
 
     //TextField
@@ -42,7 +39,7 @@ public class Notepad extends JFrame {
     public class ParseActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
             BraceChecker result = new BraceChecker(textArea.getText());
-            String text = BraceChecker.ParseResultToString(result.parse());
+            String text = BraceChecker.parseResultToString(result.parse());
 
             textField.setText(text);
         }
