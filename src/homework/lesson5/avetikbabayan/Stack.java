@@ -33,13 +33,7 @@ public class Stack {
         return values[tos];
     }
 
-    public void reset() {
-        while (tos != -1) {
-            values[tos--] = 0;
-        }
-    }
-
-    public boolean isEmpty() {
+    public boolean Empty() {
         return tos == -1;
     }
 

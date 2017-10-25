@@ -23,7 +23,7 @@ public class BraceChecker {
                 stuck.push(S[i]);
             }
         }
-        return stuck.isEmpty();
+        return stuck.Empty();
     }
     private char getOpeningBrace(char ch) {
 
