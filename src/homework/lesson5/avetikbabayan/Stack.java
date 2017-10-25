@@ -1,6 +1,7 @@
-package homework.lesson5.anighazaryan.braceChecker;
+package homework.lesson5.avetikbabayan;
 
 public class Stack {
+    public final static int DEFAULT_SIZE = 16;
 
     private int[] values;
     private int tos;
@@ -25,21 +26,14 @@ public class Stack {
         }
         return values[tos--];
     }
-
-    public int peek() {
+    public int peak() {
         if (tos == -1) {
             return 0;
         }
         return values[tos];
     }
 
-    public void reset() {
-        while (tos != -1) {
-            values[tos--] = 0;
-        }
-   }
-
-    public boolean isEmpty(){
+    public boolean Empty() {
         return tos == -1;
     }
 
@@ -48,5 +42,4 @@ public class Stack {
         System.arraycopy(values, 0, newValues, 0, values.length);
         values = newValues;
     }
-
 }

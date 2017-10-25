@@ -1,4 +1,5 @@
 package homework.lesson4.narekvagharshakyan.util;
+
 import com.sun.org.apache.xpath.internal.operations.Equals;
 import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
 
@@ -10,11 +11,11 @@ public class StringUtil {
 
         System.out.println("================");
         System.out.println("Split: ");
-        printArray(split("first second conversation",' '));
+        printArray(split("first second  conversation", ' '));
 
         System.out.println("================");
         System.out.println("subString: ");
-        System.out.println(subString("conversation",3,10));
+        System.out.println(subString("conversation", 3, 10));
 
         System.out.println("================");
         System.out.println("parseInt: ");
@@ -39,42 +40,48 @@ public class StringUtil {
 
         System.out.println("================");
         System.out.println("changeCase with index: ");
-        System.out.println(changeCase("a2adDc7D4bjHHDd",1,4));
+        System.out.println(changeCase("a2adDc7D4bjHHDd", 1, 4));
     }
 
     /**
      * Parses the specified inputText and divides it into tokens by the specified delimiter.
      *
-     * @param inputText  the string to be splitted by the specified delimiter
-     * @param delimiter  the delimiter by which the specified inputText  will splitted.
+     * @param inputText the string to be splitted by the specified delimiter
+     * @param delimiter the delimiter by which the specified inputText  will splitted.
      * @return the array of strings computed by splitting this string
-     *          around matches of the given regular expression.
+     * around matches of the given regular expression.
      */
-    public static String [] split(String inputText, char delimiter) {
+    public static String[] split(String inputText, char delimiter) {
         int start = 0;
         int end = 0;
-        int textcount = 0;
-        int temp = 1;
+        int textCount = 0;
+        int wordCount = 1;
 
         //================Create array with dynamic size=========
-        for (int i = 0; i < inputText.length() - 1; i++) {
-            if(inputText.charAt(i) == delimiter) {
-                temp++;
+        lab: for (int i = 0; i < inputText.length() - 1; i++) {
+            while (inputText.charAt(i++) == delimiter) {
+                if(i == inputText.length()) {
+                    break lab;
+                }
+
+            }
+            if(inputText.charAt(i -1) == delimiter) {
+                wordCount++;
             }
         }
-        String newString [] = new String[temp];
+        String newString[] = new String[wordCount];
         //========================================================
 
         for (int i = 0; i < inputText.length() - 1; i++) {
-            if(inputText.charAt(i) == delimiter){
+            if (inputText.charAt(i) == delimiter) {
                 end = i;
-                newString[textcount] = subString(inputText, start, end);
-                textcount++;
+                newString[textCount] = subString(inputText, start, end);
+                textCount++;
                 start = end + 1;
-                }
             }
+        }
 
-        newString[textcount] = subString(inputText, start, inputText.length() - 1);
+        newString[textCount] = subString(inputText, start, inputText.length() - 1);
 
         return newString;
     }
@@ -88,24 +95,24 @@ public class StringUtil {
      * "hamburge r".substring(4, 8) returns "urge"
      * "smiles".substring(1, 5) returns "mile"
      *
-     * @param      inputText    the string substring of which must be returned
-     * @param      startIndex   the beginning index, inclusive.
-     * @param      endIndex     the ending index, exclusive.
-     * @return     the specified substring.
-     * @exception IndexOutOfBoundsException  if the
-     *             beginIndex is negative, or
-     *             endIndex is larger than the length of
-     *             this String object, or
-     *             beginIndex is larger than
-     *             endIndex.
+     * @param inputText  the string substring of which must be returned
+     * @param startIndex the beginning index, inclusive.
+     * @param endIndex   the ending index, exclusive.
+     * @return the specified substring.
+     * @throws IndexOutOfBoundsException if the
+     *                                   beginIndex is negative, or
+     *                                   endIndex is larger than the length of
+     *                                   this String object, or
+     *                                   beginIndex is larger than
+     *                                   endIndex.
      */
     static public String subString(String inputText, int startIndex, int endIndex) {
-        if (startIndex < 0 || endIndex > inputText.length()-1 || startIndex > endIndex) {
+        if (startIndex < 0 || endIndex > inputText.length() - 1 || startIndex > endIndex) {
             throw new IndexOutOfBoundsException("Error: The value of startIndex/endIndex is not correct");
         }
-        char [] temp = inputText.toCharArray();
-        char [] Array1 = new char [endIndex - startIndex + 1];
-        System.arraycopy(temp,startIndex, Array1, 0, endIndex - startIndex + 1);
+        char[] temp = inputText.toCharArray();
+        char[] Array1 = new char[endIndex - startIndex + 1];
+        System.arraycopy(temp, startIndex, Array1, 0, endIndex - startIndex + 1);
         String str = String.valueOf(Array1);
         return str;
     }
@@ -113,21 +120,22 @@ public class StringUtil {
     /**
      * Returns a copy of the specified str, with leading and trailing whitespace
      * omitted.
+     *
      * @param str the String will be trimmed.
-     * @return  A copy of the string with leading and trailing white
-     *          space removed, or this string if it has no leading or
-     *          trailing white space.
+     * @return A copy of the string with leading and trailing white
+     * space removed, or this string if it has no leading or
+     * trailing white space.
      */
     public static String trim(String str) {
         int startIndex = 0;
         int endIndex = str.length() - 1;
-        while (str.charAt(startIndex)== ' '){
+        while (str.charAt(startIndex) == ' ') {
             startIndex++;
-            if(startIndex == str.length() - 1){
+            if (startIndex == str.length() - 1) {
                 throw new IndexOutOfBoundsException("String contains only whitespaces");
             }
         }
-        while (str.charAt(endIndex)== ' '){
+        while (str.charAt(endIndex) == ' ') {
             endIndex--;
         }
 
@@ -142,36 +150,35 @@ public class StringUtil {
      * that the first character may be an ASCII minus sign.
      *
      * @param s a String containing the int representation to be parsed
-     * @return     the integer value represented by the argument in decimal.
-     * @exception NumberFormatException  if the string does not contain a
-     *               parsable integer.
+     * @return the integer value represented by the argument in decimal.
+     * @throws NumberFormatException if the string does not contain a
+     *                               parsable integer.
      */
-    public static Integer parseInt (String s) throws NumberFormatException{
-       int parsedInt = 0;
-       int i;
-       int minusSign = 1;
+    public static Integer parseInt(String s) throws NumberFormatException {
+        int parsedInt = 0;
+        int i;
+        int minusSign = 1;
 
-       for (i = 0; i < s.length(); i++) {
-           if(s.charAt(0) == '-' && i == 0){
-               minusSign = - 1;
-               i = 1;
-           }
-           if(Character.isDigit(s.charAt(i))){
-               parsedInt = parsedInt * 10 + Character.getNumericValue(s.charAt(i));
-           }
-           else {
-               throw new NumberFormatException("The string contains letters or symbols");
-           }
+        for (i = 0; i < s.length(); i++) {
+            if (s.charAt(0) == '-' && i == 0) {
+                minusSign = -1;
+                i = 1;
+            }
+            if (Character.isDigit(s.charAt(i))) {
+                parsedInt = parsedInt * 10 + Character.getNumericValue(s.charAt(i));
+            } else {
+                throw new NumberFormatException("The string contains letters or symbols");
+            }
 
         }
         parsedInt *= minusSign;
-        return parsedInt ;
+        return parsedInt;
     }
 
 
-    public static String toLowerCase(String text){
+    public static String toLowerCase(String text) {
         for (int i = 0; i < text.length(); i++) {
-            if(Character.isLetter(text.charAt(i)) && Character.isUpperCase(text.charAt(i))){
+            if (Character.isLetter(text.charAt(i)) && Character.isUpperCase(text.charAt(i))) {
                 StringBuilder newtext = new StringBuilder(text);
                 newtext.setCharAt(i, Character.toLowerCase(text.charAt(i)));
                 text = newtext.toString();
@@ -180,9 +187,9 @@ public class StringUtil {
         return text;
     }
 
-    public static String toUpperCase(String text){
+    public static String toUpperCase(String text) {
         for (int i = 0; i < text.length(); i++) {
-            if(Character.isLetter(text.charAt(i)) && Character.isLowerCase(text.charAt(i))){
+            if (Character.isLetter(text.charAt(i)) && Character.isLowerCase(text.charAt(i))) {
                 StringBuilder newtext = new StringBuilder(text);
                 newtext.setCharAt(i, Character.toUpperCase(text.charAt(i)));
                 text = newtext.toString();
@@ -192,11 +199,10 @@ public class StringUtil {
     }
 
     private static char changeCase(char ch) {
-        if(Character.isLetter(ch)){
-            if(Character.isLowerCase(ch)){
+        if (Character.isLetter(ch)) {
+            if (Character.isLowerCase(ch)) {
                 ch = Character.toUpperCase(ch);
-            }
-            else {
+            } else {
                 ch = Character.toLowerCase(ch);
             }
         }
@@ -205,20 +211,18 @@ public class StringUtil {
 
     private static String changeCase(String text, int startIndex, int endIndex) {
         StringBuilder newtext = new StringBuilder(text);
-        if(endIndex>=startIndex) {
+        if (endIndex >= startIndex) {
             for (int i = startIndex; i <= endIndex; i++) {
-                if(Character.isLetter(text.charAt(i))){
-                    if(Character.isLowerCase(text.charAt(i))){
+                if (Character.isLetter(text.charAt(i))) {
+                    if (Character.isLowerCase(text.charAt(i))) {
                         newtext.setCharAt(i, Character.toUpperCase(text.charAt(i)));
-                    }
-                    else {
+                    } else {
                         newtext.setCharAt(i, Character.toLowerCase(text.charAt(i)));
                     }
                 }
             }
             text = newtext.toString();
-        }
-        else{
+        } else {
             throw new IndexOutOfBoundsException("startIndex can't be bigger than endIndex");
         }
         return text;

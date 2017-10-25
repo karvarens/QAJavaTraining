@@ -14,26 +14,26 @@ public class BraceChecker {
         BracketItem closedBracketItem = null;
         int i = 0;
         int rowNumber = 0;
-        int indexInRaw = 0;
+        int indexInRow = 0;
         lab:
-        for (; i < text.length(); i++, indexInRaw++) {
+        for (; i < text.length(); i++, indexInRow++) {
             char currentChar = text.charAt(i);
 
             switch (currentChar) {
                 case '\n':
                     rowNumber++;
-                    indexInRaw = 0;
+                    indexInRow = 0;
                     break;
                 case '{':
                 case '(':
                 case '[':
-                    currentBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRaw);
+                    currentBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRow);
                     bracesStack.push(currentBracketItem);
                     break;
                 case '}':
                     currentBracketItem = bracesStack.pop(); //normally the pop method should remove topof stack
                     if (currentBracketItem == null || currentBracketItem.symbol != '{') {
-                        closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRaw);
+                        closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRow);
                         break lab;
                     }
                     bracesStack.removeTopOfStack();
@@ -41,7 +41,7 @@ public class BraceChecker {
                 case ')':
                     currentBracketItem = bracesStack.pop();
                     if (currentBracketItem == null || currentBracketItem.symbol != '(') {
-                        closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRaw);
+                        closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRow);
                         break lab;
                     }
                     bracesStack.removeTopOfStack();
@@ -49,7 +49,7 @@ public class BraceChecker {
                 case ']':
                     currentBracketItem = bracesStack.pop();
                     if (currentBracketItem == null || currentBracketItem.symbol != '[') {
-                        closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRaw);
+                        closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRow);
                         break lab;
                     }
                     bracesStack.removeTopOfStack();
@@ -187,7 +187,7 @@ public class BraceChecker {
         }
     }
 
-    public static String ParseResultToString(ParseResult parseResult) {
+    public static String parseResultToString(ParseResult parseResult) {
         switch (parseResult.parseResultType.typeNumber) {
             case 0:
                 return "No Errors Found";
