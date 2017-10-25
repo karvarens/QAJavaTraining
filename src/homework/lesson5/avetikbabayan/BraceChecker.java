@@ -36,10 +36,7 @@ public class BraceChecker {
     }
     public static void main(String[] args) throws IOException {
 
-String braces = "({[]}{}()[])"; // happy case
-//String braces = "[{}]"; // happy case
-//String braces = "{{[("; // negative case
-//String braces = ")}"; // negative case
+String braces = "({[]}{}()[])";
 
         BraceChecker braceChecker = new BraceChecker();
         boolean parsBrace = braceChecker.parse(braces);
