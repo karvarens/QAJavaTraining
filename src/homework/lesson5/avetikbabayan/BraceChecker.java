@@ -42,8 +42,8 @@ String braces = "({[]}{}()[])"; // happy case
 //String braces = ")}"; // negative case
 
         BraceChecker braceChecker = new BraceChecker();
-        boolean parsedBraces = braceChecker.parse(braces);
-        System.out.println("Braces were successfully parsed? " + parsedBraces);
+        boolean parsBrace = braceChecker.parse(braces);
+        System.out.println("Braces parsed? " + parsBrace);
     }
 }
 
