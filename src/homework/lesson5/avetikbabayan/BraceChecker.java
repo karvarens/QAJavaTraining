@@ -36,7 +36,7 @@ public class BraceChecker {
     }
     public static void main(String[] args) throws IOException {
 
-String braces = "({[]}{}()[])";
+String braces = "()[]){[]}{}(";
 
         BraceChecker braceChecker = new BraceChecker();
         boolean parsBrace = braceChecker.parse(braces);
