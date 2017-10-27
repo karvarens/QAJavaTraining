@@ -12,11 +12,9 @@ public class Stack {
 
     public void push(char val) {
         if(tos == values.length - 1){
-            newValues = new char [values.length * 3 / 2];
-            System.arraycopy(values, 0, newValues, 0, values.length);
-            values = newValues;
+            ensureCapacity();
+            //TODO extend the values
         }
-
         values[++tos] = val;
     }
 
@@ -27,6 +25,13 @@ public class Stack {
         }else{
             return values[tos--];
         }
+//        TODO complete
+    }
+
+    private void ensureCapacity(){
+        newValues = new char [values.length * 3 / 2];
+        System.arraycopy(values, 0, newValues, 0, values.length);
+        values = newValues;
     }
 
     public boolean isEmpty(){

@@ -38,10 +38,13 @@ public class Notepad extends JFrame {
 
     public class ParseActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            BraceChecker result = new BraceChecker(textArea.getText());
-            String text = BraceChecker.parseResultToString(result.parse());
+            BraceChecker braceChecker = new BraceChecker();
 
-            textField.setText(text);
+//            BraceChecker.ParseResult result = braceChecker.parse(textArea.getText());
+
+            String resultMessage = braceChecker.parse(textArea.getText()).parseResultToString() ;
+
+            textField.setText(resultMessage);
         }
     }
 

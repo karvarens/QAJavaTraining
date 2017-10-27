@@ -1,15 +1,18 @@
 package homework.lesson5.davidgevorgyan.braceChecker;
 
 public class BraceChecker {
-    private String text;
+//    private String text;
     private BracketItem currentBracketItem;
     private ParseResult parseResult = new ParseResult(ParseResultType.NO_ERROR);
+    private Stack stack;
 
-    public BraceChecker(String text) {
-        this.text = text;
+    public BraceChecker() {
+        Stack stack = new Stack();
     }
 
-    public ParseResult parse() {
+    public ParseResult parse(String text) {
+//        todo reset Stack and parseResult value
+        ParseResultType type = new ParseResultType(2);
         Stack bracesStack = new Stack(); //
         BracketItem closedBracketItem = null;
         int i = 0;
@@ -72,14 +75,13 @@ public class BraceChecker {
     }
 
     public static class BracketItem {
-        int index;
-        char symbol;
-        int rowNumber = 0;
-        int indexInRow = 0;
+        private int index;
+        private char symbol;
+        private int rowNumber;
+        private int indexInRow;
 
         BracketItem(int index, char symbol) {
-            this.index = validateIndex(index);
-            this.symbol = validateSymbol(symbol);
+            this(index, symbol, 0, 0);
         }
 
         BracketItem(int index, char symbol, int rowNumber, int indexInRow) {
@@ -88,6 +90,39 @@ public class BraceChecker {
             this.rowNumber = validateIndex(rowNumber);
             this.indexInRow = validateIndex(indexInRow);
         }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public char getSymbol() {
+            return symbol;
+        }
+
+        public void setSymbol(char symbol) {
+            this.symbol = symbol;
+        }
+
+        public int getRowNumber() {
+            return rowNumber;
+        }
+
+        public void setRowNumber(int rowNumber) {
+            this.rowNumber = rowNumber;
+        }
+
+        public int getIndexInRow() {
+            return indexInRow;
+        }
+
+        public void setIndexInRow(int indexInRow) {
+            this.indexInRow = indexInRow;
+        }
+
         public void print(BracketItem value) {
             System.out.println(value);
         }
@@ -119,10 +154,11 @@ public class BraceChecker {
             if (symbol != that.symbol) return false;
             return rowNumber == that.rowNumber && indexInRow == that.indexInRow;
         }
+
+
     }
 
     public static class ParseResultType {
-        //TODO read and understand this part
         public static final ParseResultType  NO_ERROR = new ParseResultType (0);
         public static final ParseResultType CLOSED_NOT_OPENED = new ParseResultType (1);
         public static final ParseResultType  OPENED_BUT_CLOSED_WRONG_BRACKET = new ParseResultType (2);
@@ -131,7 +167,8 @@ public class BraceChecker {
         private ParseResultType(int typeNumber) {
             this.typeNumber = typeNumber;
         }
-        public int typeNumber;
+
+        private int typeNumber;
 
         @Override
         public boolean equals(Object o) {
@@ -145,9 +182,9 @@ public class BraceChecker {
     }
 
     public static class ParseResult {
-        ParseResultType parseResultType;
-        BracketItem opened;
-        BracketItem closed;
+        private ParseResultType parseResultType; // The fields must be private
+        private BracketItem opened;
+        private BracketItem closed;
 
         public ParseResult(ParseResultType parseResultType) {
             this(parseResultType, null, null);
@@ -185,19 +222,19 @@ public class BraceChecker {
                 return false;
             return (opened != null ? opened.equals(that.opened) : that.opened == null) && (closed != null ? closed.equals(that.closed) : that.closed == null);
         }
-    }
 
-    public static String parseResultToString(ParseResult parseResult) {
-        switch (parseResult.parseResultType.typeNumber) {
-            case 0:
-                return "No Errors Found";
-            case 1:
-                return "An opening bracket is missed in " + (parseResult.closed.rowNumber + 1) + " row " + parseResult.closed.indexInRow + " character";
-            case 2:
-                return "Invalid sequence of brackets started from " + (parseResult.closed.rowNumber + 1) + " row " + (parseResult.closed.indexInRow + 1) + " character";
-            case 3:
-                return "A closing bracket is missed in " + (parseResult.opened.rowNumber + 1) + " row " + (parseResult.opened.indexInRow + 1) + " character";
+        public String parseResultToString() {
+            switch (parseResultType.typeNumber) {
+                case 0:
+                    return "No Errors Found";
+                case 1:
+                    return "An opening bracket is missed in " + (closed.rowNumber + 1) + " row " + closed.indexInRow + " character";
+                case 2:
+                    return "Invalid sequence of brackets started from " + (closed.rowNumber + 1) + " row " + (closed.indexInRow + 1) + " character";
+                case 3:
+                    return "A closing bracket is missed in " + (opened.rowNumber + 1) + " row " + (opened.indexInRow + 1) + " character";
+            }
+            return "Error";
         }
-        return "Error";
     }
 }

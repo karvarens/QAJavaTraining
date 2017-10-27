@@ -1,13 +1,14 @@
 package homework.lesson5.davidgevorgyan.braceChecker;
 
+import static homework.lesson5.davidgevorgyan.braceChecker.BraceChecker.BracketItem;
+
 public class Stack {
     private final static int DEFAULT_SIZE = 3;
-    private BraceChecker.BracketItem[] values;
+    private BracketItem[] values;
     private int topOfStack;
 
     Stack() {
-        values = new BraceChecker.BracketItem[DEFAULT_SIZE];
-        topOfStack = -1;
+       this(DEFAULT_SIZE);
     }
 
     Stack(int size) {
