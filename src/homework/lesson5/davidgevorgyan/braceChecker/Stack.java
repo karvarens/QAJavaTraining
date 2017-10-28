@@ -18,14 +18,16 @@ public class Stack {
 
     public void push(BraceChecker.BracketItem value) {
         if(topOfStack == values.length - 1){
-             enlarge();
+             enlargeStackSize();
         }
-
         values[++topOfStack] = value;
     }
 
     public void removeTopOfStack() {
         topOfStack--;
+        if( topOfStack > DEFAULT_SIZE && topOfStack * 2 < values.length){
+            reduceStackSize();
+        }
     }
 
     public BraceChecker.BracketItem pop(){
@@ -35,12 +37,22 @@ public class Stack {
         return values[topOfStack];
     }
 
-    private void enlarge(){
+    private void enlargeStackSize(){
         BraceChecker.BracketItem[] newValues = new BraceChecker.BracketItem[values.length * 3 / 2];
         System.arraycopy(values, 0, newValues, 0, values.length);
         values = newValues;
     }
 
+    private void reduceStackSize(){
+        BraceChecker.BracketItem[] newValues = new BraceChecker.BracketItem[values.length / 3 * 2];
+        System.arraycopy(values, 0, newValues, 0, topOfStack+1);
+        values = newValues;
+
+    }
+    public void clearStack(){
+        this.topOfStack = -1;
+        this.values = new BraceChecker.BracketItem[DEFAULT_SIZE];
+    }
 
     public boolean isEmpty(){
         return topOfStack == -1;

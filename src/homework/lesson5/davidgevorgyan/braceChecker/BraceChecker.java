@@ -1,19 +1,15 @@
 package homework.lesson5.davidgevorgyan.braceChecker;
 
 public class BraceChecker {
-//    private String text;
+
     private BracketItem currentBracketItem;
     private ParseResult parseResult = new ParseResult(ParseResultType.NO_ERROR);
-    private Stack stack;
+    private Stack bracesStack = new Stack();
 
-    public BraceChecker() {
-        Stack stack = new Stack();
-    }
 
     public ParseResult parse(String text) {
-//        todo reset Stack and parseResult value
-        ParseResultType type = new ParseResultType(2);
-        Stack bracesStack = new Stack(); //
+        bracesStack.clearStack();
+        parseResult.setParseResult(ParseResultType.NO_ERROR,null,null);
         BracketItem closedBracketItem = null;
         int i = 0;
         int rowNumber = 0;
@@ -62,12 +58,12 @@ public class BraceChecker {
 
         if (i < text.length()) {
             if (currentBracketItem == null) {
-                parseResult = new ParseResult(ParseResultType.CLOSED_NOT_OPENED, null, closedBracketItem);
+                parseResult.setParseResult(ParseResultType.CLOSED_NOT_OPENED, null, closedBracketItem);
             } else {
-                parseResult = new ParseResult(ParseResultType.OPENED_BUT_CLOSED_WRONG_BRACKET, currentBracketItem, closedBracketItem);
+                parseResult.setParseResult(ParseResultType.OPENED_BUT_CLOSED_WRONG_BRACKET, currentBracketItem, closedBracketItem);
             }
         } else if (!bracesStack.isEmpty()) {
-            parseResult = new ParseResult(ParseResultType.OPENED_NOT_CLOSED , currentBracketItem, null);
+            parseResult.setParseResult(ParseResultType.OPENED_NOT_CLOSED , currentBracketItem, null);
             return parseResult;
         }
 
@@ -96,7 +92,7 @@ public class BraceChecker {
         }
 
         public void setIndex(int index) {
-            this.index = index;
+            this.index = validateIndex(index);
         }
 
         public char getSymbol() {
@@ -104,7 +100,7 @@ public class BraceChecker {
         }
 
         public void setSymbol(char symbol) {
-            this.symbol = symbol;
+            this.symbol = validateSymbol(symbol);
         }
 
         public int getRowNumber() {
@@ -112,7 +108,7 @@ public class BraceChecker {
         }
 
         public void setRowNumber(int rowNumber) {
-            this.rowNumber = rowNumber;
+            this.rowNumber = validateIndex(rowNumber);
         }
 
         public int getIndexInRow() {
@@ -120,7 +116,7 @@ public class BraceChecker {
         }
 
         public void setIndexInRow(int indexInRow) {
-            this.indexInRow = indexInRow;
+            this.indexInRow = validateIndex(indexInRow);
         }
 
         public void print(BracketItem value) {
@@ -200,6 +196,11 @@ public class BraceChecker {
                 throw new IllegalArgumentException();
             }
         }
+        public void setParseResult(ParseResultType parseResultType, BracketItem opened, BracketItem closed){
+            this.parseResultType = parseResultType;
+            this.opened = opened;
+            this.closed = closed;
+        }
 
         public ParseResult(ParseResultType parseResultType, BracketItem opened, BracketItem closed) {
             init(parseResultType, opened, closed);
@@ -230,9 +231,9 @@ public class BraceChecker {
                 case 1:
                     return "An opening bracket is missed in " + (closed.rowNumber + 1) + " row " + closed.indexInRow + " character";
                 case 2:
-                    return "Invalid sequence of brackets started from " + (closed.rowNumber + 1) + " row " + (closed.indexInRow + 1) + " character";
+                    return "Invalid sequence of brackets started from " + (closed.rowNumber + 1) + " row " + closed.indexInRow + " character";
                 case 3:
-                    return "A closing bracket is missed in " + (opened.rowNumber + 1) + " row " + (opened.indexInRow + 1) + " character";
+                    return "A closing bracket is missed for " + (opened.rowNumber + 1) + " row " + opened.indexInRow  + " character";
             }
             return "Error";
         }
