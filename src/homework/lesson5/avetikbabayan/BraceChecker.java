@@ -13,18 +13,21 @@ public class BraceChecker {
     }
 
     public boolean parse(String text) {
-        char[] S = text.toCharArray();
+        //Variables and methods names must be start with small letters
+        char[] s = text.toCharArray();
+        //char[] s is redundant. we can use  text.charAt(i)
         for (int i=0; i < text.length(); i++) {
-            char opening = getOpeningBrace(S[i]);
+            char opening = getOpeningBrace(text.charAt(i));
             char high = (char) stuck.peak ();
             if (opening == high) {
                 stuck.pop();
             } else {
-                stuck.push(S[i]);
+                stuck.push(s[i]);
             }
         }
         return stuck.Empty();
     }
+    
     private char getOpeningBrace(char ch) {
 
         for (int i = 0; i < braceClose.length; i++) {
