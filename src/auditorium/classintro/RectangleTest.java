@@ -20,12 +20,14 @@ public class RectangleTest {
 
         //This is too complicated without Rectangle Objects
 
+
         Rectangle r = new Rectangle();
-        r.setWidth (-100) ;
+        Rectangle r1 = new Rectangle(4, 5);
+        r.setWidth(-100) ;
+//        r.width = -1;
         System.out.println(r.getWidth());
         System.out.println(r.getSquare());
 
-        Rectangle r1 = new Rectangle(4, 5);
         r1.setWidth(-1);
 
 

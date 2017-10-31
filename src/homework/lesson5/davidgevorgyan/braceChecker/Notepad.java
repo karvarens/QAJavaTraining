@@ -8,6 +8,7 @@ public class Notepad extends JFrame {
     private JTextArea textArea;
     private JButton verifyBraces;
     private JTextField textField;
+    BraceChecker braceChecker = new BraceChecker();
 
     public Notepad() {
     //Panel
@@ -38,12 +39,8 @@ public class Notepad extends JFrame {
 
     public class ParseActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            BraceChecker braceChecker = new BraceChecker();
-
-//            BraceChecker.ParseResult result = braceChecker.parse(textArea.getText());
 
             String resultMessage = braceChecker.parse(textArea.getText()).parseResultToString() ;
-
             textField.setText(resultMessage);
         }
     }
