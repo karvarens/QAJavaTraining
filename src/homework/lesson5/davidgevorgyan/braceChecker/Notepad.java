@@ -38,7 +38,7 @@ public class Notepad extends JFrame {
     }
 
     public class ParseActionListener implements ActionListener{
-        public void actionPerformed(ActionEvent e){
+        public void actionPerformed(ActionEvent e) {
 
             String resultMessage = braceChecker.parse(textArea.getText()).parseResultToString() ;
             textField.setText(resultMessage);

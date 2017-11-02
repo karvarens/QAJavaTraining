@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class StackTest {
+@SuppressWarnings("WeakerAccess")
+public class StackTest {
     @Test
     void pushAndPop() {
         Stack stackTest = new Stack(3);
@@ -13,8 +14,8 @@ class StackTest {
         stackTest.push(bracketItemTest1);
         BraceChecker.BracketItem bracketItemTest2 = new BraceChecker.BracketItem(1, '[');
         stackTest.push(bracketItemTest2);
-        assertEquals(bracketItemTest2.getSymbol(), stackTest.pop().getSymbol());
-        assertEquals(1, stackTest.pop().getIndex());
+        assertEquals(bracketItemTest2.getSymbol(), stackTest.peek().getSymbol());
+        assertEquals(1, stackTest.peek().getIndex());
     }
 
 
@@ -25,9 +26,9 @@ class StackTest {
         stackTest.push(bracketItemTest1);
         BraceChecker.BracketItem bracketItemTest2 = new BraceChecker.BracketItem(1, '[');
         stackTest.push(bracketItemTest2);
-        stackTest.removeTopOfStack();
-        assertEquals(bracketItemTest1.getSymbol(),stackTest.pop().getSymbol());
-        assertEquals(2,stackTest.pop().getIndex());
+        stackTest.pop();
+        assertEquals(bracketItemTest1.getSymbol(),stackTest.peek().getSymbol());
+        assertEquals(2,stackTest.peek().getIndex());
     }
 
     @Test
