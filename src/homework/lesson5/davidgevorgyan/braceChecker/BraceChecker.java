@@ -1,5 +1,6 @@
 package homework.lesson5.davidgevorgyan.braceChecker;
 
+@SuppressWarnings("WeakerAccess")
 public class BraceChecker {
 
     private BracketItem currentBracketItem;
@@ -8,8 +9,8 @@ public class BraceChecker {
 
 
     public ParseResult parse(String text) {
-        bracesStack.clearStack();
-        parseResult.setParseResult(ParseResultType.NO_ERROR,null,null);
+        reset();
+
         BracketItem closedBracketItem = null;
         int i = 0;
         int rowNumber = 0;
@@ -30,12 +31,11 @@ public class BraceChecker {
                     bracesStack.push(currentBracketItem);
                     break;
                 case '}':
-                    currentBracketItem = bracesStack.pop(); //normally the pop method should remove topof stack
+                    currentBracketItem = bracesStack.pop();
                     if (currentBracketItem == null || currentBracketItem.symbol != '{') {
                         closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRow);
                         break lab;
                     }
-                    bracesStack.removeTopOfStack();
                     break;
                 case ')':
                     currentBracketItem = bracesStack.pop();
@@ -43,7 +43,6 @@ public class BraceChecker {
                         closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRow);
                         break lab;
                     }
-                    bracesStack.removeTopOfStack();
                     break;
                 case ']':
                     currentBracketItem = bracesStack.pop();
@@ -51,7 +50,6 @@ public class BraceChecker {
                         closedBracketItem = new BracketItem(i, currentChar, rowNumber, indexInRow);
                         break lab;
                     }
-                    bracesStack.removeTopOfStack();
                     break;
             }
         }
@@ -68,6 +66,11 @@ public class BraceChecker {
         }
 
         return parseResult;
+    }
+
+    private void reset() {
+        bracesStack.clearStack();
+        parseResult.setParseResult(ParseResultType.NO_ERROR,null,null);
     }
 
     public static class BracketItem {
