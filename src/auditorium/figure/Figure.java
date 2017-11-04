@@ -23,7 +23,7 @@ abstract public class Figure {
         Figure[] figures = new Figure[5];
 
         figures[0] = new Rectangle(10, 10, 100, 50);
-        figures[1] = new Circle(10, 10, 100, 50){};
+        figures[1] = new Circle(10, 10, 100){};
 
         figures[0].draw(null);
         System.out.println(figures[0]);
