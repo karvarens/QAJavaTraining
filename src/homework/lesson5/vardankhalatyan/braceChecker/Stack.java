@@ -1,9 +1,14 @@
 package homework.lesson5.vardankhalatyan.braceChecker;
 
 public class Stack {
+    public static final int DEFAULT_SIZE = 16;
 
     private int[] values;
     private int tos;
+
+    public Stack() {
+        this(DEFAULT_SIZE);
+    }
 
     public Stack(int size) {
         values = new int[size];
@@ -11,43 +16,42 @@ public class Stack {
     }
 
     public void push(int val) {
-        if(tos+1 == values.length){
-            int[] newValues = new int [values.length * 3 / 2];
-            System.arraycopy(values, 0, newValues, 0, values.length);
-            values = newValues;
-        }
+        this.increase();
         values[++tos] = val;
     }
 
-    public int pop(){
-//        if (isEmpty()){
-//            JOptionPane.showMessageDialog(null,"Game Over - The Stack is empty","Warning", JOptionPane.WARNING_MESSAGE);
-//            return Integer.MIN_VALUE;
-//        }
-        if (tos == values.length * (1/3)){
-            int[] newValues = new int[values.length * 2/3];
-            System.arraycopy(values, 0, newValues, 0, newValues.length);
-            values = newValues;
+    public Integer pop() {
+        this.clear();
+        if(isEmpty()) {
+            return null;
         }
-        try {
-            char val = (char)values[tos--];
-            values[tos+1] = 0;
-            return val;
-        }catch (IndexOutOfBoundsException e){
-            System.out.println("The Game is Over!");
-            return Integer.MIN_VALUE;
-        }
+        return values[tos--];
     }
 
     public boolean isEmpty(){
         if (tos < 0){
-//            System.out.println("The Stack is empty");
             return tos == -1;
         }
         return false;
     }
 
-    public int lenght(){
+    private void clear(){
+        if (tos == values.length * (1/3)){
+            int[] newValues = new int[values.length * 2/3];
+            System.arraycopy(values, 0, newValues, 0, newValues.length);
+            values = newValues;
+        }
+    }
+
+    private void increase(){
+        if(tos+1 == values.length){
+            int[] newValues = new int [values.length * 3 / 2];
+            System.arraycopy(values, 0, newValues, 0, values.length);
+            values = newValues;
+        }
+    }
+
+    public int length(){
         return values.length;
     }
 }
