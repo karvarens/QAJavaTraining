@@ -1,5 +1,7 @@
 package homework.lesson2.asyagrigoryan.util;
 
+import java.util.logging.XMLFormatter;
+
 /**
  * This class contains utility methods for array
  * manipulation.
@@ -13,19 +15,44 @@ public class ArrayUtil {
      * if the second element is odd. And so on for the next elements of the util
      */
     public static void sortByOddAndEven(int [] array) {
-        //Test comment
-//        TODO   implement
+
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i + 1; j < array.length - 1; j++) {
+
+                if (array[i]%2 != array[j]%2){
+
+                    swap(array, i + 1, j);
+
+                }
+
+            }
+
+
+        }
     }
 
     public static int getMaximum(int[] array) {
-//        TODO   implement
-        return 0;   // this must be replaced by correct code
+        int max = array[0];
+
+        for(int i=1; i<array.length; i++) {
+
+            if (array[i] > max)
+                max = array[i];
+        }
+        return max;
     }
 
 
     public static int getMinimum(int[] array) {
-//        TODO implement
-        return 0;   // this must be replaced by correct code
+        int min = array[0];
+
+        for (int i = 0; i<array.length; i++){
+
+            if (array[i] < min)
+                min = array[i];
+        }
+//
+        return min;
     }
 
     /**
@@ -35,8 +62,12 @@ public class ArrayUtil {
      * @return the sum of the specified util elements
      */
     public static int getSum(int[] array) {
-//        TODO implement
-        return 0;   // this must be replaced by correct code
+        int Sum = 0;
+
+        for (int i = 0; i < array.length; i++)
+            Sum = Sum + array[i];
+
+        return Sum;
     }
 
 
@@ -47,8 +78,16 @@ public class ArrayUtil {
      * @return new created reversed array to the specified parameter "array"
      */
     public static int[] reverse(int[] array) {
-//        TODO implement
-        return null;   // this must be replaced by correct code
+
+        int[] arrayNew = new int[array.length];
+
+        for (int i = array.length - 1 ; i >= 0; i--){
+
+            arrayNew [array.length - i - 1] = array[i];
+
+        }
+
+        return arrayNew;
     }
 
     /**
@@ -56,7 +95,13 @@ public class ArrayUtil {
      * @param array  an array: Elements order of wich must be reversed
      */
     public static void reverseInSameArray(int[] array) {
-//        TODO implement
+
+        for (int i = 0; i < array.length/2; i++){
+
+            int a = array[i];
+            array[i] = array[array.length - i - 1];
+            array[array.length - i - 1] = a;
+        }
 
     }
 
@@ -70,11 +115,15 @@ public class ArrayUtil {
     * @param j the index of the other element to be swapped.
     */
     private static void swap(int[] array, int i, int j) {
-        //todo: implement
+
+        int a = array[i];
+        array[i] = array[j];
+        array[j] = a;
+
     }
 
     public static void print(int[] a) {
-        print(a, " ");
+        print(a, " ^ ");
     }
 
     /**
@@ -83,11 +132,57 @@ public class ArrayUtil {
      * @param a the util to print
      */
     public static void print(int[] a, String delimiter) {
-        // todo implement
+
+        System.out.println("Array with delimiter: ");
+
+        for (int i = 0; i <= a.length - 2; i++) {
+
+        System.out.print(a[i] + delimiter);
+
+        }
+
+        System.out.println(a[a.length - 1]);
     }
 
     public static void print(int[][] a, String delimiter) {
-        // todo implement
+
+        System.out.println("Matrix with delimiter: ");
+
+        for (int i = 0; i < a.length; i++) {
+
+            for (int j = 0; j < a.length - 1; j++) {
+
+                System.out.print(a[i][j] + delimiter);
+            }
+
+            System.out.println(a[i][a.length - 1]);
+
+        }
+
+    }
+
+    public static void main(String[] args) {
+        int[] array = {-15, 7, 19, -5, 3, 14, 0};
+        int max = getMaximum(array);
+        System.out.println("Maximum of array: " + max);
+        int min = getMinimum(array);
+        System.out.println("Minimum of array: " + min);
+        int Sum = getSum(array);
+        System.out.println("Sum of array: " + Sum);
+        //int [] arrayNew = reverse(array);
+
+        reverseInSameArray(array);
+
+       // print(array);
+
+        print(array, "^");
+
+        int[][] matrix = {{12, 1, -3},
+        {13, 67, 0},
+        {2, 0, -7}};
+
+        print(matrix, "*");
+
     }
 }
       

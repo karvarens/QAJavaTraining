@@ -133,7 +133,7 @@ public class ArrayUtil {
     }
 
     public static void main(String args[]) {
-        int[] declaredArray = {12, 10, 9, 3, 7, 5, 12};
+        int[] declaredArray = {12, 10, 4, 6, 7, 5, 12};
         int maximum = getMaximum(declaredArray);
         System.out.println("Maximum value of array " + maximum);
         int minimum = getMinimum(declaredArray);
