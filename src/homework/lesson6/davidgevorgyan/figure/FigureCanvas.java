@@ -34,34 +34,53 @@ public class FigureCanvas extends JPanel {
         size++;
     }
 
-    public boolean remove (Figure figure) {
-        for (int i = 0; i < size; i++) {
-            if (figures[i].equals(figure)){
-                for (int j = i; j < size; j++) {
-                    figures[j] = figures[j + 1];
-                }
-                figures[size - 1] = null;
-                size--;
-                return true;
-                }
-            }
+    public boolean remove () {
+        if (isSelected) {
+            figures[size - 1] = null;
+            size--;
+            isSelected = false;
+            return true;
+        }
     return false;
-        //TODO not clear how to handle if we have several same figures. Delete first one, latest one or All?
     }
+//    public boolean remove (Figure figure) {
+//        if (isSelected) {
+//            for (int i = size - 1; i >= 0; i--) {
+//                if (figures[i].equals(figure)) {
+//                    for (int j = i; j < size; j++) {
+//                        figures[j] = figures[j + 1];
+//                    }
+//                    figures[size - 1] = null;
+//                    size--;
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
 
 
 
     public void select (int x, int y) {
-        for (int i = figures.length - 1; i >= 0 ; i--) {
-            if (figures[i] != null && figures[i].isBelong(x,y)){
+        for (int i = size - 1; i >= 0 ; i--) {
+            if (figures[i].isBelong(x,y)){
                 isSelected = true;
-                System.out.println("Selected figure is: " + figures[i]);
+                figures = moveToEnd(figures, i);
                 break;
             }
+            else {
+                isSelected = false;
+            }
         }
-
-        //TODO Not clear how I will select correct figure from figures
+    }
+    private Figure [] moveToEnd(Figure [] figures, int index){
+        figures[size] = figures[index];
+        for (int i = index; i <= size; i++) {
+            figures[i] = figures [i + 1];
+        }
+        figures[size] = null;
+        return figures;
     }
 
     private void enlargeArraySize() {
@@ -82,8 +101,9 @@ public class FigureCanvas extends JPanel {
         System.out.println("Array is filled with: " + size + " elements");
         System.out.println("Array length is: " + figures.length + " elements");
         for (Figure figure : figures) {
-            if (figure != null)
+            if (figure != null) {
                 output = output + "X: '" + figure.getX() + "', Y: '" + figure.getY() + "', Width: '" + figure.getWidth() + "', Height: '" + figure.getHeight() + "'\n";
+            }
         }
         return output;
     }
