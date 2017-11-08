@@ -1,9 +1,10 @@
 package auditorium.braceChecker;
-
-public class Stack {
+@SuppressWarnings({"unchecked", "WeakerAccess"})
+public class Stack <T> {
     public final static int DEFAULT_SIZE = 16;
+    public static final int MAX_EMPTY_SIZE = 2000;
 
-    private int[] values;
+    private Object[] values;
     private int tos;
 
     public Stack() {
@@ -11,33 +12,60 @@ public class Stack {
     }
 
     public Stack(int size) {
-        values = new int[size];
+        values = new Object[size];
         tos = -1;
     }
 
-    public void push(int val) {
-        if (tos == values.length - 1) {
-            ensureCapacity();
-        }
+    public Stack(int[] stack) {
+        values = new Object[stack.length];
+        System.arraycopy(stack, 0, values, 0, stack.length);
+        tos = -1;
+    }
 
+    public void push(T val) {
+        ensureCapacity();
         values[++tos] = val;
     }
 
-    public int pop() {
+    public T pop() {
         if (tos == -1) {
-            System.out.println("Stack is empty");
-            return 0;
+            return null;
         }
-        return values[tos--];
+        return (T)values[tos--];
+
     }
 
     public boolean isEmpty() {
         return tos == -1;
     }
 
+    private void reduceCapacity() {
+        if (values.length - tos < MAX_EMPTY_SIZE) {
+            return;
+        }
+        Object [] newValues = new Object[(tos + 1) * 3/2];
+        System.arraycopy(values, 0, newValues, 0, tos + 1);
+        values = newValues;
+    }
+
+    public void clear() {
+        reduceCapacity ();
+        for (int i = 0; i <= tos; i++) { //TODO : explane this during the session
+            values[i] = null;
+        }
+        tos = -1;
+    }
+
     private void ensureCapacity() {
-        int[] newValues = new int[values.length * 3 / 2];
+        if (tos < values.length - 1) {
+            return;
+        }
+        Object[] newValues = new Object[values.length * 3 / 2];
         System.arraycopy(values, 0, newValues, 0, values.length);
         values = newValues;
+    }
+
+    public static void main(String[] args) {
+        Stack<String> stack = new Stack<>();
     }
 }
