@@ -16,13 +16,13 @@ public class StackTest {
         System.out.println(st1.pop());
         System.out.println(st1.pop());
         System.out.println(st1.pop());
-        System.out.println(st1.lenght());
+//        System.out.println(st1.lenght()); TODO: Stack hasn't length() method
         st1.isEmpty();
         System.out.println(st1.pop());
-        System.out.println(st1.lenght());
+//        System.out.println(st1.lenght());
         st1.isEmpty();
         System.out.println(st1.pop());
-        System.out.println(st1.lenght());
+//        System.out.println(st1.lenght());
         st1.isEmpty();
     }
 
