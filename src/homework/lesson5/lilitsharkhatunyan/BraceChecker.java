@@ -36,20 +36,20 @@ public class BraceChecker {
                     break;
                 case '}':
                     lastStackBracket = stack.pop();
-                    if(lastStackBracket.getBracketSymbol() != '{') {
+                    if(lastStackBracket == null || lastStackBracket.getBracketSymbol() != '{') {
                         break lab;
                     }
                     break;
                 case ']':
                     lastStackBracket = stack.pop();
-                    if(lastStackBracket.getBracketSymbol() != '[') {
+                    if(lastStackBracket == null || lastStackBracket.getBracketSymbol() != '[') {
                         break lab;
                     }
                     break;
 
                 case ')':
                     lastStackBracket = stack.pop();
-                    if (lastStackBracket.getBracketSymbol() != '(') {
+                    if (lastStackBracket == null || lastStackBracket.getBracketSymbol() != '(') {
                         break lab;
                     }
                     break;
@@ -147,23 +147,6 @@ public class BraceChecker {
         public void setBracketSymbol(char bracketSymbol) {
             this.bracketSymbol = bracketSymbol;
         }
-    }
-
-    public static void main(String[] args) {
-
-        String testBrackets = new String();
-
-//        System.out.println("Please enter a text to parse brackets: ");
-//        Scanner scanner = new Scanner(System.in);
-//        testBrackets = scanner.nextLine();
-
-        // testBrackets = "{}\n[]{}\n]"; //exc
-
-        testBrackets = "{{{}}}";
-
-        BraceChecker braceChecker = new BraceChecker(testBrackets);
-
-        braceChecker.parse(testBrackets);
     }
 }
 
