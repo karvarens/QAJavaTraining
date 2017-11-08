@@ -20,7 +20,6 @@ public class Stack {
 
     public BracketItemInfo pop() {
         if (tos == -1) {
-            System.out.println("Stack is empty");
             return null;
         }
         return values[tos--];
@@ -30,10 +29,20 @@ public class Stack {
         BracketItemInfo[] newValues = new BracketItemInfo[values.length * 3 / 2];
         System.arraycopy(values, 0, newValues, 0, values.length);
         values = newValues;
+        System.out.println("Stack is refilled!");
+    }
+
+    private void reduceCapacity(){
+        //TODO
     }
 
     public boolean isEmpty() {
         return tos == -1;
+    }
+
+    public void clear(){
+        reduceCapacity();
+        tos = -1;
     }
 
 //    public BracketItemInfo getPeek() {
