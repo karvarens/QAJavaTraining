@@ -1,25 +1,14 @@
 package homework.lesson5.vardankhalatyan.braceChecker;
 
 public class BraceChecker {
-    //TODO add fields at your discretion
-    private Stack globalStack;
-    /*
-    stackOne: is for '('; ')'
-    stackTwo: is for '['; ']'
-    stackThree: is for '{'; '}'
-    stackFour: is for "
-    stackFive: is for '
-     */
-
-//    private Stack stackOne = new Stack[];
-//    private Stack stackTwo = new Stack[];
-//    private Stack stackThree = new Stack[];
-//    private Stack stackFour = new Stack[];
-//    private Stack stackFive = new Stack[];
+    //TODO add fields at your descreption - ?
+    private Stack stack;
+    private String resultMessage;
 
 
     public BraceChecker(String fileName){
-        globalStack = new Stack(10);
+        stack = new Stack(10);
+        resultMessage = "No Error";
     }
 
 
@@ -27,67 +16,70 @@ public class BraceChecker {
         boolean isCorrect = true;
       //  BufferedReader file = new BufferedReader(new FileReader("text"));
       //  line = file.readLine();
-        for (int i = 0; i < text.length(); i++) {
+        char lastOpenedBracket = 0;
+        int i = 0;
+
+        lab: for (; i < text.length(); i++) {
             char ch = text.charAt(i);
 
             switch (ch){
                 case '{':
                 case '[':
                 case '(':
-                    globalStack.push(ch);
+                    stack.push(ch);
                     break;
                 case ')':
-                    if (globalStack.isEmpty()){
-                        System.out.println("Syntax error: unused '" + ch + " sign");
-                        return isCorrect = false;
+                    if (stack.isEmpty()){
+                        isCorrect = false;
+                        break lab;
+                    } else {
+                        lastOpenedBracket = (char)stack.pop().intValue();
+                        if (lastOpenedBracket != '(') {
+                            isCorrect = false;
+                            break lab;
+                        }
                     }
-                    char poped = (char)globalStack.pop();
-                    if (poped != '('){
-                        System.out.println("Syntax error: " + ch +  " couple doesn't closed");
-                        return isCorrect = false;
-                    }else {
-                        break;
-                    }
+                    break;
                 case ']':
-                    if (globalStack.isEmpty()){
-                        System.out.println("Syntax error: unused " + ch + " sign");
-                        return isCorrect = false;
+                    if (stack.isEmpty()){
+                        isCorrect = false;
+                        break lab;
+                    } else {
+                        lastOpenedBracket = (char)stack.pop().intValue();
+                        if (lastOpenedBracket != '[') {
+                            isCorrect = false;
+                            break lab;
+                        }
                     }
-                    poped = (char)globalStack.pop();
-                    if (poped != '['){
-                        System.out.println("Syntax error: " + ch +  " couple doesn't closed");
-                        return isCorrect = false;
-                    }else {
-                        break;
-                    }
+                    break;
                 case '}':
-                    if (globalStack.isEmpty()){
-                        System.out.println("Syntax error: unused '" + ch + " sign");
-                        return isCorrect = false;
+                    if (stack.isEmpty()){
+                        isCorrect = false;
+                        break lab;
+                    } else {
+                        lastOpenedBracket = (char)stack.pop().intValue();
+                        if (lastOpenedBracket != '{') {
+                            isCorrect = false;
+                            break lab;
+                        }
                     }
-                    poped = (char)globalStack.pop();
-                    if (poped != '{'){
-                        System.out.println("Syntax error: " + ch +  " couple doesn't closed");
-                        return isCorrect = false;
-                    }else {
-                        break;
-                    }
+                    break;
             }
 
         }
-        if (!globalStack.isEmpty()){
-            char ch = (char)globalStack.pop();
-            switch (ch){
-                case '{':
-                case '(':
-                case '[':
-                    System.out.println("Syntax error: " + ch +  " couple opened, but not closed");
-                    return isCorrect = false;
+
+        if(i < text.length()) {
+            if(lastOpenedBracket == 0) {
+                resultMessage = "Error: Closed '" + text.charAt(i) + "' but not opened";
+            } else {
+                resultMessage = "Additional closed '" + text.charAt(i) + "' bracket";
             }
+
+        } else if (!stack.isEmpty()) {
+            resultMessage = "Error: Opened '" + (char)stack.pop().intValue() + "' but not closed";
         }
 
-
-//        file.close();
+        System.out.println(resultMessage);
         return isCorrect;
 
     }

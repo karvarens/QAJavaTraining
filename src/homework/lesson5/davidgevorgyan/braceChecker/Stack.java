@@ -52,7 +52,12 @@ public class Stack {
     }
     public void clearStack() {
         this.topOfStack = -1;
-        this.values = new BracketItem[DEFAULT_SIZE];
+
+        for (int i = 0; i < values.length; i++) {
+            while (this.values[i] != null) {
+                this.values[i] = null;
+            }
+        }
     }
 
     public boolean isEmpty() {

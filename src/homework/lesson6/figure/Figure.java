@@ -1,4 +1,4 @@
-package auditorium.figure;
+package homework.lesson6.figure;
 
 import java.awt.*;
 
