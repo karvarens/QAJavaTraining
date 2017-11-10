@@ -43,30 +43,12 @@ public class FigureCanvas extends JPanel {
         }
     return false;
     }
-//    public boolean remove (Figure figure) {
-//        if (isSelected) {
-//            for (int i = size - 1; i >= 0; i--) {
-//                if (figures[i].equals(figure)) {
-//                    for (int j = i; j < size; j++) {
-//                        figures[j] = figures[j + 1];
-//                    }
-//                    figures[size - 1] = null;
-//                    size--;
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
-
-
-
 
     public void select (int x, int y) {
         for (int i = size - 1; i >= 0 ; i--) {
             if (figures[i].isBelong(x,y)){
                 isSelected = true;
-                figures = moveToEnd(figures, i);
+                moveToEnd(figures, i);
                 break;
             }
             else {
@@ -74,14 +56,16 @@ public class FigureCanvas extends JPanel {
             }
         }
     }
-    private Figure [] moveToEnd(Figure [] figures, int index){
+
+    private void moveToEnd(Object [] figures, int index){
         figures[size] = figures[index];
         for (int i = index; i <= size; i++) {
             figures[i] = figures [i + 1];
         }
         figures[size] = null;
-        return figures;
     }
+
+
 
     private void enlargeArraySize() {
         Figure[] newArray = new Figure[figures.length * 3 / 2];
