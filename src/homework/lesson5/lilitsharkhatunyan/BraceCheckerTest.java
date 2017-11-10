@@ -21,4 +21,8 @@ public class BraceCheckerTest {
 
         braceChecker.parse(testBrackets);
     }
+
+    public static void parse_OpenedButNotClosed() {
+
+    }
 }

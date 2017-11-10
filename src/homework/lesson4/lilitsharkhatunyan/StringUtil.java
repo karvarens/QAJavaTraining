@@ -71,15 +71,16 @@ public class StringUtil {
         return 0; // TODO implement the method
     }
 
-    public static String toLowerCase(String text){
+    public static String toLowerCase(String text) {
+        //TODO : Later we should add validation for text == null case and then check if text length == 0 then return text;
+        char[] resultChars = new char[text.length()];
         for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
             if(isLowerCase(ch)){
-                ch = (char) (ch^32);
+                resultChars[i] = (char)(ch ^ 32);
             }
-            System.out.print(ch);
         }
-        return null;
+        return new String(resultChars);
     }
 
     private static boolean isLowerCase(char ch){

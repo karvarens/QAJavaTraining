@@ -27,7 +27,7 @@ public class ArrayUtil {
             while ((array[i] % 2) == (array[j] % 2)) {
                 j++;
                 if (j >= length) {
-                    print(array);
+//                    print(array);
                     return;
                 }
             }
@@ -39,15 +39,18 @@ public class ArrayUtil {
     }
 
     public static int getMaximum(int[] array) {
+        //TODO validate array later: if array is null or array is empty then should be thrown an exception
+        int length = array.length;
+        int max = array[0];
+        for (int i = 1; i < length; i++) {
+            if(max < array[i]) {
+                max = array[i];
+            }
+        }
 
-        int[] arrayA = array;
-
-        Arrays.sort(arrayA);
-        int length = arrayA.length;
-
-        System.out.println("Maximum number is: " + arrayA[length - 1]);
-
-        return arrayA[length - 1];
+        Arrays.sort(array);
+//        return array[length - 1];
+       return max;
     }
 
 
