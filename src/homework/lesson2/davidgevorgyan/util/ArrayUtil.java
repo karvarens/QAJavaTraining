@@ -1,11 +1,16 @@
 package homework.lesson2.davidgevorgyan.util;
 
+import homework.lesson5.davidgevorgyan.braceChecker.BraceChecker;
+
+import java.util.Arrays;
 import java.util.Random;
 /**
  * This class contains utility methods for array
  * manipulation.
  */
 public class ArrayUtil {
+    private final static int MAX_EMPTY_SIZE = 2000; // this should be discussed.
+
     public static void main(String[] args) {
         int[] a = new int[9];
         fillRandomArray(a,10);
@@ -78,7 +83,9 @@ public class ArrayUtil {
     }
 
 
-
+    /**
+     * @param array
+     */
     public static void sortByOddAndEvenKaren0 (int[] array) {
         int stepsCount = array.length - 2;
         for (int i = 0; i < stepsCount; i++) {
@@ -202,7 +209,7 @@ public class ArrayUtil {
 
 
     /**
-     *
+     * Fills array with random data
      * @param a array name
      */
     public static void fillRandomArray(int [] a,int mod) {
@@ -213,6 +220,12 @@ public class ArrayUtil {
         }
     }
 
+    /**
+     * Creates an int array with random data
+     * @param length The length of an array
+     * @param n The mod for rand digits
+     * @return return link to the new created array
+     */
     public static int[] randomIntArray(int length, int n) {
         int[] a = new int[length];
         Random generator = new Random();
@@ -221,6 +234,48 @@ public class ArrayUtil {
             a[i] = generator.nextInt(n);
 
         return a;
+    }
+
+    /**
+     * Takes an array item an puts it at the end of array
+     * @param objects Array name
+     * @param index which array will be move to the end
+     * @param size size of filled array part
+     */
+    public static void moveToEnd(Object [] objects, int index, int size){
+        objects[size] = objects[index];
+        for (int i = index; i <= size; i++) {
+            objects[i] = objects [i + 1];
+        }
+        objects[size] = null;
+    }
+
+
+    /**
+     * Increases the size of array
+     * @param arrayName
+     */
+    public static Object [] enlargeArraySize(Object [] arrayName) {
+        Object [] arr = Arrays.copyOf(arrayName, arrayName.length * 3 / 2);
+        return arr;
+
+    }
+
+
+    /**
+     * Reduces the sise of an array
+     * @param arrayName array
+     * @param size acceptable size
+     */
+    public static void ensureToReduce(Object [] arrayName, int size) {
+        if( arrayName.length - size < MAX_EMPTY_SIZE){
+            return;
+        }
+
+        BraceChecker.BracketItem[] newValues = new BraceChecker.BracketItem[arrayName.length / 3 * 2];
+        System.arraycopy(arrayName, 0, newValues, 0, size+1);
+        arrayName = newValues;
+
     }
 
 }

@@ -7,6 +7,28 @@ import javax.swing.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArrayUtilTest {
+
+    @Test
+    void moveToEnd() {
+        String [] prototype1 ={"ABC","BCD","CDE",null,null};
+        String [] prototype2 ={"BCD","CDE","ABC"};
+
+        homework.lesson2.davidgevorgyan.util.ArrayUtil.moveToEnd(prototype1, 0, 3);
+        assertEquals(prototype1[2],prototype2[2]);
+    }
+
+    @Test
+    void enlargeArraySize() {
+        String [] prototype ={"BCD","CDE","ABC","AAA"};
+        prototype = (String[])homework.lesson2.davidgevorgyan.util.ArrayUtil.enlargeArraySize(prototype);
+        assertEquals(prototype.length,6);
+
+    }
+
+    @Test
+    void ensureToReduce() {
+    }
+
     private void verifySortedByEvenOdd(int[] array){
         int count = array.length - 2;
         int i = 0;
