@@ -30,7 +30,7 @@ public class FigureFrame extends JFrame {
 
 
 
-        main.select(0,0);
+        main.select(600,600);
         System.out.println("Figure removal status: " + main.remove());
         System.out.println(main);
     }

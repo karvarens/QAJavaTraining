@@ -28,7 +28,7 @@ public class FigureCanvas extends JPanel {
 
     public void add (Figure figure) {
         if(size == figures.length - 1){
-            enlargeArraySize();
+            figures = (Figure [])homework.lesson2.davidgevorgyan.util.ArrayUtil.enlargeArraySize(figures);
         }
         figures[size]=figure;
         size++;
@@ -48,7 +48,7 @@ public class FigureCanvas extends JPanel {
         for (int i = size - 1; i >= 0 ; i--) {
             if (figures[i].isBelong(x,y)){
                 isSelected = true;
-                moveToEnd(figures, i);
+                homework.lesson2.davidgevorgyan.util.ArrayUtil.moveToEnd(figures, i, size);
                 break;
             }
             else {
@@ -57,21 +57,7 @@ public class FigureCanvas extends JPanel {
         }
     }
 
-    private void moveToEnd(Object [] figures, int index){
-        figures[size] = figures[index];
-        for (int i = index; i <= size; i++) {
-            figures[i] = figures [i + 1];
-        }
-        figures[size] = null;
-    }
 
-
-
-    private void enlargeArraySize() {
-        Figure[] newArray = new Figure[figures.length * 3 / 2];
-        System.arraycopy(figures, 0, newArray, 0, figures.length);
-        figures = newArray;
-    }
 
 
     @Override
