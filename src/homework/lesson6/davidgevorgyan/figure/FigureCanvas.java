@@ -48,7 +48,7 @@ public class FigureCanvas extends JPanel {
         for (int i = size - 1; i >= 0 ; i--) {
             if (figures[i].isBelong(x,y)){
                 isSelected = true;
-                homework.lesson2.davidgevorgyan.util.ArrayUtil.moveToEnd(figures, i, size);
+                homework.lesson2.davidgevorgyan.util.ArrayUtil.moveToEnd(figures, i);
                 break;
             }
             else {

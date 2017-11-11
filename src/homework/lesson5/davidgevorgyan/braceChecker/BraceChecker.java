@@ -2,7 +2,6 @@ package homework.lesson5.davidgevorgyan.braceChecker;
 
 @SuppressWarnings("WeakerAccess")
 public class BraceChecker {
-
     private BracketItem currentBracketItem;
     private ParseResult parseResult = new ParseResult(ParseResultType.NO_ERROR);
     private Stack bracesStack = new Stack();

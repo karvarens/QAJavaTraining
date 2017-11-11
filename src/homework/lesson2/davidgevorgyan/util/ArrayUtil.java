@@ -9,7 +9,7 @@ import java.util.Random;
  * manipulation.
  */
 public class ArrayUtil {
-    private final static int MAX_EMPTY_SIZE = 2000; // this should be discussed.
+
 
     public static void main(String[] args) {
         int[] a = new int[9];
@@ -240,14 +240,20 @@ public class ArrayUtil {
      * Takes an array item an puts it at the end of array
      * @param objects Array name
      * @param index which array will be move to the end
-     * @param size size of filled array part
      */
-    public static void moveToEnd(Object [] objects, int index, int size){
-        objects[size] = objects[index];
-        for (int i = index; i <= size; i++) {
+    public static Object[] moveToEnd(Object [] objects, int index){
+        int size = countNotNullValues(objects);
+        if (index > objects.length || index < 0 || size == 0 ) {
+            throw new IllegalArgumentException();
+        }
+        Object temp = objects[index];
+
+        for (int i = index; i < size - 1; i++) {
             objects[i] = objects [i + 1];
         }
-        objects[size] = null;
+        objects[size - 1] = temp;
+
+        return objects;
     }
 
 
@@ -264,18 +270,30 @@ public class ArrayUtil {
 
     /**
      * Reduces the sise of an array
-     * @param arrayName array
-     * @param size acceptable size
+     * @param objects array
+     * @param desiredSize acceptable size
      */
-    public static void ensureToReduce(Object [] arrayName, int size) {
-        if( arrayName.length - size < MAX_EMPTY_SIZE){
-            return;
+    public static Object [] ensureToReduce(Object [] objects, int desiredSize) {
+        int size = countNotNullValues(objects);
+        if (desiredSize <= size || desiredSize > objects.length) {
+            throw new IllegalArgumentException();
         }
+        Object [] newValues = Arrays.copyOf(objects, desiredSize);
+        return newValues;
+    }
 
-        BraceChecker.BracketItem[] newValues = new BraceChecker.BracketItem[arrayName.length / 3 * 2];
-        System.arraycopy(arrayName, 0, newValues, 0, size+1);
-        arrayName = newValues;
-
+    /**
+     * Count not null values in array
+     * @param objects
+     * @return count of not null values
+     */
+    public static int countNotNullValues(Object[] objects){
+        int i = 0;
+        for (; i < objects.length; i++) {
+            if (objects[i] == null)
+                break;
+        }
+        return i;
     }
 
 }

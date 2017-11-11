@@ -24,7 +24,10 @@ public class Stack {
     }
 
     public BracketItem pop() {
-        homework.lesson2.davidgevorgyan.util.ArrayUtil.ensureToReduce(values, topOfStack);
+//TODO reimplement this part
+//        if( topOfStack * 2 > homework.lesson2.davidgevorgyan.util.ArrayUtil.countNotNullValues(values)){
+//            values = (BracketItem[])homework.lesson2.davidgevorgyan.util.ArrayUtil.ensureToReduce(values, values.length / 2);
+//        }
 
         return isEmpty() ? null: values[topOfStack--];
     }

@@ -10,11 +10,11 @@ public class ArrayUtilTest {
 
     @Test
     void moveToEnd() {
-        String [] prototype1 ={"ABC","BCD","CDE",null,null};
-        String [] prototype2 ={"BCD","CDE","ABC"};
+        String [] prototype1 ={"ABC","BCD","CDE","DEF"};
+        String [] prototype2 ={"BCD","CDE","DEF","ABC"};
 
-        homework.lesson2.davidgevorgyan.util.ArrayUtil.moveToEnd(prototype1, 0, 3);
-        assertEquals(prototype1[2],prototype2[2]);
+        prototype1 = (String [])homework.lesson2.davidgevorgyan.util.ArrayUtil.moveToEnd(prototype1, 0);
+        assertEquals(prototype1[3],prototype2[3]);
     }
 
     @Test
@@ -27,6 +27,9 @@ public class ArrayUtilTest {
 
     @Test
     void ensureToReduce() {
+        String [] prototype ={"BCD","CDE", null, null, null, null};
+        prototype = (String[])homework.lesson2.davidgevorgyan.util.ArrayUtil.ensureToReduce(prototype,3);
+        assertEquals(prototype.length,3);
     }
 
     private void verifySortedByEvenOdd(int[] array){
