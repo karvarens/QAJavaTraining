@@ -15,6 +15,7 @@ public class Rectangle extends Figure {
 
     @Override
     public boolean isBelong (int x, int y) {
-        return false;
+
+        return x>=getX() && x<=getX() + getWidth() && y>=getY() && y<=getY() + getHeight();
     }
 }
