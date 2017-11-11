@@ -64,7 +64,6 @@ abstract public class Figure {
 
         isBelong = figures[1].isBelong(10, 60);
         System.out.println("Point is in circle > " + isBelong);
-
     }
 }
 

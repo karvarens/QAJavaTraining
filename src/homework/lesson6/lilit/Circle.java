@@ -16,7 +16,6 @@ abstract public class Circle extends Figure {
 
     @Override
     public boolean isBelong(int x, int y) {
-
         return Math.pow(radius, 2) >= Math.pow((x - getX()),2) + Math.pow((y - getY()),2);
 }
 }
