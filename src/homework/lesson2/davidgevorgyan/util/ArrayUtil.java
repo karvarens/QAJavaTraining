@@ -275,7 +275,7 @@ public class ArrayUtil {
      */
     public static Object [] ensureToReduce(Object [] objects, int desiredSize) {
         int size = countNotNullValues(objects);
-        if (desiredSize <= size || desiredSize > objects.length) {
+        if (desiredSize <= size || desiredSize >= objects.length) {
             throw new IllegalArgumentException();
         }
         Object [] newValues = Arrays.copyOf(objects, desiredSize);

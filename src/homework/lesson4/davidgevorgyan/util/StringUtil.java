@@ -88,7 +88,7 @@ public class StringUtil {
             }
         }
 
-        for (; str.charAt(endIndex-1) <= ' '; endIndex--) {
+        for (; str.charAt(endIndex) <= ' '; endIndex--) {
         }
 
         return subString(str, startIndex, endIndex + 1);

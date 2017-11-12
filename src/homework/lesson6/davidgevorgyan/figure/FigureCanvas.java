@@ -13,7 +13,7 @@ public class FigureCanvas extends JPanel {
     /**
      *  Count of elements added to the figures
      */
-    private final static int DEFAULT_SIZE = 15;
+    private final static int DEFAULT_SIZE = 300;
     private int size = 0;
     private Figure figures[] = new Figure[DEFAULT_SIZE];
 
@@ -55,6 +55,9 @@ public class FigureCanvas extends JPanel {
                 isSelected = false;
             }
         }
+    }
+    public int count () {
+      return homework.lesson2.davidgevorgyan.util.ArrayUtil.countNotNullValues(figures);
     }
 
 

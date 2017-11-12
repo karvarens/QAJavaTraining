@@ -88,6 +88,10 @@ public class BraceChecker {
             this.rowNumber = validateIndex(rowNumber);
             this.indexInRow = validateIndex(indexInRow);
         }
+        public BracketItem copy() {
+            BracketItem clone = new BracketItem(this.index,this.symbol,this.rowNumber,this.indexInRow);
+            return clone;
+        }
 
         public int getIndex() {
             return index;

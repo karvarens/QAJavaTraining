@@ -3,7 +3,7 @@ package homework.lesson5.davidgevorgyan.braceChecker;
 import static homework.lesson5.davidgevorgyan.braceChecker.BraceChecker.BracketItem;
 
 public class Stack {
-    private final static int DEFAULT_SIZE = 3;
+    private final static int DEFAULT_SIZE = 300;
     private BracketItem[] values;
     private int topOfStack;
 
@@ -24,12 +24,19 @@ public class Stack {
     }
 
     public BracketItem pop() {
-//TODO reimplement this part
-//        if( topOfStack * 2 > homework.lesson2.davidgevorgyan.util.ArrayUtil.countNotNullValues(values)){
-//            values = (BracketItem[])homework.lesson2.davidgevorgyan.util.ArrayUtil.ensureToReduce(values, values.length / 2);
-//        }
 
-        return isEmpty() ? null: values[topOfStack--];
+        if(topOfStack * 2 < values.length && topOfStack > DEFAULT_SIZE ){
+            values = (BracketItem[])homework.lesson2.davidgevorgyan.util.ArrayUtil.ensureToReduce(values, values.length / 3 * 2);
+        }
+        if (isEmpty()) {
+            return null;
+        }
+        else {
+            BracketItem temp = values[topOfStack].copy();
+            values[topOfStack] = null;
+            topOfStack--;
+            return temp;
+        }
     }
 
     public BracketItem peek() {
