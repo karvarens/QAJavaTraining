@@ -13,7 +13,7 @@ public class FigureCanvas extends JPanel {
     /**
      *  Count of elements added to the figures
      */
-    private final static int DEFAULT_SIZE = 15;
+    private final static int DEFAULT_SIZE = 300;
     private int size = 0;
     private Figure figures[] = new Figure[DEFAULT_SIZE];
 
@@ -28,7 +28,7 @@ public class FigureCanvas extends JPanel {
 
     public void add (Figure figure) {
         if(size == figures.length - 1){
-            enlargeArraySize();
+            figures = (Figure [])homework.lesson2.davidgevorgyan.util.ArrayUtil.enlargeArraySize(figures);
         }
         figures[size]=figure;
         size++;
@@ -43,30 +43,12 @@ public class FigureCanvas extends JPanel {
         }
     return false;
     }
-//    public boolean remove (Figure figure) {
-//        if (isSelected) {
-//            for (int i = size - 1; i >= 0; i--) {
-//                if (figures[i].equals(figure)) {
-//                    for (int j = i; j < size; j++) {
-//                        figures[j] = figures[j + 1];
-//                    }
-//                    figures[size - 1] = null;
-//                    size--;
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
-
-
-
 
     public void select (int x, int y) {
         for (int i = size - 1; i >= 0 ; i--) {
             if (figures[i].isBelong(x,y)){
                 isSelected = true;
-                figures = moveToEnd(figures, i);
+                homework.lesson2.davidgevorgyan.util.ArrayUtil.moveToEnd(figures, i);
                 break;
             }
             else {
@@ -74,20 +56,11 @@ public class FigureCanvas extends JPanel {
             }
         }
     }
-    private Figure [] moveToEnd(Figure [] figures, int index){
-        figures[size] = figures[index];
-        for (int i = index; i <= size; i++) {
-            figures[i] = figures [i + 1];
-        }
-        figures[size] = null;
-        return figures;
+    public int count () {
+      return homework.lesson2.davidgevorgyan.util.ArrayUtil.countNotNullValues(figures);
     }
 
-    private void enlargeArraySize() {
-        Figure[] newArray = new Figure[figures.length * 3 / 2];
-        System.arraycopy(figures, 0, newArray, 0, figures.length);
-        figures = newArray;
-    }
+
 
 
     @Override

@@ -1,11 +1,16 @@
 package homework.lesson2.davidgevorgyan.util;
 
+import homework.lesson5.davidgevorgyan.braceChecker.BraceChecker;
+
+import java.util.Arrays;
 import java.util.Random;
 /**
  * This class contains utility methods for array
  * manipulation.
  */
 public class ArrayUtil {
+
+
     public static void main(String[] args) {
         int[] a = new int[9];
         fillRandomArray(a,10);
@@ -78,7 +83,9 @@ public class ArrayUtil {
     }
 
 
-
+    /**
+     * @param array
+     */
     public static void sortByOddAndEvenKaren0 (int[] array) {
         int stepsCount = array.length - 2;
         for (int i = 0; i < stepsCount; i++) {
@@ -202,7 +209,7 @@ public class ArrayUtil {
 
 
     /**
-     *
+     * Fills array with random data
      * @param a array name
      */
     public static void fillRandomArray(int [] a,int mod) {
@@ -213,6 +220,12 @@ public class ArrayUtil {
         }
     }
 
+    /**
+     * Creates an int array with random data
+     * @param length The length of an array
+     * @param n The mod for rand digits
+     * @return return link to the new created array
+     */
     public static int[] randomIntArray(int length, int n) {
         int[] a = new int[length];
         Random generator = new Random();
@@ -221,6 +234,66 @@ public class ArrayUtil {
             a[i] = generator.nextInt(n);
 
         return a;
+    }
+
+    /**
+     * Takes an array item an puts it at the end of array
+     * @param objects Array name
+     * @param index which array will be move to the end
+     */
+    public static Object[] moveToEnd(Object [] objects, int index){
+        int size = countNotNullValues(objects);
+        if (index > objects.length || index < 0 || size == 0 ) {
+            throw new IllegalArgumentException();
+        }
+        Object temp = objects[index];
+
+        for (int i = index; i < size - 1; i++) {
+            objects[i] = objects [i + 1];
+        }
+        objects[size - 1] = temp;
+
+        return objects;
+    }
+
+
+    /**
+     * Increases the size of array
+     * @param arrayName
+     */
+    public static Object [] enlargeArraySize(Object [] arrayName) {
+        Object [] arr = Arrays.copyOf(arrayName, arrayName.length * 3 / 2);
+        return arr;
+
+    }
+
+
+    /**
+     * Reduces the sise of an array
+     * @param objects array
+     * @param desiredSize acceptable size
+     */
+    public static Object [] ensureToReduce(Object [] objects, int desiredSize) {
+        int size = countNotNullValues(objects);
+        if (desiredSize <= size || desiredSize >= objects.length) {
+            throw new IllegalArgumentException();
+        }
+        Object [] newValues = Arrays.copyOf(objects, desiredSize);
+        return newValues;
+    }
+
+    /**
+     * Count not null values in array
+     * @param objects
+     * @return count of not null values
+     */
+    public static int countNotNullValues(Object[] objects){
+        int i = 0;
+        for (; i < objects.length; i++) {
+            if (objects[i] == null)
+                break;
+        }
+        return i;
     }
 
 }

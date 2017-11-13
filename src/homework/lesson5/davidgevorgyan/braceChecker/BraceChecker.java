@@ -2,7 +2,6 @@ package homework.lesson5.davidgevorgyan.braceChecker;
 
 @SuppressWarnings("WeakerAccess")
 public class BraceChecker {
-
     private BracketItem currentBracketItem;
     private ParseResult parseResult = new ParseResult(ParseResultType.NO_ERROR);
     private Stack bracesStack = new Stack();
@@ -88,6 +87,10 @@ public class BraceChecker {
             this.symbol = validateSymbol(symbol);
             this.rowNumber = validateIndex(rowNumber);
             this.indexInRow = validateIndex(indexInRow);
+        }
+        public BracketItem copy() {
+            BracketItem clone = new BracketItem(this.index,this.symbol,this.rowNumber,this.indexInRow);
+            return clone;
         }
 
         public int getIndex() {
