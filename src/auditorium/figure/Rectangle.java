@@ -8,13 +8,18 @@ public class Rectangle extends Figure {
         super(x, y, width, height);
     }
 
-    @Override
+//    @Override
     public void draw (Graphics g) {
-
+       //SOME bla bla
+       super.draw(g);
     }
 
     @Override
     public boolean isBelong (int x, int y) {
         return false;
+    }
+
+    public void anotherMethod() {
+        // bla bla
     }
 }

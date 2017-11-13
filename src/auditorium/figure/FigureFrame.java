@@ -5,9 +5,6 @@ import java.awt.*;
 
 public class FigureFrame extends JFrame {
 
-
-
-
     public FigureFrame() {
     }
 }

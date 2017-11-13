@@ -1,21 +1,22 @@
 package auditorium.braceChecker;
 
 public class BraceChecker {
-    private Stack stack;
-    //TODO add fields at your discretion
-
+    private StackRowType stack;
+    //TODO: Try to use StackRowType
     public BraceChecker(){
-        stack = new Stack(10);
+        stack = new StackRowType(10);
 
     }
 
     public boolean parse(String text) {
         boolean isCorrect = true;
         int i = 0;
-        kuku:
+        lab:
         for (; i < text.length(); i++) {
             char ch = text.charAt(i);
 
+            Character character = new Character('[');
+            ch = character;
             switch(ch) {
                 case '{':
                 case '(':
@@ -25,7 +26,7 @@ public class BraceChecker {
                     char lastBracket = (char)stack.pop();
 //              TODO: check correctness
                 if(lastBracket != '{'){
-                    break kuku;
+                    break lab;
                 }
                 break;
 
