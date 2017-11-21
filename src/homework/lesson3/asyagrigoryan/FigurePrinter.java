@@ -125,7 +125,7 @@ public class FigurePrinter {
      */
     public static void drawRhombus(int length){
 
-       /* for (int i = 0; i <= length - 1; i++){
+       for (int i = 0; i <= length - 1; i++){
             for (int j = 0; j <= length - 1; j++){
 
                 if (j < i){
@@ -134,7 +134,7 @@ public class FigurePrinter {
                 else System.out.print("* ");
             }
             System.out.println(" ");
-        }*/
+        }
     }
 
     /**
@@ -184,10 +184,11 @@ public class FigurePrinter {
     //   drawLeftUpTriangle(4);
   //        drawRightUpTriangle(4);
   //        drawLeftBottomTriangle(4);
-       drawRightBottomTriangle(4);
+   //    drawRightBottomTriangle(4);
 //        drawRightBottomTriangle(4);
 //        drawRightBottomTriangle(7);
-        drawEmptyRectangle(7, 4, "@@");
+        drawRhombus(4);
+  //      drawEmptyRectangle(7, 4, "@@");
 
 
     }
