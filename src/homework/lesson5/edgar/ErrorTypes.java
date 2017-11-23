@@ -1,6 +1,6 @@
 package homework.lesson5.edgar;
 
-public enum Error_Types {
+public enum ErrorTypes {
     NO_ERROR,
     OPEN_BUT_NOT_CLOSED,
     CLOSED_BUT_NOT_OPEN,

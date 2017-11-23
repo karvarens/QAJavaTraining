@@ -2,7 +2,7 @@ package homework.lesson5.edgar;
 
 public class BraceCheker {
     private BraketItem currentBracketItem;
-    private ParseResult parseResult = new ParseResult(Error_Types.NO_ERROR);
+    private ParseResult parseResult = new ParseResult(ErrorTypes.NO_ERROR);
     private Stack<BraketItem> bracketStack = new Stack<>();
 
     public ParseResult parse(String text) {
@@ -27,11 +27,11 @@ public class BraceCheker {
                 case '(':
                 case '{':
                 case '[':
-                {
+//                {  is redundant
                     currentBracketItem = new BraketItem(i, currentChar, rowNumber, indexInRow);
                     bracketStack.push(currentBracketItem);
                     break;
-                }
+//                }
                 case ')': {
                     currentBracketItem = bracketStack.pop();
                     if (currentBracketItem == null || currentBracketItem.symbol != '(') {
@@ -61,12 +61,12 @@ public class BraceCheker {
 
         if (i < text.length()){
             if (currentBracketItem == null){
-                parseResult.setParseResult(Error_Types.CLOSED_BUT_NOT_OPEN,null,closeBracketItem);
+                parseResult.setParseResult(ErrorTypes.CLOSED_BUT_NOT_OPEN,null,closeBracketItem);
             }else {
-                parseResult.setParseResult(Error_Types.CLOSD_BY_WRONG_BRACKET,currentBracketItem,closeBracketItem);
+                parseResult.setParseResult(ErrorTypes.CLOSD_BY_WRONG_BRACKET,currentBracketItem,closeBracketItem);
             }
         }else if (!bracketStack.isEmpty()){
-            parseResult.setParseResult(Error_Types.OPEN_BUT_NOT_CLOSED,currentBracketItem,null);
+            parseResult.setParseResult(ErrorTypes.OPEN_BUT_NOT_CLOSED,currentBracketItem,null);
             return parseResult;
         }
         return parseResult;
@@ -136,26 +136,26 @@ public class BraceCheker {
     }
 
     public static class ParseResult {
-        private Error_Types error_Types;
+        private ErrorTypes error_Types;
         private BraketItem opened;
         private BraketItem closed;
 
-        public ParseResult(Error_Types error_types) {
+        public ParseResult(ErrorTypes error_types) {
             this(error_types, null, null);
         }
 
 
-        public void setParseResult(Error_Types error_types, BraketItem opened, BraketItem closed){
+        public void setParseResult(ErrorTypes error_types, BraketItem opened, BraketItem closed){
             this.error_Types = error_types;
             this.opened = opened;
             this.closed = closed;
         }
 
-        public ParseResult(Error_Types error_types, BraketItem opened, BraketItem closed) {
+        public ParseResult(ErrorTypes error_types, BraketItem opened, BraketItem closed) {
             init(error_types, opened, closed);
         }
 
-        private void init(Error_Types error_types, BraketItem opened, BraketItem closed){
+        private void init(ErrorTypes error_types, BraketItem opened, BraketItem closed){
             this.error_Types = error_types;
             this.opened = opened;
             this.closed = closed;
@@ -179,7 +179,7 @@ public class BraceCheker {
 
     private void reset(){
         bracketStack.clear();
-        parseResult.setParseResult(Error_Types.NO_ERROR,null,null);
+        parseResult.setParseResult(ErrorTypes.NO_ERROR,null,null);
     }
 
 
