@@ -7,6 +7,7 @@ import com.sun.tools.javac.util.ArrayUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class FigureCanvas extends JPanel {
 
@@ -65,7 +66,10 @@ public class FigureCanvas extends JPanel {
 
     @Override
     public void paint (Graphics g) {
-//        TODO: implement the method
+        for (Figure figure:figures) {
+            if (figure != null)
+                figure.draw(getGraphics());
+        }
     }
 
     @Override
@@ -79,6 +83,28 @@ public class FigureCanvas extends JPanel {
             }
         }
         return output;
+    }
+    public Figure randomFigure(int canvasWidth, int canvasHeight){
+
+        int maxWidth = canvasWidth;
+        int maxHeight = canvasHeight;
+        Figure randomFigure;
+        int width = ThreadLocalRandom.current().nextInt(0, maxWidth);
+        int height = ThreadLocalRandom.current().nextInt(0, maxHeight);
+        int y = ThreadLocalRandom.current().nextInt(0, maxHeight - height);
+        int x = ThreadLocalRandom.current().nextInt(0, maxWidth - width);
+
+
+        if(x % 2 == 0)
+        {
+            randomFigure= new Rectangle(x,y,width,height);
+        }
+        else {
+            randomFigure= new Circle(x,y,height);
+        }
+
+
+        return randomFigure;
     }
 
 }

@@ -1,41 +1,51 @@
 package homework.lesson6.davidgevorgyan.figure;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FigureFrame extends JFrame {
 
-
     public static void main(String[] args) {
-        FigureCanvas main = new FigureCanvas();
-
-
-        Rectangle a= new Rectangle(1000,200,400,500);
-        Circle b = new Circle(100,200,100);
-        Circle c = new Circle(400,400,400);
-        main.add(a);
-        main.add(b);
-        main.add(c);
-        main.add(b);
-
-
-        System.out.println("Status for a dot in a Rectangle: " + a.isBelong(1002,202));
-        System.out.println("Status for a dot in a Circle: " + b.isBelong(1100,250));
-
-        System.out.println(main);
-        main.select(1050,250);
-        System.out.println(main);
-        System.out.println("Figure removal status: " + main.remove());
-        System.out.println(main);
-
-
-
-
-        main.select(600,600);
-        System.out.println("Figure removal status: " + main.remove());
-        System.out.println(main);
+        new FigureFrame();
     }
 
+
+
     public FigureFrame() {
+
+        JPanel controlPanel = new JPanel();
+        JButton addButton = new JButton("Add");
+        JButton removeButton = new JButton("Remove");
+        controlPanel.add(addButton);
+        controlPanel.add(removeButton);
+
+        add(controlPanel, BorderLayout.NORTH);
+        FigureCanvas canvas = new FigureCanvas();
+
+        add(canvas, BorderLayout.CENTER);
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addActionPerformed(e, canvas);
+            }
+        });
+
+
+        setSize(900, 600);
+        setLocation(100,100);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    private void addActionPerformed (ActionEvent e, FigureCanvas canvas) {
+        homework.lesson6.davidgevorgyan.figure.Figure tempFigure;
+        tempFigure = canvas.randomFigure(canvas.getWidth(),canvas.getHeight());
+        canvas.add(tempFigure);
+        canvas.paint(getGraphics());
+
 
     }
 }

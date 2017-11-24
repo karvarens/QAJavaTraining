@@ -10,7 +10,8 @@ public class Rectangle extends Figure {
 
     @Override
     void draw (Graphics g) {
-
+        g.setColor(new Color((int)(Math.random() * 0x1000000)));
+        g.fillRect(getX(),getY(),getWidth(),getHeight());
     }
 
     @Override

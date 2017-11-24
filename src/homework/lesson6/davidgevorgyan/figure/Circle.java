@@ -9,7 +9,8 @@ public class Circle extends Figure {
 
     @Override
     public void draw(Graphics g) {
-
+        g.setColor(Color.YELLOW);
+        g.fillOval(getX(),getY(),getWidth(),getHeight());
     }
 
     @Override
