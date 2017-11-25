@@ -8,9 +8,9 @@ class FigureCanvasTest {
     @Test
     void add() {
         FigureCanvas main = new FigureCanvas();
-        Rectangle a= new Rectangle(1000,200,400,500);
-        Circle b = new Circle(100,200,100);
-        Circle c = new Circle(400,400,400);
+        Rectangle a= new Rectangle(1000,200,400,500,0);
+        Circle b = new Circle(100,200,100,0);
+        Circle c = new Circle(400,400,400,0);
         main.add(a);
         main.add(b);
         main.add(c);
@@ -21,9 +21,9 @@ class FigureCanvasTest {
     @Test
     void remove_withoutSelect() {
         FigureCanvas main = new FigureCanvas();
-        Rectangle a= new Rectangle(1000,200,400,500);
-        Circle b = new Circle(100,200,100);
-        Circle c = new Circle(400,400,400);
+        Rectangle a= new Rectangle(1000,200,400,500,0);
+        Circle b = new Circle(100,200,100,0);
+        Circle c = new Circle(400,400,400,0);
         main.add(a);
         main.add(b);
         main.add(c);
@@ -34,9 +34,9 @@ class FigureCanvasTest {
     @Test
     void remove_withEmptySelect() {
         FigureCanvas main = new FigureCanvas();
-        Rectangle a= new Rectangle(1000,200,400,500);
-        Circle b = new Circle(100,200,100);
-        Circle c = new Circle(400,400,400);
+        Rectangle a= new Rectangle(1000,200,400,500,0);
+        Circle b = new Circle(100,200,100,0);
+        Circle c = new Circle(400,400,400,0);
         main.add(a);
         main.add(b);
         main.add(c);
@@ -48,9 +48,9 @@ class FigureCanvasTest {
     @Test
     void remove_withSelect() {
         FigureCanvas main = new FigureCanvas();
-        Rectangle a= new Rectangle(1000,200,400,500);
-        Circle b = new Circle(100,200,100);
-        Circle c = new Circle(400,400,400);
+        Rectangle a= new Rectangle(1000,200,400,500,0);
+        Circle b = new Circle(100,200,100,0);
+        Circle c = new Circle(400,400,400,0);
         main.add(a);
         main.add(b);
         main.add(c);

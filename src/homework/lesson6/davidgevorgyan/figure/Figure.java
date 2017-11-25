@@ -19,13 +19,18 @@ abstract public class Figure {
         return height;
     }
 
+    public int getColour() {
+        return colour;
+    }
+
     private int x;
     private int y;
     private int width;
     private int height;
+    private int colour;
 
 
-    Figure(int x, int y, int width, int height) {
+    Figure(int x, int y, int width, int height, int colour) {
         if (!validator(x, y, width, height)) {
             throw new IllegalArgumentException();
         }
@@ -33,6 +38,7 @@ abstract public class Figure {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.colour = colour;
 
     }
 

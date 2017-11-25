@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class FigureFrame extends JFrame {
 
@@ -26,17 +28,26 @@ public class FigureFrame extends JFrame {
 
         add(canvas, BorderLayout.CENTER);
 
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                addActionPerformed(e, canvas);
-            }
+        addButton.addActionListener(e -> {
+           addActionPerformed(e, canvas);
         });
 
+        removeButton.addActionListener(e -> {
+            removeActionPerformed(e, canvas);
+        });
+
+        canvas.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e)
+            {
+                paint(getGraphics());
+            }
+        });
 
         setSize(900, 600);
         setLocation(100,100);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Figures");
         setVisible(true);
     }
 
@@ -44,8 +55,17 @@ public class FigureFrame extends JFrame {
         homework.lesson6.davidgevorgyan.figure.Figure tempFigure;
         tempFigure = canvas.randomFigure(canvas.getWidth(),canvas.getHeight());
         canvas.add(tempFigure);
-        canvas.paint(getGraphics());
+        paint(getGraphics());
 
 
     }
+
+    private void removeActionPerformed (ActionEvent e, FigureCanvas canvas) {
+
+        canvas.remove();
+        paint(getGraphics());
+
+    }
+
+
 }

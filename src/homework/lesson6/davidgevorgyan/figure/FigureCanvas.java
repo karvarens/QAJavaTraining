@@ -7,6 +7,8 @@ import com.sun.tools.javac.util.ArrayUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class FigureCanvas extends JPanel {
@@ -21,10 +23,16 @@ public class FigureCanvas extends JPanel {
     private boolean isSelected;
 
     public FigureCanvas() {
-
-        //TODO: add MouseListeners and MouseMotionListener
-
-
+        addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent me) {
+                for (Figure figure:figures) {
+                    select(me.getX(),me.getY());
+                    if (figure != null && figure.isBelong(me.getX(), me.getY())) {
+                        paint(getGraphics());
+                    }
+                }
+            }
+        });
     }
 
     public void add (Figure figure) {
@@ -85,22 +93,18 @@ public class FigureCanvas extends JPanel {
         return output;
     }
     public Figure randomFigure(int canvasWidth, int canvasHeight){
-
-        int maxWidth = canvasWidth;
-        int maxHeight = canvasHeight;
         Figure randomFigure;
-        int width = ThreadLocalRandom.current().nextInt(0, maxWidth);
-        int height = ThreadLocalRandom.current().nextInt(0, maxHeight);
-        int y = ThreadLocalRandom.current().nextInt(0, maxHeight - height);
-        int x = ThreadLocalRandom.current().nextInt(0, maxWidth - width);
-
+        int width = ThreadLocalRandom.current().nextInt(0, canvasWidth);
+        int height = ThreadLocalRandom.current().nextInt(0, canvasHeight);
+        int x = ThreadLocalRandom.current().nextInt(0, canvasWidth - width);
+        int y = ThreadLocalRandom.current().nextInt(0, canvasHeight - height);
 
         if(x % 2 == 0)
         {
-            randomFigure= new Rectangle(x,y,width,height);
+            randomFigure= new Rectangle(x,y,width,height,(int)(Math.random() * 0x1000000));
         }
         else {
-            randomFigure= new Circle(x,y,height);
+            randomFigure= new Circle(x,y,height,(int)(Math.random() * 0x1000000));
         }
 
 
