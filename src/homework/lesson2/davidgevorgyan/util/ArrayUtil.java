@@ -256,14 +256,48 @@ public class ArrayUtil {
         return objects;
     }
 
+    /**
+     * Removes an array item
+     * @param objects Array name
+     * @param index which array item will be removed
+     */
+    public static Object[] removeFromArray(Object [] objects, int index){
+        int size = countNotNullValues(objects);
+        for (int i = index; i < size - 1; i++) {
+            objects[i] = objects [i + 1];
+        }
+
+        objects = Arrays.copyOf(objects, objects.length - 1);
+        return objects;
+    }
+
+    /**
+     * Add an array item to the of an array
+     * @param objects Array name
+     * @param object item which will be added to the end of an array
+     */
+    public static Object[] appendToArray(Object [] objects, Object object){
+        int size = countNotNullValues(objects);
+        if (size >= objects.length - 1) {
+            objects = enlargeArraySize(size, objects);
+        }
+        objects[size] = object;
+        return objects;
+    }
 
     /**
      * Increases the size of array
-     * @param arrayName
+     * @param objects
      */
-    public static Object [] enlargeArraySize(Object [] arrayName) {
-        return Arrays.copyOf(arrayName, arrayName.length * 3 / 2);
-    }
+    public static Object [] enlargeArraySize(int size, Object [] objects) {
+
+            if (size >= objects.length - 1) {
+                objects = Arrays.copyOf(objects, objects.length * 3 / 2);
+                return objects;
+            }
+            return objects;
+        }
+
 
 
     /**

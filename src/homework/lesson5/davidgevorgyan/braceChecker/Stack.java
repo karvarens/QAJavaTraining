@@ -17,9 +17,7 @@ public class Stack {
     }
 
     public void push(BracketItem value) {
-        if(topOfStack == values.length - 1){
-            values = (BracketItem []) homework.lesson2.davidgevorgyan.util.ArrayUtil.enlargeArraySize(values);
-        }
+        values = (BracketItem []) homework.lesson2.davidgevorgyan.util.ArrayUtil.enlargeArraySize(values.length, values);
         values[++topOfStack] = value;
     }
 

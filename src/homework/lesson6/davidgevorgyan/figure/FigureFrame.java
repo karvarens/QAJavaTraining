@@ -31,12 +31,7 @@ public class FigureFrame extends JFrame {
         addButton.addActionListener(this::addActionPerformed);
         removeButton.addActionListener(this::removeActionPerformed);
 
-//        canvas.addComponentListener(new ComponentAdapter() {
-//            @Override
-//            public void componentResized(ComponentEvent e) {
-//                paint(getGraphics());
-//            }
-//        });
+
 
         setSize(900, 600);
         setLocation(100,100);
@@ -47,18 +42,14 @@ public class FigureFrame extends JFrame {
 
     private void addActionPerformed (ActionEvent e) {
         homework.lesson6.davidgevorgyan.figure.Figure tempFigure;
-//        tempFigure = canvas.randomFigure(canvas.getWidth(),canvas.getHeight());
         tempFigure = FigureCanvas.randomFigure(canvas.getWidth(),canvas.getHeight());
         canvas.add(tempFigure);
-//        paint(getGraphics());
 
 
     }
 
     private void removeActionPerformed (ActionEvent e) {
         canvas.remove();
-//        paint(getGraphics());
-
     }
 
 

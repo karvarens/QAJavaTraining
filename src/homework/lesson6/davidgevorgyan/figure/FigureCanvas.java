@@ -10,9 +10,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
+import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
 
 public class FigureCanvas extends JPanel {
-    //TODO: Move the code related to size handleing to the DynamicArray class
     /**
      * Default capacity of figures can be added to figures
      */
@@ -47,23 +47,19 @@ public class FigureCanvas extends JPanel {
     }
 
     public void add(Figure figure) {
-        ensureCapacity();
+        figures = (Figure[]) homework.lesson2.davidgevorgyan.util.ArrayUtil.enlargeArraySize(size, figures);
         figures[size] = figure;
         size++;
         repaint();
     }
-    //figures specific method
-    private void ensureCapacity ()  {
-        if (size == figures.length - 1) {
-            figures = Arrays.copyOf(figures, figures.length * 3 / 2);
-        }
-    }
+
 
     public boolean remove() {
         if (isSelected) {
             figures[size - 1] = null;
             size--;
             isSelected = false;
+            repaint();
             return true;
         }
         repaint();
@@ -84,11 +80,6 @@ public class FigureCanvas extends JPanel {
 
         isSelected = false;
     }
-
-//    public int count() {
-//        return homework.lesson2.davidgevorgyan.util.ArrayUtil.countNotNullValues(figures);
-//    }
-
 
     @Override
     public void update(Graphics g){
@@ -117,15 +108,15 @@ public class FigureCanvas extends JPanel {
 
     public static Figure randomFigure(int canvasWidth, int canvasHeight) {
         Figure randomFigure;
-        int width = ThreadLocalRandom.current().nextInt(0, canvasWidth);
-        int height = ThreadLocalRandom.current().nextInt(0, canvasHeight);
+        int width = ThreadLocalRandom.current().nextInt(1, canvasWidth);
+        int height = ThreadLocalRandom.current().nextInt(1, canvasHeight);
         int x = ThreadLocalRandom.current().nextInt(0, canvasWidth - width);
         int y = ThreadLocalRandom.current().nextInt(0, canvasHeight - height);
 
         if (x % 2 == 0) {
             randomFigure = new Rectangle(x, y, width, height, (int) (Math.random() * 0x1000000));
         } else {
-            randomFigure = new Circle(x, y, height, (int) (Math.random() * 0x1000000));
+            randomFigure = new Circle(x, y, minAbs(height,width), (int) (Math.random() * 0x1000000));
         }
 
 
