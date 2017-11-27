@@ -262,9 +262,7 @@ public class ArrayUtil {
      * @param arrayName
      */
     public static Object [] enlargeArraySize(Object [] arrayName) {
-        Object [] arr = Arrays.copyOf(arrayName, arrayName.length * 3 / 2);
-        return arr;
-
+        return Arrays.copyOf(arrayName, arrayName.length * 3 / 2);
     }
 
 

@@ -14,6 +14,7 @@ public class FigureFrame extends JFrame {
     }
 
 
+    private FigureCanvas canvas;
 
     public FigureFrame() {
 
@@ -22,27 +23,20 @@ public class FigureFrame extends JFrame {
         JButton removeButton = new JButton("Remove");
         controlPanel.add(addButton);
         controlPanel.add(removeButton);
-
         add(controlPanel, BorderLayout.NORTH);
-        FigureCanvas canvas = new FigureCanvas();
 
+        canvas = new FigureCanvas();
         add(canvas, BorderLayout.CENTER);
 
-        addButton.addActionListener(e -> {
-           addActionPerformed(e, canvas);
-        });
+        addButton.addActionListener(this::addActionPerformed);
+        removeButton.addActionListener(this::removeActionPerformed);
 
-        removeButton.addActionListener(e -> {
-            removeActionPerformed(e, canvas);
-        });
-
-        canvas.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e)
-            {
-                paint(getGraphics());
-            }
-        });
+//        canvas.addComponentListener(new ComponentAdapter() {
+//            @Override
+//            public void componentResized(ComponentEvent e) {
+//                paint(getGraphics());
+//            }
+//        });
 
         setSize(900, 600);
         setLocation(100,100);
@@ -51,19 +45,19 @@ public class FigureFrame extends JFrame {
         setVisible(true);
     }
 
-    private void addActionPerformed (ActionEvent e, FigureCanvas canvas) {
+    private void addActionPerformed (ActionEvent e) {
         homework.lesson6.davidgevorgyan.figure.Figure tempFigure;
-        tempFigure = canvas.randomFigure(canvas.getWidth(),canvas.getHeight());
+//        tempFigure = canvas.randomFigure(canvas.getWidth(),canvas.getHeight());
+        tempFigure = FigureCanvas.randomFigure(canvas.getWidth(),canvas.getHeight());
         canvas.add(tempFigure);
-        paint(getGraphics());
+//        paint(getGraphics());
 
 
     }
 
-    private void removeActionPerformed (ActionEvent e, FigureCanvas canvas) {
-
+    private void removeActionPerformed (ActionEvent e) {
         canvas.remove();
-        paint(getGraphics());
+//        paint(getGraphics());
 
     }
 

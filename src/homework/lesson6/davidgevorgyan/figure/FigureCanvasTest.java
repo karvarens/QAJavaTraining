@@ -15,7 +15,7 @@ class FigureCanvasTest {
         main.add(b);
         main.add(c);
         main.add(b);
-        assertEquals(4, main.count());
+        assertEquals(4, main.figuresSize());
     }
 
     @Test
@@ -57,6 +57,6 @@ class FigureCanvasTest {
         main.add(b);
         main.select(150,250);
         assertEquals(true, main.remove());
-        assertEquals(3, main.count());
+        assertEquals(3, main.figuresSize());
     }
 }
