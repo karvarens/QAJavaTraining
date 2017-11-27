@@ -41,25 +41,22 @@ public class FigureCanvas extends JPanel {
     }
 
     private void mousePressedPerformed (MouseEvent me) {
-//        for (Figure figure : figures) {
         select(me.getX(), me.getY());
-//            if (figure != null && figure.isBelong(me.getX(), me.getY())) {
-//                paint(getGraphics());
-//            }
-//        }
         repaint();
 
     }
 
     public void add(Figure figure) {
-        if (size == figures.length - 1) {
-            figures = Arrays.copyOf(figures, figures.length * 3 / 2);
-            ;
-//            figures = (Figure [])homework.lesson2.davidgevorgyan.util.ArrayUtil.enlargeArraySize(figures);
-        }
+        ensureCapacity();
         figures[size] = figure;
         size++;
         repaint();
+    }
+    //figures specific method
+    private void ensureCapacity ()  {
+        if (size == figures.length - 1) {
+            figures = Arrays.copyOf(figures, figures.length * 3 / 2);
+        }
     }
 
     public boolean remove() {
