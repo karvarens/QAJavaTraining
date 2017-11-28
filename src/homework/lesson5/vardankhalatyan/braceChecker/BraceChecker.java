@@ -33,7 +33,7 @@ public class BraceChecker {
                         isCorrect = false;
                         break lab;
                     } else {
-                        lastOpenedBracket = (char)stack.pop().intValue();
+                        //lastOpenedBracket = (char)stack.pop().intValue();
                         if (lastOpenedBracket != '(') {
                             isCorrect = false;
                             break lab;
@@ -45,7 +45,7 @@ public class BraceChecker {
                         isCorrect = false;
                         break lab;
                     } else {
-                        lastOpenedBracket = (char)stack.pop().intValue();
+                      //  lastOpenedBracket = (char)stack.pop().intValue();
                         if (lastOpenedBracket != '[') {
                             isCorrect = false;
                             break lab;
@@ -57,7 +57,7 @@ public class BraceChecker {
                         isCorrect = false;
                         break lab;
                     } else {
-                        lastOpenedBracket = (char)stack.pop().intValue();
+                       // lastOpenedBracket = (char)stack.pop().intValue();
                         if (lastOpenedBracket != '{') {
                             isCorrect = false;
                             break lab;
@@ -76,7 +76,7 @@ public class BraceChecker {
             }
 
         } else if (!stack.isEmpty()) {
-            resultMessage = "Error: Opened '" + (char)stack.pop().intValue() + "' but not closed";
+          //  resultMessage = "Error: Opened '" + (char)stack.pop().intValue() + "' but not closed";
         }
 
         System.out.println(resultMessage);
