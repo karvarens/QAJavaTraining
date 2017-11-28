@@ -3,7 +3,7 @@ package homework.lesson5.vardankhalatyan.braceChecker;
 public class Stack {
     public static final int DEFAULT_SIZE = 16;
 
-    private int[] values;
+    private Object[] values;
     private int tos;
 
     public Stack() {
@@ -11,17 +11,17 @@ public class Stack {
     }
 
     public Stack(int size) {
-        values = new int[size];
+        values = new Object[size];
         tos = -1;
     }
 
-    public void push(int val) {
+    public void push(Object val) {
         this.increase();
         values[++tos] = val;
     }
 
-    public Integer pop() {
-        this.clear();
+    public Object pop() {
+        this.reduce();
         if(isEmpty()) {
             return null;
         }
@@ -29,15 +29,16 @@ public class Stack {
     }
 
     public boolean isEmpty(){
-        if (tos < 0){
-            return tos == -1;
-        }
-        return false;
+        return tos < 0;
     }
 
     private void clear(){
-        if (tos == values.length * (1/3)){
-            int[] newValues = new int[values.length * 2/3];
+        tos = -1;
+    }
+
+    private void reduce(){
+        if (tos == values.length / 3){
+            Object[] newValues = new Object[values.length * 2/3];
             System.arraycopy(values, 0, newValues, 0, newValues.length);
             values = newValues;
         }
@@ -45,7 +46,7 @@ public class Stack {
 
     private void increase(){
         if(tos+1 == values.length){
-            int[] newValues = new int [values.length * 3 / 2];
+            Object[] newValues = new Object [(values.length * 3 / 2)+1];
             System.arraycopy(values, 0, newValues, 0, values.length);
             values = newValues;
         }
