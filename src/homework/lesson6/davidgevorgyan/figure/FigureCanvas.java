@@ -1,14 +1,9 @@
 package homework.lesson6.davidgevorgyan.figure;
 
-
-import com.sun.tools.javac.util.ArrayUtils;
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
 
@@ -71,8 +66,7 @@ public class FigureCanvas extends JPanel {
             if (figures[i].isBelong(x, y)) {
                 isSelected = true;
                 if(i < size - 1) {
-                    homework.lesson2.davidgevorgyan.util.ArrayUtil.moveToEnd(figures, i); //TODO: I think it may be preferable to have a remove by index method for figures array which returns removed figure
-                    //TODO(continuation): and add method which adds to the end of figures array
+                    DynamicArray.moveToEnd(figures, i);
                 }
                 return;
             }

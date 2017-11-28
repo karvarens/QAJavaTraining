@@ -7,44 +7,6 @@ import javax.swing.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArrayUtilTest {
-    @Test
-    void removeFromArray() {
-        String [] prototype1 ={"ABC","BCD","CDE","DEF"};
-        String [] prototype2 ={"ABC","CDE","DEF"};
-        prototype1 = (String [])homework.lesson2.davidgevorgyan.util.ArrayUtil.removeFromArray(prototype1, 1);
-        assertEquals(prototype1[2],prototype2[2]);
-    }
-
-    @Test
-    void appendToArray() {
-        String [] prototype1 ={"ABC","BCD","CDE","DEF"};
-        String [] prototype2 ={"ABC","BCD","CDE"};
-        prototype2 = (String [])homework.lesson2.davidgevorgyan.util.ArrayUtil.appendToArray(prototype2, "DEF");
-        assertEquals(prototype1[3],prototype2[3]);
-    }
-
-    @Test
-    void countNotNullValues() {
-        String [] prototype1 ={"ABC","BCD", null, null};
-        assertEquals(2,homework.lesson2.davidgevorgyan.util.ArrayUtil.countNotNullValues(prototype1));
-    }
-
-    @Test
-    void moveToEnd() {
-        String [] prototype1 ={"ABC","BCD","CDE","DEF"};
-        String [] prototype2 ={"BCD","CDE","DEF","ABC"};
-
-        prototype1 = (String [])homework.lesson2.davidgevorgyan.util.ArrayUtil.moveToEnd(prototype1, 0);
-        assertEquals(prototype1[3],prototype2[3]);
-    }
-
-    @Test
-    void enlargeArraySize() {
-        String [] prototype ={"BCD","CDE","ABC","AAA"};
-        prototype = (String[])homework.lesson2.davidgevorgyan.util.ArrayUtil.enlargeArraySize(prototype.length, prototype);
-        assertEquals(6,prototype.length);
-
-    }
 
     @Test
     void ensureToReduce() {
