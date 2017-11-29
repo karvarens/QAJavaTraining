@@ -7,42 +7,68 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DynamicArrayTest {
 
     @Test
-    void countNotNullValues() {
-        String [] prototype1 ={"ABC","BCD", null, null};
-        assertEquals(2,DynamicArray.countNotNullValues(prototype1));
+    void getObject() {
     }
 
     @Test
+    void setObjects() {
+    }
+
+
+    @Test
+    void removeFromArray() {
+        DynamicArray dynamicArray = new DynamicArray(3);
+        dynamicArray.setObject("Test");
+        dynamicArray.setObject("Rest");
+        assertEquals("Rest",dynamicArray.removeFromArray(1));
+        assertEquals(1,dynamicArray.countNotNullValues());
+    }
+
+
+    @Test
     void enlargeArraySize() {
-        String [] prototype ={"BCD","CDE","ABC","AAA"};
-        prototype = (String[])DynamicArray.enlargeArraySize(prototype.length, prototype);
-        assertEquals(6,prototype.length);
+        DynamicArray dynamicArray = new DynamicArray(3);
+        dynamicArray.setObject("Test");
+        dynamicArray.setObject("Rest");
+        dynamicArray.setObject("Aest");
+        dynamicArray.setObject("Best");
+        dynamicArray.setObject("Sest");
+        assertEquals(5,dynamicArray.countNotNullValues());
+        assertEquals(9,dynamicArray.getObjects().length);
+    }
+
+    @Test
+    void ensureToReduce() {
+        DynamicArray dynamicArray = new DynamicArray(200);
+        for (int i = 0; i < 10; i++) {
+            dynamicArray.setObject("Test");
+        }
+        for (int i = 0; i < 5; i++) {
+            dynamicArray.removeFromArray(0);
+        }
+        assertEquals(5,dynamicArray.countNotNullValues());
+        assertEquals(12,dynamicArray.getObjects().length);
 
     }
 
     @Test
     void moveToEnd() {
-        String [] prototype1 ={"ABC","BCD","CDE","DEF"};
-        String [] prototype2 ={"BCD","CDE","DEF","ABC"};
-
-        prototype1 = (String [])DynamicArray.moveToEnd(prototype1, 0);
-        assertEquals(prototype1[3],prototype2[3]);
+        DynamicArray dynamicArray = new DynamicArray(3);
+        dynamicArray.setObject("Best");
+        dynamicArray.setObject("Rest");
+        dynamicArray.setObject("Test");
+        dynamicArray.moveToEnd(1);
+        assertEquals("Rest",dynamicArray.getObject(2));
     }
 
     @Test
-    void removeFromArray() {
-        String [] prototype1 ={"ABC","BCD","CDE","DEF"};
-        String [] prototype2 ={"BCD"};
-
-        assertEquals(prototype2[0],DynamicArray.removeFromArray(prototype1, 1));
+    void countNotNullValues() {
+        DynamicArray dynamicArray = new DynamicArray(3);
+        dynamicArray.setObject("Test");
+        dynamicArray.setObject("Rest");
+        assertEquals(2,dynamicArray.countNotNullValues());
     }
 
-    @Test
-    void appendToArray() {
-        String [] prototype1 ={"ABC","BCD","CDE","DEF"};
-        String [] prototype2 ={"ABC","BCD","CDE"};
-        prototype2 = (String [])DynamicArray.appendToArray(prototype2, "DEF");
-        assertEquals(prototype1[3],prototype2[3]);
-    }
+
 
 }

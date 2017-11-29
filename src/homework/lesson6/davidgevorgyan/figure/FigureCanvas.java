@@ -8,22 +8,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
 
 public class FigureCanvas extends JPanel {
-    /**
-     * Default capacity of figures can be added to figures
-     */
-    private final static int DEFAULT_SIZE = 300;
+//TODO get rid of too many figures.countNotNullValues() calls
 
-    /**
-     * Count of elements added to the figures
-     */
-    private int size = 0;
-
-
-    public int figuresSize() {
-        return size;
-    }
-
-    private Figure figures[] = new Figure[DEFAULT_SIZE];
+    DynamicArray figures = new DynamicArray(3);
 
     private boolean isSelected;
 
@@ -38,21 +25,17 @@ public class FigureCanvas extends JPanel {
     private void mousePressedPerformed (MouseEvent me) {
         select(me.getX(), me.getY());
         repaint();
-
     }
 
     public void add(Figure figure) {
-        figures = (Figure[]) homework.lesson2.davidgevorgyan.util.ArrayUtil.enlargeArraySize(size, figures);
-        figures[size] = figure;
-        size++;
+        figures.setObject(figure);
         repaint();
     }
 
 
     public boolean remove() {
         if (isSelected) {
-            figures[size - 1] = null;
-            size--;
+            figures.removeFromArray(figures.countNotNullValues() - 1);
             isSelected = false;
             repaint();
             return true;
@@ -62,11 +45,12 @@ public class FigureCanvas extends JPanel {
     }
 
     public void select(int x, int y) {
-        for (int i = size - 1; i >= 0; i--) {
-            if (figures[i].isBelong(x, y)) {
+        for (int i = figures.countNotNullValues() - 1; i >= 0; i--) {
+            Figure temp = (Figure)figures.getObject(i);
+            if (temp.isBelong(x, y)) {
                 isSelected = true;
-                if(i < size - 1) {
-                    DynamicArray.moveToEnd(figures, i);
+                if(i < figures.countNotNullValues() - 1) {
+                    figures.moveToEnd(i);
                 }
                 return;
             }
@@ -76,23 +60,26 @@ public class FigureCanvas extends JPanel {
     }
 
     @Override
-    public void update(Graphics g){
+    public void update(Graphics g) {
 
     }
 
     @Override
     public void paint(Graphics g) {
-        for (int i = 0; i < size; i++) {
-                figures[i].draw(g);
+        for (int i = 0; i < figures.countNotNullValues(); i++) {
+                Figure temp = (Figure)figures.getObject(i);
+                temp.draw(g);
         }
     }
 
     @Override
     public String toString() {
         String output = "";
-        System.out.println("Array is filled with: " + size + " elements");
-        System.out.println("Array length is: " + figures.length + " elements");
-        for (Figure figure : figures) {
+        System.out.println("Array is filled with: " + figures.countNotNullValues() + " elements");
+        System.out.println("Array length is: " + figures.getObjects().length + " elements");
+        Figure figure;
+        for (int i =0; i < figures.countNotNullValues(); i++) {
+            figure = (Figure)figures.getObject(i);
             if (figure != null) {
                 output = output + "X: '" + figure.getX() + "', Y: '" + figure.getY() + "', Width: '" + figure.getWidth() + "', Height: '" + figure.getHeight() + "'\n";
             }
