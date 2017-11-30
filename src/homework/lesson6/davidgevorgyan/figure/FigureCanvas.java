@@ -28,14 +28,14 @@ public class FigureCanvas extends JPanel {
     }
 
     public void add(Figure figure) {
-        figures.setObject(figure);
+        figures.add(figure);
         repaint();
     }
 
 
     public boolean remove() {
         if (isSelected) {
-            figures.removeFromArray(figures.countNotNullValues() - 1);
+            figures.remove(figures.countNotNullValues() - 1);
             isSelected = false;
             repaint();
             return true;
@@ -46,7 +46,7 @@ public class FigureCanvas extends JPanel {
 
     public void select(int x, int y) {
         for (int i = figures.countNotNullValues() - 1; i >= 0; i--) {
-            Figure temp = (Figure)figures.getObject(i);
+            Figure temp = (Figure)figures.get(i);
             if (temp.isBelong(x, y)) {
                 isSelected = true;
                 if(i < figures.countNotNullValues() - 1) {
@@ -67,7 +67,7 @@ public class FigureCanvas extends JPanel {
     @Override
     public void paint(Graphics g) {
         for (int i = 0; i < figures.countNotNullValues(); i++) {
-                Figure temp = (Figure)figures.getObject(i);
+                Figure temp = (Figure)figures.get(i);
                 temp.draw(g);
         }
     }
@@ -79,7 +79,7 @@ public class FigureCanvas extends JPanel {
         System.out.println("Array length is: " + figures.getObjects().length + " elements");
         Figure figure;
         for (int i =0; i < figures.countNotNullValues(); i++) {
-            figure = (Figure)figures.getObject(i);
+            figure = (Figure)figures.get(i);
             if (figure != null) {
                 output = output + "X: '" + figure.getX() + "', Y: '" + figure.getY() + "', Width: '" + figure.getWidth() + "', Height: '" + figure.getHeight() + "'\n";
             }

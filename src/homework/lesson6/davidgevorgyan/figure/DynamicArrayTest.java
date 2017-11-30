@@ -18,9 +18,9 @@ public class DynamicArrayTest {
     @Test
     void removeFromArray() {
         DynamicArray dynamicArray = new DynamicArray(3);
-        dynamicArray.setObject("Test");
-        dynamicArray.setObject("Rest");
-        assertEquals("Rest",dynamicArray.removeFromArray(1));
+        dynamicArray.setObject("Test", 0);
+        dynamicArray.setObject("Rest", 0);
+        assertEquals("Rest",dynamicArray.remove(1));
         assertEquals(1,dynamicArray.countNotNullValues());
     }
 
@@ -28,11 +28,11 @@ public class DynamicArrayTest {
     @Test
     void enlargeArraySize() {
         DynamicArray dynamicArray = new DynamicArray(3);
-        dynamicArray.setObject("Test");
-        dynamicArray.setObject("Rest");
-        dynamicArray.setObject("Aest");
-        dynamicArray.setObject("Best");
-        dynamicArray.setObject("Sest");
+        dynamicArray.setObject("Test", 0);
+        dynamicArray.setObject("Rest", 0);
+        dynamicArray.setObject("Aest", 0);
+        dynamicArray.setObject("Best", 0);
+        dynamicArray.setObject("Sest", 0);
         assertEquals(5,dynamicArray.countNotNullValues());
         assertEquals(9,dynamicArray.getObjects().length);
     }
@@ -41,10 +41,10 @@ public class DynamicArrayTest {
     void ensureToReduce() {
         DynamicArray dynamicArray = new DynamicArray(200);
         for (int i = 0; i < 10; i++) {
-            dynamicArray.setObject("Test");
+            dynamicArray.setObject("Test", 0);
         }
         for (int i = 0; i < 5; i++) {
-            dynamicArray.removeFromArray(0);
+            dynamicArray.remove(0);
         }
         assertEquals(5,dynamicArray.countNotNullValues());
         assertEquals(12,dynamicArray.getObjects().length);
@@ -54,18 +54,18 @@ public class DynamicArrayTest {
     @Test
     void moveToEnd() {
         DynamicArray dynamicArray = new DynamicArray(3);
-        dynamicArray.setObject("Best");
-        dynamicArray.setObject("Rest");
-        dynamicArray.setObject("Test");
+        dynamicArray.setObject("Best", 0);
+        dynamicArray.setObject("Rest", 0);
+        dynamicArray.setObject("Test", 0);
         dynamicArray.moveToEnd(1);
-        assertEquals("Rest",dynamicArray.getObject(2));
+        assertEquals("Rest",dynamicArray.get(2));
     }
 
     @Test
     void countNotNullValues() {
         DynamicArray dynamicArray = new DynamicArray(3);
-        dynamicArray.setObject("Test");
-        dynamicArray.setObject("Rest");
+        dynamicArray.setObject("Test", 0);
+        dynamicArray.setObject("Rest", 0);
         assertEquals(2,dynamicArray.countNotNullValues());
     }
 
