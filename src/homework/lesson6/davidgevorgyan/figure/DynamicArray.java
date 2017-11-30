@@ -4,15 +4,20 @@ import java.util.Arrays;
 
 public class DynamicArray {
     //TODO improve constructor. Add validation and default value
-    DynamicArray(int size){
-        this.objects = new Object[size];
+
+    private Object objects[];
+    private int size;
+
+    DynamicArray(int capacity){
+        this.objects = new Object[capacity];
+        size = 0;
     }
 
     public Object[] getObjects() {
         return objects;
     }
 
-    public Object getObject(int index) {
+    public Object get(int index) {
         return objects[index];
     }
 
@@ -20,12 +25,18 @@ public class DynamicArray {
         this.objects = objects;
     }
 
-    public void setObject(Object object) {
+    public void add(Object object) {
+
+    }
+
+    public void add(Object object, int index) {
+        size++;
+    }
+
+    public void setObject(Object object, int index) {
         int temp = countNotNullValues();
         this.objects[temp] = object;
     }
-
-    private Object objects[];
 
 
     /**
@@ -33,14 +44,14 @@ public class DynamicArray {
      * @param index index to be removed
      * @return removed object
      */
+    public Object remove (int index){
 
-    public Object removeFromArray(int index){
-        int size = countNotNullValues();
         Object temp = objects[index];
         for (int i = index; i < size; i++) {
             objects[i] = objects [i + 1];
         }
         objects[size] = null;
+        size--;
         return temp;
     }
 
@@ -89,7 +100,7 @@ public class DynamicArray {
         if (index > objects.length || index < 0 || size == 0 ) {
             throw new IllegalArgumentException();
         }
-        setObject(removeFromArray(index));
+       // setObject(remove(index));
 
     }
 
