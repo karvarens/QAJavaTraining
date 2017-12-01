@@ -1,5 +1,7 @@
 package homework.lesson6.figure;
 
+import homework.lesson6.figure.util.DynamicArray;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,12 +11,15 @@ public class FigureCanvas extends JPanel {
      *  Count of elements added to the figures
      */
     int size = 0;
-    private Figure[] figures;
-
+    //    private Figure[] figures;
     private boolean isSelected;
 
+    private DynamicArray<Figure> figures;
+
+
     public FigureCanvas() {
-        this.figures = new Figure[10];  //TODO: Write an DynamicArray class  and replace it LATER.
+        /*this.figures = new Figure[10];  *///TODO: Write an DynamicArray class  and replace it LATER.
+// TODO figures =  new DynamicArrayImpl();
 
         //TODO: add MouseListeners and MouseMotionListener
 

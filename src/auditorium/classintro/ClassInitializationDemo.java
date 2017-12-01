@@ -18,13 +18,13 @@ class A {
 
     int nonStatic = 10;
 
-    {
+    {//Non static block
         this.FINAL_FIELD = 100;
         this.nonStatic = 11;
     }
 
 
-    static {
+    static { //Static block
         ST_FINAL = 111;
         stNonFinal = -100;
     }
