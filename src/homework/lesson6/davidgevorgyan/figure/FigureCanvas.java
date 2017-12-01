@@ -1,5 +1,7 @@
 package homework.lesson6.davidgevorgyan.figure;
 
+import homework.lesson6.davidgevorgyan.figure.util.DynamicArrayImplementation;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -8,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
 
 public class FigureCanvas extends JPanel {
-    DynamicArray figures = new DynamicArray(3);
+    public DynamicArrayImplementation figures = new DynamicArrayImplementation();
 
     private boolean isSelected;
 
@@ -33,7 +35,7 @@ public class FigureCanvas extends JPanel {
 
     public boolean remove() {
         if (isSelected) {
-            figures.remove(figures.getSize() - 1);
+            figures.remove(figures.size() - 1);
             isSelected = false;
             repaint();
             return true;
@@ -43,11 +45,11 @@ public class FigureCanvas extends JPanel {
     }
 
     public void select(int x, int y) {
-        for (int i = figures.getSize() - 1; i >= 0; i--) {
+        for (int i = figures.size() - 1; i >= 0; i--) {
             Figure temp = (Figure)figures.get(i);
             if (temp.isBelong(x, y)) {
                 isSelected = true;
-                if(i < figures.getSize() - 1) {
+                if(i < figures.size() - 1) {
                     figures.moveToEnd(i);
                 }
                 return;
@@ -64,7 +66,7 @@ public class FigureCanvas extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        for (int i = 0; i < figures.getSize(); i++) {
+        for (int i = 0; i < figures.size(); i++) {
                 Figure temp = (Figure)figures.get(i);
                 temp.draw(g);
         }
@@ -73,10 +75,9 @@ public class FigureCanvas extends JPanel {
     @Override
     public String toString() {
         String output = "";
-        System.out.println("Array is filled with: " + figures.getSize() + " elements");
-        System.out.println("Array length is: " + figures.getLength() + " elements");
+        System.out.println("Array is filled with: " + figures.size() + " elements");
         Figure figure;
-        for (int i =0; i < figures.getSize(); i++) {
+        for (int i =0; i < figures.size(); i++) {
             figure = (Figure)figures.get(i);
             if (figure != null) {
                 output = output + "X: '" + figure.getX() + "', Y: '" + figure.getY() + "', Width: '" + figure.getWidth() + "', Height: '" + figure.getHeight() + "'\n";
