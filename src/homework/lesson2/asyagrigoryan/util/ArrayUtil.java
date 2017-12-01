@@ -17,23 +17,16 @@ public class ArrayUtil {
     public static void sortByOddAndEven(int [] array) {
 
         for (int i = 0; i < array.length - 1; i++) {
-            for (int j = i + 1; j < array.length - 1; j++) {
-
-                if (array[i]%2 != array[j]%2){
-
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] % 2 != array[j] % 2) {
                     swap(array, i + 1, j);
-
                 }
-
             }
-
-
         }
     }
 
     public static int getMaximum(int[] array) {
         int max = array[0];
-
         for(int i=1; i<array.length; i++) {
 
             if (array[i] > max)
@@ -42,16 +35,12 @@ public class ArrayUtil {
         return max;
     }
 
-
     public static int getMinimum(int[] array) {
         int min = array[0];
-
         for (int i = 0; i<array.length; i++){
-
             if (array[i] < min)
                 min = array[i];
         }
-//
         return min;
     }
 

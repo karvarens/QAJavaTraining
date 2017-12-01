@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings("WeakerAccess")
-public class StackTest {
+public class StackImplTest {
     @Test
     void pushAndPop() {
         Stack stackTest = new Stack(3);

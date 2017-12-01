@@ -13,29 +13,28 @@ public class Stack {
     }
 
     public void push(char val) {
-        if(tos == values.length - 1){
-            System.out.println("Stack is full");
+        if(tos == values.length - 1) {  // TODO: Move this piece to separate private method
             char [] newValues = new char [values.length * 3 / 2];
             System.arraycopy(values, 0, newValues, 0, values.length);
             values = newValues;
-            System.out.println("Stack is refilled");
+            System.out.println("StackImpl is refilled");
         }
         values[++tos] = val;
-
     }
 
-    public char pop(int number) throws NumberFormatException {
-        if(tos < 0) {
-            //throw new NumberFormatException("TEST FAILED: Program found unopened brace: " + number +"-th symbol of text");
-            System.out.println("TEST FAILED: Program found unopened brace: " + number +"-th symbol of text");
-            return 0;
-        }
-        else {
-            return values[tos--];
-        }
+    public char pop() /*throws NumberFormatException*/ {
+//        if(tos < 0) {
+//            //throw new NumberFormatException("TEST FAILED: Program found unopened brace: " + number +"-th symbol of text");
+////            System.out.println("TEST FAILED: Program found unopened brace: " + number +"-th symbol of text");
+//            return 0;
+//        }
+//        else {
+//            return tos < 0 ? 0 : values[tos--];
+//        }
+        return isEmpty() ? 0 : values[tos--];
     }
 
-    public char reverseSymbol(char symbol){
+    public char reverseSymbol(char symbol){ //TODO: move this logic to BraceChecker class
          switch (symbol) {
             case '(':
                 symbol = ')';
@@ -49,9 +48,9 @@ public class Stack {
             case '{':
                 symbol = '}';
                 break;
-            case '[':
-                symbol = ']';
-                break;
+//            case '[':
+//                symbol = ']';
+//                break;
             case ']':
                 symbol = '[';
                 break;
@@ -60,16 +59,17 @@ public class Stack {
     }
 
     public boolean isEmpty(){
-        if(tos == -1) {
-            return true;
-        }
-        else {
-            System.out.println("TEST FAILED: Program found unclosed brace(s):");
-            for (int p = tos; p > -1; p--) {
-               System.out.println(values[p]);
-            }
-            return false;
-        }
+//        if(tos == -1) {
+//            return true;
+//        }
+//        else {
+//            System.out.println("TEST FAILED: Program found unclosed brace(s):");
+//            for (int p = tos; p > -1; p--) {
+//               System.out.println(values[p]);
+//            }
+//            return false;
+//        }
+        return tos == -1;
     }
 }
 

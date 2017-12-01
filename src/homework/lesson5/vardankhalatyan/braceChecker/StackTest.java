@@ -16,7 +16,7 @@ public class StackTest {
         System.out.println(st1.pop());
         System.out.println(st1.pop());
         System.out.println(st1.pop());
-//        System.out.println(st1.lenght()); TODO: Stack hasn't length() method
+//        System.out.println(st1.lenght()); TODO: Stack Impl hasn't length() method
         st1.isEmpty();
         System.out.println(st1.pop());
 //        System.out.println(st1.lenght());

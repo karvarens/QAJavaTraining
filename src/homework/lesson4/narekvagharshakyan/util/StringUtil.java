@@ -155,7 +155,7 @@ public class StringUtil {
      *                               parsable integer.
      */
     public static Integer parseInt(String s) throws NumberFormatException {
-        int parsedInt = 0;
+        int parsedInt = 0;  //TODO:
         int i;
         int minusSign = 1;
 
@@ -210,20 +210,19 @@ public class StringUtil {
     }
 
     private static String changeCase(String text, int startIndex, int endIndex) {
-        StringBuilder newtext = new StringBuilder(text);
+        StringBuilder newText = new StringBuilder(text);
         if (endIndex >= startIndex) {
             for (int i = startIndex; i <= endIndex; i++) {
-                if (Character.isLetter(text.charAt(i))) {
                     if (Character.isLowerCase(text.charAt(i))) {
-                        newtext.setCharAt(i, Character.toUpperCase(text.charAt(i)));
+                        newText.setCharAt(i, Character.toUpperCase(text.charAt(i)));
                     } else {
-                        newtext.setCharAt(i, Character.toLowerCase(text.charAt(i)));
+                        newText.setCharAt(i, Character.toLowerCase(text.charAt(i)));
                     }
-                }
+//
             }
-            text = newtext.toString();
+            text = newText.toString();
         } else {
-            throw new IndexOutOfBoundsException("startIndex can't be bigger than endIndex");
+            throw new IndexOutOfBoundsException ("startIndex can't be bigger than endIndex");
         }
         return text;
     }
