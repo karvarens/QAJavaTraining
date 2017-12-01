@@ -8,8 +8,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
 
 public class FigureCanvas extends JPanel {
-//TODO get rid of too many figures.countNotNullValues() calls
-
     DynamicArray figures = new DynamicArray(3);
 
     private boolean isSelected;
@@ -35,7 +33,7 @@ public class FigureCanvas extends JPanel {
 
     public boolean remove() {
         if (isSelected) {
-            figures.remove(figures.countNotNullValues() - 1);
+            figures.remove(figures.getSize() - 1);
             isSelected = false;
             repaint();
             return true;
@@ -45,11 +43,11 @@ public class FigureCanvas extends JPanel {
     }
 
     public void select(int x, int y) {
-        for (int i = figures.countNotNullValues() - 1; i >= 0; i--) {
+        for (int i = figures.getSize() - 1; i >= 0; i--) {
             Figure temp = (Figure)figures.get(i);
             if (temp.isBelong(x, y)) {
                 isSelected = true;
-                if(i < figures.countNotNullValues() - 1) {
+                if(i < figures.getSize() - 1) {
                     figures.moveToEnd(i);
                 }
                 return;
@@ -66,7 +64,7 @@ public class FigureCanvas extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        for (int i = 0; i < figures.countNotNullValues(); i++) {
+        for (int i = 0; i < figures.getSize(); i++) {
                 Figure temp = (Figure)figures.get(i);
                 temp.draw(g);
         }
@@ -75,10 +73,10 @@ public class FigureCanvas extends JPanel {
     @Override
     public String toString() {
         String output = "";
-        System.out.println("Array is filled with: " + figures.countNotNullValues() + " elements");
-        System.out.println("Array length is: " + figures.getObjects().length + " elements");
+        System.out.println("Array is filled with: " + figures.getSize() + " elements");
+        System.out.println("Array length is: " + figures.getLength() + " elements");
         Figure figure;
-        for (int i =0; i < figures.countNotNullValues(); i++) {
+        for (int i =0; i < figures.getSize(); i++) {
             figure = (Figure)figures.get(i);
             if (figure != null) {
                 output = output + "X: '" + figure.getX() + "', Y: '" + figure.getY() + "', Width: '" + figure.getWidth() + "', Height: '" + figure.getHeight() + "'\n";

@@ -13,31 +13,37 @@ public class DynamicArray {
         size = 0;
     }
 
-    public Object[] getObjects() {
-        return objects;
-    }
-
     public Object get(int index) {
         return objects[index];
     }
 
-    public void setObjects(Object[] objects) {
-        this.objects = objects;
-    }
 
     public void add(Object object) {
-
-    }
-
-    public void add(Object object, int index) {
+        objects = enlargeArraySize();
+        this.objects[size] = object;
         size++;
     }
 
-    public void setObject(Object object, int index) {
-        int temp = countNotNullValues();
-        this.objects[temp] = object;
+    public void add(Object object, int index) {
+       //TODO
     }
 
+    public boolean set(Object object, int index) {
+        if (index > size) {
+            return false;
+        }
+        this.objects[index] = object;
+        return true;
+    }
+
+
+    public int getLength() {
+        return objects.length;
+    }
+
+    public int getSize() {
+        return size;
+    }
 
     /**
      * Removed an item from array of objects
@@ -52,6 +58,9 @@ public class DynamicArray {
         }
         objects[size] = null;
         size--;
+        if (size * 3 < objects.length && size > 3) {
+            objects = ensureToReduce();
+        }
         return temp;
     }
 
@@ -59,7 +68,12 @@ public class DynamicArray {
      * Increases the size of array
      */
     private Object [] enlargeArraySize() {
-        return Arrays.copyOf(objects, objects.length * 3 / 2);
+        if (size == objects.length - 1) {
+            return Arrays.copyOf(objects, objects.length * 3 / 2);
+        }
+        else {
+            return objects;
+        }
     }
 
 
@@ -100,7 +114,7 @@ public class DynamicArray {
         if (index > objects.length || index < 0 || size == 0 ) {
             throw new IllegalArgumentException();
         }
-       // setObject(remove(index));
+        add(remove(index));
 
     }
 

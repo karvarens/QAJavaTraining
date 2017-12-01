@@ -1,11 +1,11 @@
 package homework.lesson3.davidgevorgyan.additionaltasks;
 
-import homework.lesson3.davidgevorgyan.additionaltasks.ArrayUtil;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import javax.swing.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static junit.framework.TestCase.assertEquals;
 
 public class ArrayUtilTest {
 
