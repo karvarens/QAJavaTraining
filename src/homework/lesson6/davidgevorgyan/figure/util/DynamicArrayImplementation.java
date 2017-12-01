@@ -137,24 +137,6 @@ public class DynamicArrayImplementation<T> implements homework.lesson6.figure.ut
         return Arrays.copyOf(objects, objects.length / 2);
     }
 
-    /**
-     * Count not null values in array
-     * @return count of not null values
-     */
-    public int countNotNullValues(){
-        int i = 0;
-        for (; i < objects.length; i++) {
-            if (objects[i] == null)
-                break;
-        }
-        if (i == objects.length - 1) {
-            objects = enlargeArraySize();
-        }
-        if (i * 3 < objects.length && i > 3)
-            objects = ensureToReduce();
-
-        return i;
-    }
 
     /**
      * Takes an array item an puts it at the end of array
@@ -162,7 +144,6 @@ public class DynamicArrayImplementation<T> implements homework.lesson6.figure.ut
      * @param index which array will be move to the end
      */
     public void moveToEnd(int index){
-        int size = countNotNullValues();
         if (index > objects.length || index < 0 || size == 0 ) {
             throw new IllegalArgumentException();
         }

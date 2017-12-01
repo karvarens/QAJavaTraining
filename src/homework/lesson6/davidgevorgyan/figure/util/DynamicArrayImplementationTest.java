@@ -124,6 +124,20 @@ public class DynamicArrayImplementationTest {
 
 
     @Test
+    void remove1() {
+        DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation();
+        dynamicArrayImplementation.add("Test");
+        dynamicArrayImplementation.add("Rest");
+        dynamicArrayImplementation.add("Aest");
+        dynamicArrayImplementation.add("Best");
+        dynamicArrayImplementation.add("Sest");
+        assertEquals(true, dynamicArrayImplementation.remove("Rest"));
+        assertEquals("Aest", dynamicArrayImplementation.get(1));
+        assertEquals(false, dynamicArrayImplementation.remove("Gest"));
+
+    }
+
+    @Test
     void enlargeArraySize() {
         DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation(3);
         dynamicArrayImplementation.add("Test");
@@ -159,28 +173,4 @@ public class DynamicArrayImplementationTest {
         assertEquals("Rest", dynamicArrayImplementation.get(4));
     }
 
-    @Test
-    void countNotNullValues() {
-        DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation(3);
-        dynamicArrayImplementation.add("Test");
-        dynamicArrayImplementation.add("Rest");
-        assertEquals(2, dynamicArrayImplementation.size());
-    }
-
-
-
-
-    @Test
-    void remove1() {
-        DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation();
-        dynamicArrayImplementation.add("Test");
-        dynamicArrayImplementation.add("Rest");
-        dynamicArrayImplementation.add("Aest");
-        dynamicArrayImplementation.add("Best");
-        dynamicArrayImplementation.add("Sest");
-        assertEquals(true, dynamicArrayImplementation.remove("Rest"));
-        assertEquals("Aest", dynamicArrayImplementation.get(1));
-        assertEquals(false, dynamicArrayImplementation.remove("Gest"));
-
-    }
 }
