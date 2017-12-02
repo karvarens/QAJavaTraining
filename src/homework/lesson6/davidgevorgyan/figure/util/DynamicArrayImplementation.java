@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class DynamicArrayImplementation<T> implements homework.lesson6.figure.util.DynamicArray<T> {
     private Object objects[];
     private int size;
-    public final static int DEFAULT_SIZE = 16;
+    private final static int DEFAULT_SIZE = 16;
 
     public DynamicArrayImplementation(){
         this.objects = new Object[DEFAULT_SIZE];

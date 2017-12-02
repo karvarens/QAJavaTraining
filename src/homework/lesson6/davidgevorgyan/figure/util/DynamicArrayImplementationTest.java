@@ -27,7 +27,7 @@ public class DynamicArrayImplementationTest {
 
     @Test
     void contains() {
-        DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation();
+        DynamicArrayImplementation<String> dynamicArrayImplementation = new DynamicArrayImplementation<>();
         dynamicArrayImplementation.add("Test");
         dynamicArrayImplementation.add("Rest");
         dynamicArrayImplementation.add("Aest");
@@ -42,7 +42,7 @@ public class DynamicArrayImplementationTest {
 
     @Test
     void indexOf() {
-        DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation();
+        DynamicArrayImplementation<String> dynamicArrayImplementation = new DynamicArrayImplementation<>();
         dynamicArrayImplementation.add("Test");
         dynamicArrayImplementation.add("Rest");
         dynamicArrayImplementation.add("Aest");
@@ -57,7 +57,7 @@ public class DynamicArrayImplementationTest {
 
     @Test
     void lastIndexOf() {
-        DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation();
+        DynamicArrayImplementation<String> dynamicArrayImplementation = new DynamicArrayImplementation<>();
         dynamicArrayImplementation.add("Test");
         dynamicArrayImplementation.add("Rest");
         dynamicArrayImplementation.add("Aest");
@@ -86,20 +86,20 @@ public class DynamicArrayImplementationTest {
 
     @Test
     void set() {
-        DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation();
+        DynamicArrayImplementation<String> dynamicArrayImplementation = new DynamicArrayImplementation<>();
         dynamicArrayImplementation.add("Aest");
         dynamicArrayImplementation.add("West");
         dynamicArrayImplementation.add("Zest");
         dynamicArrayImplementation.add("Best");
         dynamicArrayImplementation.add("Sest");
-        String a = (String) dynamicArrayImplementation.set(3, "WWWest");
+        String a = dynamicArrayImplementation.set(3, "WWWest");
         assertEquals("WWWest", dynamicArrayImplementation.get(3));
         assertThrows(IndexOutOfBoundsException.class, ()->{dynamicArrayImplementation.set(5, "AAA");});
     }
 
     @Test
     void add() {
-        DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation();
+        DynamicArrayImplementation<String> dynamicArrayImplementation = new DynamicArrayImplementation<>();
         dynamicArrayImplementation.add("Test");
         dynamicArrayImplementation.add("Rest");
         dynamicArrayImplementation.add("Aest");
@@ -125,7 +125,7 @@ public class DynamicArrayImplementationTest {
 
     @Test
     void remove1() {
-        DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation();
+        DynamicArrayImplementation<String> dynamicArrayImplementation = new DynamicArrayImplementation<>();
         dynamicArrayImplementation.add("Test");
         dynamicArrayImplementation.add("Rest");
         dynamicArrayImplementation.add("Aest");
