@@ -50,7 +50,11 @@ public class FigureCanvas extends JPanel {
             if (temp.isBelong(x, y)) {
                 isSelected = true;
                 if(i < figures.size() - 1) {
-                    figures.moveToEnd(i);
+                    try {
+                        figures.moveToEnd(i);
+                    } catch (Exception e) {
+                        System.out.println("It's not possible to select the Figure");
+                    }
                 }
                 return;
             }
@@ -74,16 +78,16 @@ public class FigureCanvas extends JPanel {
 
     @Override
     public String toString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         System.out.println("Array is filled with: " + figures.size() + " elements");
         Figure figure;
         for (int i =0; i < figures.size(); i++) {
             figure = (Figure)figures.get(i);
             if (figure != null) {
-                output = output + "X: '" + figure.getX() + "', Y: '" + figure.getY() + "', Width: '" + figure.getWidth() + "', Height: '" + figure.getHeight() + "'\n";
+                output.append("X: '").append(figure.getX()).append("', Y: '").append(figure.getY()).append("', Width: '").append(figure.getWidth()).append("', Height: '").append(figure.getHeight()).append("'\n");
             }
         }
-        return output;
+        return output.toString();
     }
 
     public static Figure randomFigure(int canvasWidth, int canvasHeight) {

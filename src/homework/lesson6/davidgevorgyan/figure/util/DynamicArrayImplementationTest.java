@@ -81,7 +81,7 @@ public class DynamicArrayImplementationTest {
         dynamicArrayImplementation.add("Best");
         dynamicArrayImplementation.add("Sest");
         assertEquals("Best", dynamicArrayImplementation.get(5));
-        assertThrows(IndexOutOfBoundsException.class, ()->{dynamicArrayImplementation.get(7);});
+        assertThrows(IndexOutOfBoundsException.class, ()-> dynamicArrayImplementation.get(7));
     }
 
     @Test
@@ -92,9 +92,9 @@ public class DynamicArrayImplementationTest {
         dynamicArrayImplementation.add("Zest");
         dynamicArrayImplementation.add("Best");
         dynamicArrayImplementation.add("Sest");
-        String a = dynamicArrayImplementation.set(3, "WWWest");
+        dynamicArrayImplementation.set(3, "WWWest");
         assertEquals("WWWest", dynamicArrayImplementation.get(3));
-        assertThrows(IndexOutOfBoundsException.class, ()->{dynamicArrayImplementation.set(5, "AAA");});
+        assertThrows(IndexOutOfBoundsException.class, ()-> dynamicArrayImplementation.set(5, "AAA"));
     }
 
     @Test
@@ -109,7 +109,7 @@ public class DynamicArrayImplementationTest {
         assertEquals("AAAest", dynamicArrayImplementation.get(1));
         dynamicArrayImplementation.add(6,"BBBest");
         assertEquals("BBBest", dynamicArrayImplementation.get(6));
-        assertThrows(IndexOutOfBoundsException.class, ()->{dynamicArrayImplementation.get(7);});
+        assertThrows(IndexOutOfBoundsException.class, ()-> dynamicArrayImplementation.get(7));
     }
 
     @Test
@@ -119,7 +119,7 @@ public class DynamicArrayImplementationTest {
         dynamicArrayImplementation.add("Rest");
         assertEquals("Rest", dynamicArrayImplementation.remove(1));
         assertEquals(1, dynamicArrayImplementation.size());
-        assertThrows(IndexOutOfBoundsException.class, ()->{dynamicArrayImplementation.get(2);});
+        assertThrows(IndexOutOfBoundsException.class, ()-> dynamicArrayImplementation.get(2));
     }
 
 
@@ -169,7 +169,12 @@ public class DynamicArrayImplementationTest {
         dynamicArrayImplementation.add("Aest");
         dynamicArrayImplementation.add("Best");
         dynamicArrayImplementation.add("Sest");
-        dynamicArrayImplementation.moveToEnd(1);
+        try {
+            dynamicArrayImplementation.moveToEnd(1);
+        }
+        catch (Exception e) {
+            System.out.println("Critical error. Not possible to set the value");
+        }
         assertEquals("Rest", dynamicArrayImplementation.get(4));
     }
 

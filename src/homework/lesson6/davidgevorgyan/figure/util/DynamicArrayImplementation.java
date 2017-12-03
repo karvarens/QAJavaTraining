@@ -54,14 +54,14 @@ public class DynamicArrayImplementation<T> implements homework.lesson6.figure.ut
 
     public T get(int index) {
         if (index >= size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Can't get item");
         }
         return (T)objects[index];
     }
 
     public T set(int index, T object) {
         if (index >= size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Can't set item");
         }
         T temp = (T) objects[index];
         objects[index] = object;
@@ -77,7 +77,7 @@ public class DynamicArrayImplementation<T> implements homework.lesson6.figure.ut
 
     public void add(int index, T object) {
         if (index > size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Can't add item");
         }
         objects = enlargeArraySize();
         T temp;
@@ -89,14 +89,12 @@ public class DynamicArrayImplementation<T> implements homework.lesson6.figure.ut
         size++;
     }
 
-    public T remove (int index){
+    public T remove (int index) {
         if (index > size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Can't remove item");
         }
         T temp = (T) objects[index];
-        for (int i = index; i < size; i++) {
-            objects[i] = objects [i + 1];
-        }
+        System.arraycopy(objects, index + 1, objects, index, size - index);
         objects[size] = null;
         size--;
         if (size * 3 < objects.length && size > 3) {
@@ -143,9 +141,9 @@ public class DynamicArrayImplementation<T> implements homework.lesson6.figure.ut
 
      * @param index which array will be move to the end
      */
-    public void moveToEnd(int index){
+    public void moveToEnd(int index) throws Exception {
         if (index > objects.length || index < 0 || size == 0 ) {
-            throw new IllegalArgumentException();
+            throw new Exception("Demo exception: Can't move item"); //I understand that it's not necessary to handle runtime exceptions. Just putted it here to test
         }
         add(remove(index));
 
