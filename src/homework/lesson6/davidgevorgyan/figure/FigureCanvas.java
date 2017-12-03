@@ -11,20 +11,12 @@ import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
 
 public class FigureCanvas extends JPanel {
     public DynamicArrayImplementation figures = new DynamicArrayImplementation();
-
+    private MovingAdapter ma = new MovingAdapter();
     private boolean isSelected;
 
     public FigureCanvas() {
-        addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent me) {
-                mousePressedPerformed(me);
-            }
-        });
-    }
-
-    private void mousePressedPerformed (MouseEvent me) {
-        select(me.getX(), me.getY());
-        repaint();
+        addMouseMotionListener(ma);
+        addMouseListener(ma);
     }
 
     public void add(Figure figure) {
@@ -70,6 +62,14 @@ public class FigureCanvas extends JPanel {
 
     @Override
     public void paint(Graphics g) {
+        super.paint(g);
+
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
         for (int i = 0; i < figures.size(); i++) {
                 Figure temp = (Figure)figures.get(i);
                 temp.draw(g);
@@ -106,5 +106,33 @@ public class FigureCanvas extends JPanel {
 
         return randomFigure;
     }
+    class MovingAdapter extends MouseAdapter {
 
+        private int x;
+        private int y;
+
+        public void mousePressed(MouseEvent e) {
+            x = e.getX();
+            y = e.getY();
+            select(e.getX(), e.getY());
+            repaint();
+        }
+
+        public void mouseDragged(MouseEvent e) {
+            int dx = e.getX() - x;
+            int dy = e.getY() - y;
+
+
+            Figure temp = (Figure) figures.get(figures.size()-1);
+            if (temp.isBelong(x, y)) {
+                if (temp.getY() + dy > 0 && temp.getY() + dy + temp.getHeight() < getHeight())
+                    temp.setY(temp.getY() + dy);
+                if (temp.getX() + dx > 0 && temp.getX() + dx + temp.getWidth() < getWidth())
+                    temp.setX(temp.getX() + dx);
+                repaint();
+            }
+            x += dx;
+            y += dy;
+        }
+    }
 }
