@@ -1,6 +1,7 @@
 package homework.lesson6.davidgevorgyan.figure;
 
 import java.awt.*;
+import java.util.Objects;
 
 abstract public class Figure {
     public int getX() {
@@ -32,6 +33,8 @@ abstract public class Figure {
     }
 
     private int x;
+
+
     private int y;
     private int width;
     private int height;
@@ -80,6 +83,15 @@ abstract public class Figure {
 
         if (x != figure.x) return false;
         if (y != figure.y) return false;
+        if (colour != figure.colour) return false;
         return width == figure.width && height == figure.height;
     }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(x, y, width, height, colour);
+    }
+
+
 }

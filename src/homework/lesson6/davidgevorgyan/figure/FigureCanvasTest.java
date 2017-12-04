@@ -32,6 +32,14 @@ class FigureCanvasTest {
         main.select(0,0);
         assertEquals(false, main.remove());
     }
+    @Test
+    void equalsTest(){
+        Rectangle a= new Rectangle(1000,200,400,400,0);
+        Circle b = new Circle(1000,200,400,0);
+        Circle c = new Circle(1000,200,400,0);
+        assertEquals(false,a.equals(b));
+        assertEquals(true,b.equals(c));
+    }
 
     @Test
     void remove_withSelect() {

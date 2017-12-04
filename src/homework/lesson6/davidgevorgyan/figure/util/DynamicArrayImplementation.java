@@ -33,7 +33,7 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     public int indexOf(T object){
         int i = -1;
         for (int j = 0; j < size; j++) {
-            if( objects[j] == object) { //TODO: We need to use equals method instead of == operator
+            if(object.equals(objects[j])) {
                 i = j;
                 break;
             }
@@ -44,7 +44,7 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     public int lastIndexOf(T object) {
         int i = -1;
         for (int j = size; j > -1; j--) {
-            if( objects[j] == object) {
+            if(object.equals(objects[j])) {
                 i = j;
                 break;
             }
@@ -53,8 +53,11 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     }
 
     public T get(int index) {
-        if (index >= size) {  // for negative indexes also ...
+        if (index >= size) {
             throw new IndexOutOfBoundsException("Can't get item");
+        }
+        if (index < 0) {
+            throw new NegativeArraySizeException("Can't get item");
         }
         return getElement(index);
     }
@@ -62,6 +65,9 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     public T set(int index, T object) {
         if (index >= size) {
             throw new IndexOutOfBoundsException("Can't set item");
+        }
+        if (index < 0) {
+            throw new NegativeArraySizeException("Can't set item");
         }
         T temp = getElement(index);
         objects[index] = object;
@@ -79,6 +85,9 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
         if (index > size) {
             throw new IndexOutOfBoundsException("Can't add item");
         }
+        if (index < 0) {
+            throw new NegativeArraySizeException("Can't add item");
+        }
         objects = enlargeArraySize();
         T temp;
         for (int i = index; i < size; i++) {
@@ -95,13 +104,14 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
         if (index > size) {
             throw new IndexOutOfBoundsException("Can't remove item");
         }
+        if (index < 0) {
+            throw new NegativeArraySizeException("Can't remove item");
+        }
         T temp = getElement(index);
         System.arraycopy(objects, index + 1, objects, index, size - index);
         objects[size - 1] = null;
         size--;
-        if (size * 3 < objects.length && size > 3) {
-            objects = ensureToReduce();
-        }
+        objects = ensureToReduce();
         return temp;
     }
 
@@ -137,7 +147,12 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
      * Reduces the size of an array
      */
     private Object [] ensureToReduce() {
-        return Arrays.copyOf(objects, objects.length / 2);
+        if (size * 3 < objects.length && size > 3) {
+            return Arrays.copyOf(objects, objects.length / 2);
+        }
+        else {
+            return objects;
+        }
     }
 
 
