@@ -56,14 +56,14 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
         if (index >= size) {  // for negative indexes also ...
             throw new IndexOutOfBoundsException("Can't get item");
         }
-        return (T)objects[index];
+        return getElement(index);
     }
 
     public T set(int index, T object) {
         if (index >= size) {
             throw new IndexOutOfBoundsException("Can't set item");
         }
-        T temp = (T) objects[index];
+        T temp = getElement(index);
         objects[index] = object;
         return temp;
     }
@@ -90,14 +90,14 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     }
 
 
-    @SuppressWarnings("unchecked")
+
     public T remove (int index) {
         if (index > size) {
             throw new IndexOutOfBoundsException("Can't remove item");
         }
-        T temp = (T) objects[index];
+        T temp = getElement(index);
         System.arraycopy(objects, index + 1, objects, index, size - index);
-        objects[size] = null;
+        objects[size - 1] = null;
         size--;
         if (size * 3 < objects.length && size > 3) {
             objects = ensureToReduce();
@@ -111,11 +111,14 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
             remove(temp);
             return true;
         }
-        else {
-            return false;
-        }
+
+        return false;
     }
 
+    @SuppressWarnings("unchecked")
+    private T getElement (int index) {
+        return (T)objects[index];
+    }
 
     /**
      * Increases the size of array
@@ -131,7 +134,7 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
 
 
     /**
-     * Reduces the sise of an array
+     * Reduces the size of an array
      */
     private Object [] ensureToReduce() {
         return Arrays.copyOf(objects, objects.length / 2);
