@@ -2,7 +2,7 @@ package homework.lesson6.davidgevorgyan.figure.util;
 
 import java.util.Arrays;
 
-public class DynamicArrayImplementation<T> implements homework.lesson6.figure.util.DynamicArray<T> {
+public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     private Object objects[];
     private int size;
     private final static int DEFAULT_SIZE = 16;
@@ -33,7 +33,7 @@ public class DynamicArrayImplementation<T> implements homework.lesson6.figure.ut
     public int indexOf(T object){
         int i = -1;
         for (int j = 0; j < size; j++) {
-            if( objects[j] == object) {
+            if( objects[j] == object) { //TODO: We need to use equals method instead of == operator
                 i = j;
                 break;
             }
@@ -53,7 +53,7 @@ public class DynamicArrayImplementation<T> implements homework.lesson6.figure.ut
     }
 
     public T get(int index) {
-        if (index >= size) {
+        if (index >= size) {  // for negative indexes also ...
             throw new IndexOutOfBoundsException("Can't get item");
         }
         return (T)objects[index];
@@ -89,6 +89,8 @@ public class DynamicArrayImplementation<T> implements homework.lesson6.figure.ut
         size++;
     }
 
+
+    @SuppressWarnings("unchecked")
     public T remove (int index) {
         if (index > size) {
             throw new IndexOutOfBoundsException("Can't remove item");
