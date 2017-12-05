@@ -4,6 +4,24 @@ import java.awt.*;
 import java.util.Objects;
 
 abstract public class Figure {
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    private int colour;
+
+    Figure(int x, int y, int width, int height, int colour) {
+        if (!validate(x, y, width, height)) { // it would be better to throw IllegalArgumentException in validate method
+            throw new IllegalArgumentException();
+        }
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.colour = colour;
+
+    }
+
     public int getX() {
         return x;
     }
@@ -32,39 +50,23 @@ abstract public class Figure {
         this.y = y;
     }
 
-    private int x;
-
-
-    private int y;
-    private int width;
-    private int height;
-    private int colour;
-
-
-    Figure(int x, int y, int width, int height, int colour) {
-        if (!validator(x, y, width, height)) {
-            throw new IllegalArgumentException();
-        }
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.colour = colour;
-
-    }
-
-
     abstract void draw(Graphics g);
 
     abstract boolean isBelong (int x, int y);
 
-    boolean validator(int x, int y, int width, int height){
+    public void move(int dX, int dY){
+
+    }
+
+    private boolean validate(int x, int y, int width, int height){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double screenSizeWidth = screenSize.getWidth();
         double screenSizeHeight = screenSize.getHeight();
 
         return x >= 0 && !(x > screenSizeWidth - width) && y >= 0 && !(y > screenSizeHeight - height) && width >= 1 && height >= 1;
     }
+
+    //Overridden methods of the Object class
 
     @Override
     public String toString() {
@@ -73,9 +75,8 @@ abstract public class Figure {
         return className +  ". X: '" + this.x + "', Y: '" + this.y + "', Width: '" + this.width + "', Height: '" + this.height + "'";
     }
 
-
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o) { //TODO:  analise  this method during the lesson
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -89,7 +90,6 @@ abstract public class Figure {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(x, y, width, height, colour);
     }
 

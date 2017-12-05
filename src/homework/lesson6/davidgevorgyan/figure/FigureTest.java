@@ -2,6 +2,9 @@ package homework.lesson6.davidgevorgyan.figure;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FigureTest {
@@ -17,9 +20,12 @@ public class FigureTest {
     }
 
     @Test
-    void validatorValid() {
+    void validatorValid() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Rectangle a = new Rectangle(10,10,10,10,0);
-        assertEquals(true,a.validator(a.getX(),a.getY(),a.getWidth(),a.getHeight()));
+        Method method = Figure.class.getDeclaredMethod("validate", int.class, int.class, int.class, int.class);
+        method.setAccessible(true);
+        assertEquals(true,  method.invoke(a, a.getX(),a.getY(),a.getWidth(),a.getHeight()));
+//        assertEquals(true, a.validate(a.getX(),a.getY(),a.getWidth(),a.getHeight()));
     }
 
     @Test

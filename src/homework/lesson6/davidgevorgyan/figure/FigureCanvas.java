@@ -1,6 +1,6 @@
 package homework.lesson6.davidgevorgyan.figure;
 
-import homework.lesson6.davidgevorgyan.figure.util.DynamicArrayImplementation;
+import homework.lesson6.davidgevorgyan.figure.util.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
 
 public class FigureCanvas extends JPanel {
-    public DynamicArrayImplementation figures = new DynamicArrayImplementation();
+    public DynamicArray<Figure> figures = new DynamicArrayImplementation<>();  // TODO: It is the better practise to interface references instead of class ref.
+
     private MovingAdapter ma = new MovingAdapter();
     private boolean isSelected;
 
@@ -24,7 +25,6 @@ public class FigureCanvas extends JPanel {
         repaint();
     }
 
-
     public boolean remove() {
         if (isSelected) {
             figures.remove(figures.size() - 1);
@@ -36,18 +36,19 @@ public class FigureCanvas extends JPanel {
         return false;
     }
 
-    public void select(int x, int y) {
+    void select(int x, int y) {
         for (int i = figures.size() - 1; i >= 0; i--) {
-            Figure temp = (Figure)figures.get(i);
+            Figure temp = figures.get(i);
             if (temp.isBelong(x, y)) {
                 isSelected = true;
-                if(i < figures.size() - 1) {
-                    try {
-                        figures.moveToEnd(i);
-                    } catch (Exception e) {
-                        System.out.println("It's not possible to select the Figure");
-                    }
-                }
+                figures.add(figures.remove(i));
+//                if(i < figures.size() - 1) {
+//                    try {
+////                        figures.moveToEnd(i);
+//                    } catch (Exception e) {
+//                        System.out.println("It's not possible to select the Figure");
+//                    }
+//                }
                 return;
             }
         }
@@ -123,7 +124,7 @@ public class FigureCanvas extends JPanel {
             int dy = e.getY() - y;
 
 
-            Figure temp = (Figure) figures.get(figures.size()-1);
+            Figure temp = figures.get(figures.size()-1);
             if (temp.isBelong(x, y)) {
                 if (temp.getY() + dy > 0 && temp.getY() + dy + temp.getHeight() < getHeight())
                     temp.setY(temp.getY() + dy);
@@ -131,7 +132,7 @@ public class FigureCanvas extends JPanel {
                     temp.setX(temp.getX() + dx);
                 repaint();
             }
-            x += dx;
+            x += dx;  // TODO: implement and use move method of Figure class
             y += dy;
         }
     }
