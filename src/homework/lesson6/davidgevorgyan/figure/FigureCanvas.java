@@ -42,13 +42,6 @@ public class FigureCanvas extends JPanel {
             if (temp.isBelong(x, y)) {
                 isSelected = true;
                 figures.add(figures.remove(i));
-//                if(i < figures.size() - 1) {
-//                    try {
-////                        figures.moveToEnd(i);
-//                    } catch (Exception e) {
-//                        System.out.println("It's not possible to select the Figure");
-//                    }
-//                }
                 return;
             }
         }
@@ -72,7 +65,7 @@ public class FigureCanvas extends JPanel {
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
         for (int i = 0; i < figures.size(); i++) {
-                Figure temp = (Figure)figures.get(i);
+                Figure temp = figures.get(i);
                 temp.draw(g);
         }
     }
@@ -83,7 +76,7 @@ public class FigureCanvas extends JPanel {
         System.out.println("Array is filled with: " + figures.size() + " elements");
         Figure figure;
         for (int i =0; i < figures.size(); i++) {
-            figure = (Figure)figures.get(i);
+            figure = figures.get(i);
             if (figure != null) {
                 output.append("X: '").append(figure.getX()).append("', Y: '").append(figure.getY()).append("', Width: '").append(figure.getWidth()).append("', Height: '").append(figure.getHeight()).append("'\n");
             }
@@ -97,11 +90,11 @@ public class FigureCanvas extends JPanel {
         int height = ThreadLocalRandom.current().nextInt(1, canvasHeight);
         int x = ThreadLocalRandom.current().nextInt(0, canvasWidth - width);
         int y = ThreadLocalRandom.current().nextInt(0, canvasHeight - height);
-
+        Color color = new Color((int)( Math.random() * 255),(int)( Math.random() * 255),(int)( Math.random() * 255) );
         if (x % 2 == 0) {
-            randomFigure = new Rectangle(x, y, width, height, (int) (Math.random() * 0x1000000));
+            randomFigure = new Rectangle(x, y, width, height, color);
         } else {
-            randomFigure = new Circle(x, y, minAbs(height,width), (int) (Math.random() * 0x1000000));
+            randomFigure = new Circle(x, y, minAbs(height,width), color);
         }
 
 

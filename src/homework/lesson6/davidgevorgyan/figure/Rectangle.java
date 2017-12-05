@@ -4,13 +4,13 @@ import java.awt.*;
 
 public class Rectangle extends Figure {
 
-    public Rectangle(int x, int y, int width, int height, int colour) {
-        super(x, y, width, height, colour);
+    public Rectangle(int x, int y, int width, int height, Color color) {
+        super(x, y, width, height, color);
     }
 
     @Override
     void draw (Graphics g) {
-        g.setColor(new Color(getColour()));
+        g.setColor(getColor());
         g.fillRect(getX(),getY(),getWidth(),getHeight());
     }
 

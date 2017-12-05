@@ -8,9 +8,9 @@ abstract public class Figure {
     private int y;
     private int width;
     private int height;
-    private int colour;
+    private Color color;
 
-    Figure(int x, int y, int width, int height, int colour) {
+    Figure(int x, int y, int width, int height, Color color) {
         if (!validate(x, y, width, height)) { // it would be better to throw IllegalArgumentException in validate method
             throw new IllegalArgumentException();
         }
@@ -18,7 +18,7 @@ abstract public class Figure {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.colour = colour;
+        this.color = color;
 
     }
 
@@ -38,8 +38,8 @@ abstract public class Figure {
         return height;
     }
 
-    public int getColour() {
-        return colour;
+    public Color getColor() {
+        return color;
     }
 
     public void setX(int x) {
@@ -84,13 +84,13 @@ abstract public class Figure {
 
         if (x != figure.x) return false;
         if (y != figure.y) return false;
-        if (colour != figure.colour) return false;
+        if ( ! color.equals(figure.color)) return false;
         return width == figure.width && height == figure.height;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y, width, height, colour);
+        return Objects.hash(x, y, width, height, color);
     }
 
 
