@@ -11,9 +11,7 @@ abstract public class Figure {
     private Color color;
 
     Figure(int x, int y, int width, int height, Color color) {
-        if (!validate(x, y, width, height)) { // it would be better to throw IllegalArgumentException in validate method
-            throw new IllegalArgumentException();
-        }
+        validate(x, y, width, height);
         this.x = x;
         this.y = y;
         this.width = width;
@@ -63,7 +61,13 @@ abstract public class Figure {
         double screenSizeWidth = screenSize.getWidth();
         double screenSizeHeight = screenSize.getHeight();
 
-        return x >= 0 && !(x > screenSizeWidth - width) && y >= 0 && !(y > screenSizeHeight - height) && width >= 1 && height >= 1;
+        if (x >= 0 && !(x > screenSizeWidth - width) && y >= 0 && !(y > screenSizeHeight - height) && width >= 1 && height >= 1) {
+            return true;
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
+
     }
 
     //Overridden methods of the Object class
