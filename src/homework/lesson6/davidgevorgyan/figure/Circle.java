@@ -3,13 +3,13 @@ package homework.lesson6.davidgevorgyan.figure;
 import java.awt.*;
 
 public class Circle extends Figure {
-    public Circle(int x, int y, int diameter,int colour) {
-        super(x, y, diameter, diameter,colour);
+    public Circle(int x, int y, int diameter, Color color) {
+        super(x, y, diameter, diameter, color);
     }
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(new Color(getColour()));
+        g.setColor(getColor());
         g.fillOval(getX(),getY(),getWidth(),getHeight());
     }
 

@@ -17,13 +17,9 @@ public class MathUtil {
     public static int pow(int a, int n) {
         int pow = 1;
 
-        for (int i = 1 ; i <= n; i++){
-
+        for (int i = 1 ; i <= n; i++) {
             pow *= a;
-
         }
-
-        
         return pow;
     }
 

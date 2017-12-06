@@ -20,7 +20,7 @@ public class Stack {
 
     public int pop() {
         if (tos == -1) {
-            System.out.println("Stack is empty");
+            System.out.println("StackImpl is empty");
             return 0;
         }
         return values[tos--];

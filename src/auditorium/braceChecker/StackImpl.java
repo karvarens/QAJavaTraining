@@ -1,39 +1,39 @@
 package auditorium.braceChecker;
 
-//THIS IS NON GENERIC STACK EXAMPLE
 
-public class StackRowType {
+@SuppressWarnings({"unchecked", "WeakerAccess"})
+public class StackImpl<T> implements Stack<T>{
     public final static int DEFAULT_SIZE = 16;
     public static final int MAX_EMPTY_SIZE = 2000;
 
     private Object[] values;
     private int tos;
 
-    public StackRowType() {
+    public StackImpl() {
         this(DEFAULT_SIZE);
     }
 
-    public StackRowType(int size) {
+    public StackImpl(int size) {
         values = new Object[size];
         tos = -1;
     }
+//
+//    public StackImpl(int[] stack) {
+//        values = new Object[stack.length];
+//        System.arraycopy(stack, 0, values, 0, stack.length);
+//        tos = -1;
+//    }
 
-    public StackRowType(int[] stack) {
-        values = new Object[stack.length];
-        System.arraycopy(stack, 0, values, 0, stack.length);
-        tos = -1;
-    }
-
-    public void push(Object val) {
+    public void push(T val) {
         ensureCapacity();
         values[++tos] = val;
     }
 
-    public Object pop() {
+    public T pop() {
         if (tos == -1) {
             return null;
         }
-        return values[tos--];
+        return (T)values[tos--];
 
     }
 
@@ -52,7 +52,7 @@ public class StackRowType {
 
     public void clear() {
         reduceCapacity ();
-        for (int i = 0; i <= tos; i++) { //TODO : clarify this during the session
+        for (int i = 0; i <= tos; i++) { //TODO : explane this during the session
             values[i] = null;
         }
         tos = -1;

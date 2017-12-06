@@ -22,25 +22,30 @@ abstract public class Figure {
     abstract public boolean isBelong (int x, int y);
 
     public static void main(String[] args) {
-        Figure[] figures = new Figure[7];
 
-        figures[0] = new Rectangle(10, 10, 100, 50);
-        figures[1] = new Circle(10, 10, 100){};
 
-        Figure figure = figures[0];
-
-        for (int i = 0; i < figures.length; i++) {
-            figures[i].draw(null);
-
-        }
-
-        figures[0].draw(null);
-        System.out.println(figures[0]);
-        System.out.println(figures[1]);
+//        Figure[] figures = new Figure[7];
+//
+//        figures[0] = new Rectangle(10, 10, 100, 50);
+//        figures[1] = new Circle(10, 10, 100){};
+//
+//        Figure figure = figures[0];
+//
+//        for (int i = 0; i < figures.length; i++) {
+//            figures[i].draw(null);
+//
+//        }
+//
+//        figures[0].draw(null);
+//        System.out.println(figures[0]);
+//        System.out.println(figures[1]);
 
         B b = new B() {};
+        System.out.println(b);
     }
 }
 
 
-abstract class B {}
+abstract class B {
+
+}

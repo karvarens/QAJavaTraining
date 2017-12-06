@@ -29,7 +29,7 @@ public class Stack {
         BracketItemInfo[] newValues = new BracketItemInfo[values.length * 3 / 2];
         System.arraycopy(values, 0, newValues, 0, values.length);
         values = newValues;
-        System.out.println("Stack is refilled!");
+        System.out.println("StackImpl is refilled!");
     }
 
     private void reduceCapacity(){

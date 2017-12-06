@@ -12,7 +12,7 @@ public class ArrayUtil {
         System.out.println("hahaha");
         int l = array.length - 2;
         for (int i = 0; i < l; ++i) {
-            for (int j = i + 1; j <= l; ++j) {
+            for (int j = i + 1; j < array.length; ++j) {
                 if (array[i] % 2 != array[j] % 2) {
                     swap(array, i + 1, j);
                     break;
@@ -24,8 +24,8 @@ public class ArrayUtil {
     }
 
     public static int getMaximum(int[] array) {
-        if (array.length == 0) {
-            return 0;
+        if (array == null || array.length == 0) { // To avoid NullPointerException
+            return 0;  //TODO later it should be thrown IllegalArgumentException
         }
 
         int maximum = array[0];
@@ -123,7 +123,7 @@ public class ArrayUtil {
     /**
      * Prints all elements in an array by using specified delimiter between elements.
      *
-     * @param a the util to print
+     * @param array the util to print
      */
     public static void print(int[] array, String delimiter) {
         System.out.print(array[0]);
