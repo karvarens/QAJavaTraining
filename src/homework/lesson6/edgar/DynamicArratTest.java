@@ -2,7 +2,7 @@ package homework.lesson6.edgar;
 
 public class DynamicArratTest {
     public static void main(String[] args) {
-        UseDynamicArray array = new UseDynamicArray(60);
+        DynamicArrayImpl array = new DynamicArrayImpl(60);
         for (int i = 0; i < 20; i++) {
             array.set(i,i);
         }
