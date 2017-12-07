@@ -2,8 +2,7 @@ package homework.lesson6.davidgevorgyan.figure.util;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DynamicArrayImplementationTest {
     @Test
@@ -20,9 +19,9 @@ public class DynamicArrayImplementationTest {
     @Test
     void isEmpty() {
         DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation();
-        assertEquals(true, dynamicArrayImplementation.isEmpty());
+        assertTrue(dynamicArrayImplementation.isEmpty());
         dynamicArrayImplementation.add("Sest");
-        assertEquals(false, dynamicArrayImplementation.isEmpty());
+        assertFalse(dynamicArrayImplementation.isEmpty());
     }
 
     @Test
@@ -36,8 +35,8 @@ public class DynamicArrayImplementationTest {
         dynamicArrayImplementation.add("Aest");
         dynamicArrayImplementation.add("Best");
         dynamicArrayImplementation.add("Sest");
-        assertEquals(true, dynamicArrayImplementation.contains("Best"));
-        assertEquals(false, dynamicArrayImplementation.contains("West"));
+        assertTrue(dynamicArrayImplementation.contains("Best"));
+        assertFalse(dynamicArrayImplementation.contains("West"));
     }
 
     @Test
@@ -131,9 +130,9 @@ public class DynamicArrayImplementationTest {
         dynamicArrayImplementation.add("Aest");
         dynamicArrayImplementation.add("Best");
         dynamicArrayImplementation.add("Sest");
-        assertEquals(true, dynamicArrayImplementation.remove("Rest"));
+        assertTrue( dynamicArrayImplementation.remove("Rest"));
         assertEquals("Aest", dynamicArrayImplementation.get(1));
-        assertEquals(false, dynamicArrayImplementation.remove("Gest"));
+        assertFalse(dynamicArrayImplementation.remove("Gest"));
 
     }
 
