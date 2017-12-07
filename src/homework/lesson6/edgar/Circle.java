@@ -3,8 +3,10 @@ package homework.lesson6.edgar;
 import java.awt.*;
 
 abstract public class Circle extends Figure {
+    private int radius;
     public Circle(int x, int y, int diameter) {
         super(x, y, diameter, diameter);
+        radius = diameter / 2;
     }
 
     //    @Override
@@ -14,7 +16,6 @@ abstract public class Circle extends Figure {
 
     @Override
     public boolean isBelong(int x, int y) {
-        double radius = getWidth() / 2;
-        return (x >= getX() - radius || x <= getX() + radius) && (y >= getY() - radius || y <= getY() + radius);
+        return (x >= getX() - radius && x <= getX() + radius) && (y >= getY() - radius && y <= getY() + radius);
     }
 }

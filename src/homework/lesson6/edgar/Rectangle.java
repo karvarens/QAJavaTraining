@@ -2,7 +2,8 @@ package homework.lesson6.edgar;
 
 import java.awt.*;
 
-public class Rectangle extends Figure {
+public class
+Rectangle extends Figure {
 
     public Rectangle(int x, int y, int width, int height) {
         super(x, y, width, height);
