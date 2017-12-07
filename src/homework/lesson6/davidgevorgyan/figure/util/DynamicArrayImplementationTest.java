@@ -112,7 +112,7 @@ public class DynamicArrayImplementationTest {
     }
 
     @Test
-    void remove() {
+    void remove_byIndex() {
         DynamicArrayImplementation dynamicArrayImplementation = new DynamicArrayImplementation(3);
         dynamicArrayImplementation.add("Test");
         dynamicArrayImplementation.add("Rest");
@@ -123,7 +123,7 @@ public class DynamicArrayImplementationTest {
 
 
     @Test
-    void remove1() {
+    void remove_byObject() {
         DynamicArrayImplementation<String> dynamicArrayImplementation = new DynamicArrayImplementation<>();
         dynamicArrayImplementation.add("Test");
         dynamicArrayImplementation.add("Rest");
@@ -175,6 +175,14 @@ public class DynamicArrayImplementationTest {
             System.out.println("Critical error. Not possible to set the value");
         }
         assertEquals("Rest", dynamicArrayImplementation.get(4));
+    }
+
+    private DynamicArrayImplementation<String> createDynamicArray (int size, String value) {
+        DynamicArrayImplementation<String> dynamicArray = new DynamicArrayImplementation<>();
+        for (int i = 0; i < size; i++) {
+            dynamicArray.add (value + i);
+        }
+        return dynamicArray;
     }
 
 
