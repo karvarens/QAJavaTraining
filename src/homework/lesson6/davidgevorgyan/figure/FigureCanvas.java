@@ -36,7 +36,7 @@ public class FigureCanvas extends JPanel {
         return false;
     }
 
-    void select(int x, int y) {
+    void select(int x, int y) { //TODO think how to optimize this
         for (int i = figures.size() - 1; i >= 0; i--) {
             Figure temp = figures.get(i);
             if (temp.isBelong(x, y)) {
@@ -118,14 +118,11 @@ public class FigureCanvas extends JPanel {
 
 
             Figure temp = figures.get(figures.size()-1);
-            if (temp.isBelong(x, y)) {
-                if (temp.getY() + dy > 0 && temp.getY() + dy + temp.getHeight() < getHeight())
-                    temp.setY(temp.getY() + dy);
-                if (temp.getX() + dx > 0 && temp.getX() + dx + temp.getWidth() < getWidth())
-                    temp.setX(temp.getX() + dx);
+            if (isSelected) {
+                temp.move(dx, dy, getWidth(), getHeight());
                 repaint();
             }
-            x += dx;  // TODO: implement and use move method of Figure class
+            x += dx;
             y += dy;
         }
     }

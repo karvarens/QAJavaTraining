@@ -52,8 +52,11 @@ abstract public class Figure {
 
     abstract boolean isBelong (int x, int y);
 
-    public void move(int dX, int dY){
-
+    public void move(int dx, int dy, int canvasWidth, int canvasHeight ) {
+           if (getY() + dy > 0 && getY() + dy + getHeight() < canvasHeight)
+                setY(getY() + dy);
+           if (getX() + dx > 0 && getX() + dx + getWidth() < canvasWidth)
+                setX(getX() + dx);
     }
 
     private boolean validate(int x, int y, int width, int height){
