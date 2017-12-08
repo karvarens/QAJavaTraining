@@ -36,10 +36,9 @@ public class FigureCanvas extends JPanel {
         return false;
     }
 
-    void select(int x, int y) { //TODO think how to optimize this
+    void select(int x, int y) {
         for (int i = figures.size() - 1; i >= 0; i--) {
-            Figure temp = figures.get(i);
-            if (temp.isBelong(x, y)) {
+            if (figures.get(i).isBelong(x, y)) {
                 isSelected = true;
                 figures.add(figures.remove(i));
                 return;

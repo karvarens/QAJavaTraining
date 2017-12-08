@@ -8,7 +8,7 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     private final static int DEFAULT_SIZE = 16;
 
     public DynamicArrayImplementation(){
-        this.objects = new Object[DEFAULT_SIZE];
+        this(DEFAULT_SIZE);
     }
 
     public DynamicArrayImplementation(int capacity){
@@ -31,44 +31,50 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
 
 
     public int indexOf(T object){
-        int i = -1;
-        for (int j = 0; j < size; j++) {
-            if(object.equals(objects[j])) {
-                i = j;
-                break;
+        if ( object == null)
+        {
+            for (int j = 0; j < size; j++) {
+                if (objects[j] == null ) {
+                    return j;
+                }
             }
         }
-        return i;
+        else {
+            for (int j = 0; j < size; j++) {
+                if (object.equals(objects[j])) {
+                    return j;
+                }
+            }
+        }
+        return -1;
     }
 
     public int lastIndexOf(T object) {
-        int i = -1;
-        for (int j = size; j > -1; j--) {
-            if(object.equals(objects[j])) {
-                i = j;
-                break;
+        if ( object == null)
+        {
+            for (int j = size - 1; j > -1; j--) {
+                if (objects[j] == null ) {
+                    return j;
+                }
             }
         }
-        return i;
+        else {
+            for (int j = size - 1; j > -1; j--) {
+                if (object.equals(objects[j])) {
+                    return j;
+                }
+            }
+        }
+        return -1;
     }
 
     public T get(int index) {
-        if (index >= size) {
-            throw new IndexOutOfBoundsException("Can't get item");
-        }
-        if (index < 0) {
-            throw new NegativeArraySizeException("Can't get item");
-        }
+        isValid(index, true, "Can't get item");
         return getElement(index);
     }
 
     public T set(int index, T object) {
-        if (index >= size) {
-            throw new IndexOutOfBoundsException("Can't set item");
-        }
-        if (index < 0) {
-            throw new NegativeArraySizeException("Can't set item");
-        }
+        isValid(index, true, "Can't set item");
         T temp = getElement(index);
         objects[index] = object;
         return temp;
@@ -76,37 +82,30 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
 
     public boolean add(Object object) {
         objects = enlargeArraySize();
-        this.objects[size] = object;
-        size++;
+        objects[size++] = object;
         return true;
     }
 
     public void add(int index, T object) {
-        if (index > size) {
-            throw new IndexOutOfBoundsException("Can't add item");
-        }
-        if (index < 0) {
-            throw new NegativeArraySizeException("Can't add item");
-        }
+        isValid(index, false, "Can't add item");
         objects = enlargeArraySize();
-        T temp;
-        for (int i = index; i < size; i++) {
-            temp = set(i, object);
-            object = temp;
+        for (int i = 0; i < size; i++) {
+            System.out.println(objects[i]);
         }
-        objects[size] = object;
+        System.arraycopy(objects, index, objects, index + 1, size - index);
+        objects[index] = object;
         size++;
+        System.out.println();
+        for (int i = 0; i < size; i++) {
+            System.out.println(objects[i]);
+        }
+        System.out.println();
     }
 
 
 
     public T remove (int index) {
-        if (index > size) {
-            throw new IndexOutOfBoundsException("Can't remove item");
-        }
-        if (index < 0) {
-            throw new NegativeArraySizeException("Can't remove item");
-        }
+        isValid(index, false, "Can't remove item");
         T temp = getElement(index);
         System.arraycopy(objects, index + 1, objects, index, size - index);
         objects[size - 1] = null;
@@ -116,9 +115,8 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     }
 
     public boolean remove(T object) {
-        int temp = indexOf(object);
-        if ( temp != -1){
-            remove(temp);
+        if (indexOf(object) != -1){
+            remove(indexOf(object));
             return true;
         }
 
@@ -166,6 +164,19 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
             throw new Exception("Demo exception: Can't move item"); //I understand that it's not necessary to handle runtime exceptions. Just putted it here to test
         }
         add(remove(index));
+
+    }
+
+    private void isValid(int index, boolean withSize, String errorMessage){
+        if (index < 0) {
+            throw new NegativeArraySizeException("Index is negative: " + errorMessage);
+        }
+        if (withSize && index >= size) {
+            throw new IndexOutOfBoundsException("Index is greater or equal to Size: " + errorMessage);
+        }
+        if (!withSize && index > size) {
+            throw new IndexOutOfBoundsException("Index is greater than Size: " + errorMessage);
+        }
 
     }
 
