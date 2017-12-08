@@ -18,7 +18,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
         size = 0;
     }
 
-    public DynamicArrayImpl(){
+    public DynamicArrayImpl() {
         this(DEFAULT_CAPACITY);
     }
 
@@ -29,53 +29,50 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public boolean isEmpty() {
-        if (size > 0)
-            return false;
-        else
-            return true;
+        return size == 0;
     }
 
     @Override
     public boolean contains(T o) {
-        if(o == null){
-            for (int i = 0; i < size; i++) {
-                if (values[i] == null)
-                    return true;
-            }
-            for (int i = 0; i < size; i++) {
-                if (o.equals(values[i]))
-                    return true;
-            }
-        }
-        return false;
+//        if(o == null){
+//            for (int i = 0; i < size; i++) {
+//                if (values[i] == null)
+//                    return true;
+//            }
+//        } else {
+//            for (int i = 0; i < size; i++) {
+//                if (o.equals(values[i]))
+//                    return true;
+//            }
+//        }  // TO AVOID CODE DUPLICATION
+        return indexOf(o) > -1;
     }
 
     @Override
     public int indexOf(T o) {
-        if (o == null){
+        if (o == null) {
             for (int i = 0; i < size; i++) {
                 if (values[i] == null)
                     return i;
             }
-        }
-        else
+        } else {
             for (int i = 0; i < size; i++) {
                 if (o.equals(values[i]))
                     return i;
             }
+        }
         return -1;
     }
 
     @Override
     public int lastIndexOf(T o) {
-        if (o == null){
-            for (int i = size-1; i >= 0; i--) {
+        if (o == null) {
+            for (int i = size - 1; i >= 0; i--) {
                 if (values[i] == null)
                     return i;
             }
-        }
-        else
-            for (int i = size-1; i >= 0; i--) {
+        } else
+            for (int i = size - 1; i >= 0; i--) {
                 if (o.equals(values[i]))
                     return i;
             }
@@ -84,67 +81,81 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public T get(int index) {
+        // Validation layer
+
         return getElement(index);
     }
 
+    @SuppressWarnings("unchecked")
     private T getElement(int index) {
-        if(validateIndex(index))
-            return (T)values[index];
-        else
-            return null;
+        validateIndex(index);
+
+        return (T) values[index];
     }
 
-    private boolean validateIndex(int index){
-        if(index >= 0 && index <= size)
-            return true;
-        else
-            return false;
+    private void validateIndex(int index) {
+        if (index < 0 && index >= size) { // index >= size for set, get remove methods and > size for add method
+            //TODO: It should be thrown exception later.
+        }
     }
 
     @Override
     public T set(int index, T element) {
+        validateIndex(index);
+
         T oldValue = getElement(index);
         values[index] = element;
+
         return oldValue;
     }
 
     @Override
     public boolean add(T e) {
-        return false;
+        //ensure capacity
+
+        values[size++] = e;
+        return true;
     }
 
     @Override
     public void add(int index, T element) {
-        if(validateIndex(index)){
-            size++;
-            T replacedValue;
-            for (int i = index; i < size; i++) {
-                replacedValue = set(i, element);
-                element = replacedValue;
-            }
-            values[size] = element;
+        validateIndex(index);
+        //insure Capacity
+
+        T replacedValue;
+        for (int i = index; i < size; i++) {
+            values[i + 1] = values[i];
         }
-        else
-            System.out.println("Invalid value of Index for '" + element.toString() + "' value");
+        values[index] = element;
     }
 
     @Override
     public T remove(int index) {
-        if(validateIndex(index)){
-            size--;
-            T removedValue = getElement(index);;
-            //TODO to continue...
-        }
-        return null;
+        validateIndex(index);
+
+        size--;
+        T removedValue = getElement(index);
+
+
+
+        //TODO to continue...
+
+        return removedValue;
     }
 
     @Override
     public boolean remove(T o) {
-        return false;
+        int index = indexOf(o);
+        if(index < 0){
+            return false;
+        }
+
+        remove(index);
+        return true;
     }
 
     @Override
-    public void print(){
+    public void print() {
         for (int i = 0; i < size; i++) {
             System.out.println(values[i]);
         }
@@ -152,8 +163,8 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     public static void main(String[] args) {
         DynamicArray<String> testingString = new DynamicArrayImpl<String>(5);
-        testingString.add(0,"one");
-        testingString.add(1,"two");
+        testingString.add(0, "one");
+        testingString.add(1, "two");
         testingString.add(0, "three");
         testingString.add(-1, "aaa");
 
