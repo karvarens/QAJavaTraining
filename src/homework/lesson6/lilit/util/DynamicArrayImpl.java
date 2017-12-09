@@ -137,7 +137,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
         ensureCapacity();
 
-        for (int i = size-1; i > index; i--) {
+        for (int i = size-1; i >= index; i--) {
             values[i+1] = values[i];
         }
         values[index] = element;
@@ -161,8 +161,8 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
         T removedValue = getElement(index);
 
-        for (int i = index; i < size + 1; i++) {
-            values[i+1] = values[i];
+        for (int i = size-1; i > index; i--) {
+            values[i-1] = values[i];
         }
         size--;
 
@@ -172,6 +172,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     @Override
     public boolean remove(T o) {
         int index = indexOf(o);
+
         if(index < 0){
             return false;
         }
@@ -191,8 +192,10 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
         DynamicArray<String> testingString = new DynamicArrayImpl<String>(5);
         testingString.add(0, "one");
         testingString.add(1, "two");
-        testingString.add(0, "three");
-        testingString.add(-1, "aaa");
+        testingString.add(2, "three");
+        //testingString.add(-1, "aaa");
+
+        testingString.remove(1);
 
         testingString.print();
     }
