@@ -13,9 +13,15 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     private int size;
 
     public DynamicArrayImpl(int capacity) {
-        this.values = values;
+        this.values = new Object[capacity];
         values = new Object[capacity];
-        size = 0;
+        this.size = 0;
+    }
+
+    public DynamicArrayImpl(T[] initialValues) {
+        this.values = new Object[initialValues.length];
+        System.arraycopy(initialValues, 0, values, 0, initialValues.length);
+        size = initialValues.length; //??? why not this
     }
 
     public DynamicArrayImpl() {
@@ -81,27 +87,35 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public T get(int index) {
-        // Validation layer
+        validateIndex(index, true);
 
         return getElement(index);
     }
 
     @SuppressWarnings("unchecked")
     private T getElement(int index) {
-        validateIndex(index);
+        validateIndex(index, true);
 
         return (T) values[index];
     }
 
-    private void validateIndex(int index) {
-        if (index < 0 && index >= size) { // index >= size for set, get remove methods and > size for add method
-            //TODO: It should be thrown exception later.
+    private void validateIndex(int index, boolean equalToSize) {
+        if(equalToSize) {
+            if (index < 0 && index >= size) { // index >= size for set, get remove methods and > size for add method > DONE
+                //TODO have boolean parameter to identify the condition case > add, remove
+                //TODO: It should be thrown exception later.
+            }
+        }
+        else {
+            if (index < 0 && index > size){
+                //TODO: It should be thrown exception later.
+            }
         }
     }
 
     @Override
     public T set(int index, T element) {
-        validateIndex(index);
+        validateIndex(index, true);
 
         T oldValue = getElement(index);
         values[index] = element;
@@ -119,26 +133,38 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public void add(int index, T element) {
-        validateIndex(index);
-        //insure Capacity
+        validateIndex(index, false);
 
-        T replacedValue;
-        for (int i = index; i < size; i++) {
-            values[i + 1] = values[i];
+        ensureCapacity();
+
+        for (int i = size-1; i > index; i--) {
+            values[i+1] = values[i];
         }
         values[index] = element;
+        size++;
+    }
+
+    private void ensureCapacity(){
+        if(size+1 < values.length){
+            return;
+        }
+        else {
+            Object[] tmp = new Object[values.length * 3 / 2];
+            System.arraycopy(values, 0, tmp, 0, values.length);
+            values = tmp;
+        }
     }
 
     @Override
     public T remove(int index) {
-        validateIndex(index);
+        validateIndex(index, true);
 
-        size--;
         T removedValue = getElement(index);
 
-
-
-        //TODO to continue...
+        for (int i = index; i < size + 1; i++) {
+            values[i+1] = values[i];
+        }
+        size--;
 
         return removedValue;
     }
