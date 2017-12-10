@@ -3,6 +3,8 @@ package homework.lesson6.davidgevorgyan.figure;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 public class FigureFrame extends JFrame {
 
@@ -27,9 +29,7 @@ public class FigureFrame extends JFrame {
 
         addButton.addActionListener(this::addActionPerformed);
         removeButton.addActionListener(this::removeActionPerformed);
-
-
-
+        canvas.addComponentListener(new FrameListen());
         setSize(900, 600);
         setLocation(100,100);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -48,6 +48,15 @@ public class FigureFrame extends JFrame {
     private void removeActionPerformed (ActionEvent e) {
         canvas.remove();
     }
-
-
+    private class FrameListen implements ComponentListener{
+        public void componentHidden(ComponentEvent arg0) {
+        }
+        public void componentMoved(ComponentEvent arg0) {
+        }
+        public void componentResized(ComponentEvent arg0) {
+                canvas.setCanvasSize(canvas.getWidth(),canvas.getHeight());
+        }
+        public void componentShown(ComponentEvent arg0) {
+        }
+    }
 }

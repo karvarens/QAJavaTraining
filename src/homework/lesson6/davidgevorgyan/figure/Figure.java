@@ -3,21 +3,33 @@ package homework.lesson6.davidgevorgyan.figure;
 import java.awt.*;
 import java.util.Objects;
 
-abstract public class Figure {
+abstract public class Figure implements Runnable {
+    private static int canvasWidth = 900;
+    private static int canvasHeight = 600;
     private int x;
     private int y;
     private int width;
     private int height;
     private Color color;
+    private int speed;
+    private boolean suspendFlag;
 
-    Figure(int x, int y, int width, int height, Color color) {
+    Figure(int x, int y, int width, int height, Color color, int speed) {
         validate(x, y, width, height);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
+        this.speed = speed;
+        Thread t = new Thread(this, "Figure");
+        t.start();
+        suspendFlag = false;
+    }
 
+    //Getters
+    public boolean isSuspendFlag() {
+        return suspendFlag;
     }
 
     public int getX() {
@@ -40,6 +52,15 @@ abstract public class Figure {
         return color;
     }
 
+    //Setters
+    public static void setCanvasWidth(int canvasWidth) {
+        Figure.canvasWidth = canvasWidth;
+    }
+
+    public static void setCanvasHeight(int canvasHeight) {
+        Figure.canvasHeight = canvasHeight;
+    }
+
     public void setX(int x) {
         this.x = x;
     }
@@ -48,33 +69,37 @@ abstract public class Figure {
         this.y = y;
     }
 
+    //Abstract methods
     abstract void draw(Graphics g);
 
     abstract boolean isBelong (int x, int y);
 
-    public void move(int dx, int dy, int canvasWidth, int canvasHeight ) {
-           if (getY() + dy > 0 && getY() + dy + getHeight() < canvasHeight)
-                setY(getY() + dy);
-           if (getX() + dx > 0 && getX() + dx + getWidth() < canvasWidth)
-                setX(getX() + dx);
+    //Threads methods
+    synchronized void suspend() {
+        suspendFlag = true;
     }
 
-    private boolean validate(int x, int y, int width, int height){
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double screenSizeWidth = screenSize.getWidth();
-        double screenSizeHeight = screenSize.getHeight();
+    synchronized void resume() {
+        suspendFlag = false;
+        notify();
+    }
 
-        if (x >= 0 && !(x > screenSizeWidth - width) && y >= 0 && !(y > screenSizeHeight - height) && width >= 1 && height >= 1) {
-            return true;
-        }
-        else {
+    //Other methods
+    private void validate(int x, int y, int width, int height){
+        if (!(x >= 0 && !(x > canvasWidth - width) && y >= 0 && !(y > canvasHeight - height) && width >= 1 && height >= 1)) {
             throw new IllegalArgumentException();
         }
-
     }
 
-    //Overridden methods of the Object class
+    public void move(int dx, int dy) {
+        if (getY() + dy > 0 && getY() + dy + getHeight() < canvasHeight)
+            setY(getY() + dy);
+        if (getX() + dx > 0 && getX() + dx + getWidth() < canvasWidth)
+            setX(getX() + dx);
+    }
 
+
+    //Overridden methods of the Object class
     @Override
     public String toString() {
         String className = getClass().toString();
@@ -100,5 +125,32 @@ abstract public class Figure {
         return Objects.hash(x, y, width, height, color);
     }
 
+    @Override
+    public void run() {
+        int dx = 1;
+        int dy = 1;
+        try {
+            while (getX() < canvasWidth || getY() < canvasHeight) {
+                if (getX() < 10)
+                    dx = 1;
+                if (getX() + getWidth() >= canvasWidth - 1)
+                    dx = -1;
+                if (getY() < 10)
+                    dy = 1;
+                if (getY() + getHeight() >= canvasHeight - 1)
+                    dy = -1;
+                Thread.sleep(speed * 4);
+                synchronized(this) {
+                    while(suspendFlag) {
+                        wait();
+                    }
+                }
+                move(dx, dy);
+            }
+        } catch (InterruptedException e) {
+            System.out.println(x + "Interrupted:");
+        }
+        System.out.println(x + " exiting.");
+    }
 
 }
