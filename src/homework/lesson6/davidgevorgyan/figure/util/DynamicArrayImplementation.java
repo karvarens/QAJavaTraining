@@ -89,16 +89,9 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     public void add(int index, T object) {
         isValid(index, false, "Can't add item");
         objects = enlargeArraySize();
-        for (int i = 0; i < size; i++) {
-            System.out.println(objects[i]);
-        }
         System.arraycopy(objects, index, objects, index + 1, size - index);
         objects[index] = object;
         size++;
-        System.out.println();
-        for (int i = 0; i < size; i++) {
-            System.out.println(objects[i]);
-        }
         System.out.println();
     }
 
