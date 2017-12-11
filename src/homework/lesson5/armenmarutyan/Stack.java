@@ -31,4 +31,13 @@ public class Stack {
     public boolean isEmpty(){
         return tos == -1;
     }
+
+    public int peek(){
+        if(tos == -1) {
+            System.out.println("Heeey, Stack is empty!!");
+            return 0;
+        }
+
+        return values[tos];
+    }
 }
