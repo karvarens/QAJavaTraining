@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
+import static homework.lesson6.davidgevorgyan.figure.FigureCanvas.*;
+
 public class FigureFrame extends JFrame {
 
     public static void main(String[] args) {
@@ -39,7 +41,7 @@ public class FigureFrame extends JFrame {
 
     private void addActionPerformed (ActionEvent e) {
         homework.lesson6.davidgevorgyan.figure.Figure tempFigure;
-        tempFigure = FigureCanvas.randomFigure(canvas.getWidth(),canvas.getHeight());
+        tempFigure = canvas.randomFigure(canvas.getWidth(),canvas.getHeight());
         canvas.add(tempFigure);
 
 

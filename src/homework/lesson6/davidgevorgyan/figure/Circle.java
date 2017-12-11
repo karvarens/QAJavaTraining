@@ -3,9 +3,10 @@ package homework.lesson6.davidgevorgyan.figure;
 import java.awt.*;
 
 public class Circle extends Figure {
-    public Circle(int x, int y, int diameter, Color color, int speed) {
-        super(x, y, diameter, diameter, color, speed);
+    public Circle(int x, int y, int diameter, Color color, int speed, FigureCanvas location) {
+        super(x, y, diameter, diameter, color, speed, location);
     }
+
 
     @Override
     public void draw(Graphics g) {

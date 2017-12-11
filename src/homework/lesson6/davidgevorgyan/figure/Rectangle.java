@@ -3,9 +3,8 @@ package homework.lesson6.davidgevorgyan.figure;
 import java.awt.*;
 
 public class Rectangle extends Figure {
-
-    public Rectangle(int x, int y, int width, int height, Color color, int speed) {
-        super(x, y, width, height, color, speed);
+    public Rectangle(int x, int y, int width, int height, Color color, int speed, FigureCanvas location) {
+        super(x, y, width, height, color, speed, location);
     }
 
     @Override

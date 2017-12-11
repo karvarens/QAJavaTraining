@@ -13,8 +13,9 @@ abstract public class Figure implements Runnable {
     private Color color;
     private int speed;
     private boolean suspendFlag;
+    private FigureCanvas location;
 
-    Figure(int x, int y, int width, int height, Color color, int speed) {
+    Figure(int x, int y, int width, int height, Color color, int speed, FigureCanvas location) {
         validate(x, y, width, height);
         this.x = x;
         this.y = y;
@@ -25,6 +26,7 @@ abstract public class Figure implements Runnable {
         Thread t = new Thread(this, "Figure");
         t.start();
         suspendFlag = false;
+        this.location = location;
     }
 
     //Getters
@@ -131,11 +133,11 @@ abstract public class Figure implements Runnable {
         int dy = 1;
         try {
             while (getX() < canvasWidth || getY() < canvasHeight) {
-                if (getX() < 10)
+                if (getX() < 2)
                     dx = 1;
                 if (getX() + getWidth() >= canvasWidth - 1)
                     dx = -1;
-                if (getY() < 10)
+                if (getY() < 2)
                     dy = 1;
                 if (getY() + getHeight() >= canvasHeight - 1)
                     dy = -1;
@@ -146,6 +148,8 @@ abstract public class Figure implements Runnable {
                     }
                 }
                 move(dx, dy);
+                if(location != null)
+                    location.repaint();
             }
         } catch (InterruptedException e) {
             System.out.println(x + "Interrupted:");

@@ -8,18 +8,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.concurrent.ThreadLocalRandom;
 import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
-    public class FigureCanvas extends JPanel implements Runnable {
+    public class FigureCanvas extends JPanel {
 
     public DynamicArray<Figure> figures = new DynamicArrayImplementation<>();
     private boolean isSelected;
-    private boolean suspendFlag;
+
 
     public FigureCanvas() {
         MovingAdapter ma = new MovingAdapter();
         addMouseMotionListener(ma);
         addMouseListener(ma);
-        Thread t = new Thread(this, "Canvas Redraw");
-        t.start();
     }
 
     //Inner classes
@@ -90,7 +88,7 @@ import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
         Figure.setCanvasHeight(canvasHeight);
     }
 
-    public static Figure randomFigure(int canvasWidth, int canvasHeight) {
+    public Figure randomFigure(int canvasWidth, int canvasHeight) {
             Figure randomFigure;
             int width = ThreadLocalRandom.current().nextInt(1, canvasWidth);
             int height = ThreadLocalRandom.current().nextInt(1, canvasHeight);
@@ -99,9 +97,9 @@ import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
             int speed = ThreadLocalRandom.current().nextInt(1, 10);
             Color color = new Color((int)(Math.random() * 255),(int)(Math.random() * 255), (int)(Math.random() * 255));
             if (x % 2 == 0) {
-                randomFigure = new Rectangle(x, y, width, height, color, speed);
+                randomFigure = new Rectangle(x, y, width, height, color, speed, this);
             } else {
-                randomFigure = new Circle(x, y, minAbs(height,width), color, speed);
+                randomFigure = new Circle(x, y, minAbs(height,width), color, speed, this);
             }
             return randomFigure;
     }
@@ -136,19 +134,5 @@ import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
             }
         }
         return output.toString();
-    }
-
-    @Override
-    public void run(){
-        try {
-            while (true) {//TODO improve this
-                Thread.sleep(20);
-                //wait();
-                repaint();
-            }
-        } catch (InterruptedException e) {
-            System.out.println("Repaint Interrupted");
-        }
-        System.out.println("Repainting exiting");
     }
 }
