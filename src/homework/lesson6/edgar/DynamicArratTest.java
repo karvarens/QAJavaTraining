@@ -1,5 +1,7 @@
 package homework.lesson6.edgar;
 
+import homework.lesson6.edgar.util.DynamicArrayImpl;
+
 public class DynamicArratTest {
     public static void main(String[] args) {
         DynamicArrayImpl array = new DynamicArrayImpl(60);
