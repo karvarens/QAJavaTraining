@@ -11,18 +11,20 @@ abstract public class Figure implements Runnable {
     private int width;
     private int height;
     private Color color;
-    private int speed;
+    private int dx;
+    private int dy;
     private boolean suspendFlag;
     private FigureCanvas location;
 
-    Figure(int x, int y, int width, int height, Color color, int speed, FigureCanvas location) {
+    Figure(int x, int y, int width, int height, Color color, int dx, int dy, FigureCanvas location) {
         validate(x, y, width, height);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
-        this.speed = speed;
+        this.dx = dx;
+        this.dy = dy;
         Thread t = new Thread(this, "Figure");
         t.start();
         suspendFlag = false;
@@ -71,6 +73,26 @@ abstract public class Figure implements Runnable {
         this.y = y;
     }
 
+    private int setDirectionX (int dx) {
+        if (this.getX() < 0 ) {
+            dx = dx < 0 ? -dx : dx;
+        }
+        if (this.getX() + this.getWidth() >= canvasWidth - 1) {
+            dx = dx > 0 ? -dx : dx;
+        }
+        return dx;
+    }
+
+    private int setDirectionY (int dy) {
+        if (this.getY() <= 0) {
+            dy = dy < 0 ? -dy : dy;
+        }
+        if (this.getY() + this.getHeight() >= canvasHeight - 1) {
+            dy = dy > 0? -dy: dy;
+        }
+        return dy;
+    }
+
     //Abstract methods
     abstract void draw(Graphics g);
 
@@ -94,9 +116,7 @@ abstract public class Figure implements Runnable {
     }
 
     public void move(int dx, int dy) {
-        if (getY() + dy > 0 && getY() + dy + getHeight() < canvasHeight)
             setY(getY() + dy);
-        if (getX() + dx > 0 && getX() + dx + getWidth() < canvasWidth)
             setX(getX() + dx);
     }
 
@@ -116,9 +136,15 @@ abstract public class Figure implements Runnable {
 
         Figure figure = (Figure) o;
 
-        if (x != figure.x) return false;
-        if (y != figure.y) return false;
-        if ( ! color.equals(figure.color)) return false;
+        if (x != figure.x) {
+            return false;
+        }
+        else if (y != figure.y) {
+            return false;
+        }
+        else if ( ! color.equals(figure.color)) {
+            return false;
+        }
         return width == figure.width && height == figure.height;
     }
 
@@ -129,19 +155,11 @@ abstract public class Figure implements Runnable {
 
     @Override
     public void run() {
-        int dx = 1;
-        int dy = 1;
         try {
             while (getX() < canvasWidth || getY() < canvasHeight) {
-                if (getX() < 2)
-                    dx = 1;
-                if (getX() + getWidth() >= canvasWidth - 1)
-                    dx = -1;
-                if (getY() < 2)
-                    dy = 1;
-                if (getY() + getHeight() >= canvasHeight - 1)
-                    dy = -1;
-                Thread.sleep(speed * 4);
+                dx = setDirectionX(dx);
+                dy = setDirectionY(dy);
+                Thread.sleep( 10);
                 synchronized(this) {
                     while(suspendFlag) {
                         wait();
