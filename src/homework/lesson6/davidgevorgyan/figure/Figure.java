@@ -20,13 +20,14 @@ abstract public class Figure implements Runnable {
     private Thread t;
 
     Figure(int x, int y, int width, int height, Color color, FigureCanvas location) {
+        validate(x, y, width, height);
+
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
         this.location = location;
-        validate(x, y, width, height);
     }
 
     //Getters
@@ -94,7 +95,9 @@ abstract public class Figure implements Runnable {
     }
 
     private void pause() {
-        isPaused = true;
+        if(isRunning) {
+            isPaused = true;
+        }
     }
 
     public void playPause(){
@@ -151,7 +154,7 @@ abstract public class Figure implements Runnable {
 
     private void setSpeed() {
         if (isRunning && !isPaused) {
-            dx = ThreadLocalRandom.current().nextInt(-5, 5);
+            dx = ThreadLocalRandom.current().nextInt(-5, 5); //TODO: eliminate hardcoded value and use some defaults
             dy = ThreadLocalRandom.current().nextInt(-5, 5);
         }
         else {
@@ -196,20 +199,22 @@ abstract public class Figure implements Runnable {
     public void run() {
         try {
             while (isRunning) {
-                dx = setDirectionX(dx);
-                dy = setDirectionY(dy);
-                Thread.sleep( 10);
                 synchronized(this) {
                     while(isPaused) {
                         wait();
                     }
                 }
+                dx = setDirectionX(dx); //It can be one method responsible for direction setDirectionX(dx) dx is redundant
+                dy = setDirectionY(dy);
                 move(dx, dy);
-                if(location != null)
+                if(location != null) {
+                    //It should be thrown an Exception , this situation is impossible
                     location.repaint();
+                }
+                Thread.sleep( 10);
             }
         } catch (InterruptedException e) {
-            System.out.println(x + "Interrupted:");
+            e.printStackTrace();
         }
         System.out.println(x + " exiting.");
     }
