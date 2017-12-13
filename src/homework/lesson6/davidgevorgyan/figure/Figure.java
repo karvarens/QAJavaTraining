@@ -1,11 +1,12 @@
+//TODO ask about removal method in canvas
+
 package homework.lesson6.davidgevorgyan.figure;
 
 import java.awt.*;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 abstract public class Figure implements Runnable {
-    private static int canvasWidth = 900;
-    private static int canvasHeight = 600;
     private int x;
     private int y;
     private int width;
@@ -13,28 +14,22 @@ abstract public class Figure implements Runnable {
     private Color color;
     private int dx;
     private int dy;
-    private boolean suspendFlag;
+    private boolean isRunning;
+    private boolean isPaused;
     private FigureCanvas location;
+    private Thread t;
 
-    Figure(int x, int y, int width, int height, Color color, int dx, int dy, FigureCanvas location) {
+    Figure(int x, int y, int width, int height, Color color, FigureCanvas location) {
+        this.location = location;
         validate(x, y, width, height);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
-        this.dx = dx;
-        this.dy = dy;
-        Thread t = new Thread(this, "Figure");
-        t.start();
-        suspendFlag = false;
-        this.location = location;
     }
 
     //Getters
-    public boolean isSuspendFlag() {
-        return suspendFlag;
-    }
 
     public int getX() {
         return x;
@@ -57,14 +52,6 @@ abstract public class Figure implements Runnable {
     }
 
     //Setters
-    public static void setCanvasWidth(int canvasWidth) {
-        Figure.canvasWidth = canvasWidth;
-    }
-
-    public static void setCanvasHeight(int canvasHeight) {
-        Figure.canvasHeight = canvasHeight;
-    }
-
     public void setX(int x) {
         this.x = x;
     }
@@ -73,24 +60,19 @@ abstract public class Figure implements Runnable {
         this.y = y;
     }
 
-    private int setDirectionX (int dx) {
+    private void setDirection () {
         if (this.getX() < 0 ) {
             dx = dx < 0 ? -dx : dx;
         }
-        if (this.getX() + this.getWidth() >= canvasWidth - 1) {
+        if (this.getX() + this.getWidth() >= location.getWidth() - 1) {
             dx = dx > 0 ? -dx : dx;
         }
-        return dx;
-    }
-
-    private int setDirectionY (int dy) {
         if (this.getY() <= 0) {
             dy = dy < 0 ? -dy : dy;
         }
-        if (this.getY() + this.getHeight() >= canvasHeight - 1) {
+        if (this.getY() + this.getHeight() >= location.getHeight() - 1) {
             dy = dy > 0? -dy: dy;
         }
-        return dy;
     }
 
     //Abstract methods
@@ -99,27 +81,81 @@ abstract public class Figure implements Runnable {
     abstract boolean isBelong (int x, int y);
 
     //Threads methods
-    synchronized void suspend() {
-        suspendFlag = true;
+    private synchronized void play() {
+        if(isPaused) {
+            isPaused = false;
+            notify();
+        }
     }
 
-    synchronized void resume() {
-        suspendFlag = false;
-        notify();
+    private void pause() {
+        if(isRunning) {
+            isPaused = true;
+        }
+    }
+
+    public void playPause(){
+        if(isRunning) {
+            if (isPaused) {
+                play();
+            } else {
+                pause();
+            }
+        }
+        else {
+            start();
+        }
+    }
+
+    private void start() {
+        if (t != null) {
+            stop();
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
+        t = new Thread(this, "Figure");
+        isRunning = true;
+        setSpeed();
+        try {
+            t.start();
+        } catch (IllegalThreadStateException e) {
+            e.printStackTrace();
+            isRunning = false;
+        }
+    }
+
+    public void stop() {
+        play();
+        isRunning = false;
+        setSpeed();
     }
 
     //Other methods
     private void validate(int x, int y, int width, int height){
-        if (!(x >= 0 && !(x > canvasWidth - width) && y >= 0 && !(y > canvasHeight - height) && width >= 1 && height >= 1)) {
+        if (!(x >= 0 && !(x > location.getWidth() - width) && y >= 0 && !(y > location.getHeight() - height) && width >= 1 && height >= 1)) {
             throw new IllegalArgumentException();
         }
     }
 
-    public void move(int dx, int dy) {
+    public void move() {
             setY(getY() + dy);
             setX(getX() + dx);
     }
 
+    private void setSpeed() {
+        if (isRunning && !isPaused) {
+            dx = ThreadLocalRandom.current().nextInt(-5, 5); //TODO: eliminate hardcoded value and use some defaults
+            dy = ThreadLocalRandom.current().nextInt(-5, 5);
+        }
+        else {
+            dx = 0;
+            dy = 0;
+        }
+    }
 
     //Overridden methods of the Object class
     @Override
@@ -156,21 +192,19 @@ abstract public class Figure implements Runnable {
     @Override
     public void run() {
         try {
-            while (getX() < canvasWidth || getY() < canvasHeight) {
-                dx = setDirectionX(dx);
-                dy = setDirectionY(dy);
-                Thread.sleep( 10);
+            while (isRunning) {
                 synchronized(this) {
-                    while(suspendFlag) {
+                    while(isPaused) {
                         wait();
                     }
                 }
-                move(dx, dy);
-                if(location != null)
-                    location.repaint();
+                setDirection();
+                move();
+                location.repaint();
+                Thread.sleep( 10);
             }
         } catch (InterruptedException e) {
-            System.out.println(x + "Interrupted:");
+            e.printStackTrace();
         }
         System.out.println(x + " exiting.");
     }

@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
     public class FigureCanvas extends JPanel {
@@ -39,7 +40,7 @@ import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
 
             Figure temp = figures.get(figures.size()-1);
             if (isSelected) {
-                temp.move(dx, dy);
+                temp.move();
                 repaint();
             }
             x += dx;
@@ -54,8 +55,9 @@ import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
     }
 
     public boolean remove() {
-        if (isSelected) {
-            figures.remove(figures.size() - 1);
+        if(getSelected() != null) {
+            getSelected().stop();
+            figures.remove(getSelected());
             isSelected = false;
             repaint();
             return true;
@@ -69,13 +71,6 @@ import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
             if (figures.get(i).isBelong(x, y)) {
                 isSelected = true;
                 figures.add(figures.remove(i));
-                if (figures.get(figures.size() - 1).isSuspendFlag()) {
-                    figures.get(figures.size() - 1).resume();
-                }
-                else {
-                    figures.get(figures.size() - 1).suspend();
-                }
-
                 return;
             }
         }
@@ -83,9 +78,22 @@ import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
         isSelected = false;
     }
 
-    public void setCanvasSize(int canvasWidth, int canvasHeight){
-        Figure.setCanvasWidth(canvasWidth);
-        Figure.setCanvasHeight(canvasHeight);
+    public void playPause() {
+        try {
+            Objects.requireNonNull(getSelected()).playPause();
+        }
+        catch (NullPointerException ignore) {
+
+        }
+    }
+
+    public void stop() {
+        try {
+            Objects.requireNonNull(getSelected()).stop();
+        }
+        catch (NullPointerException ignore) {
+
+        }
     }
 
     public Figure randomFigure(int canvasWidth, int canvasHeight) {
@@ -97,11 +105,20 @@ import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
             int speed = ThreadLocalRandom.current().nextInt(1, 5);
             Color color = new Color((int)(Math.random() * 255),(int)(Math.random() * 255), (int)(Math.random() * 255));
             if (x % 2 == 0) {
-                randomFigure = new Rectangle(x, y, width, height, color, speed, speed, this);
+                randomFigure = new Rectangle(x, y, width, height, color,this);
             } else {
-                randomFigure = new Circle(x, y, minAbs(height,width), color, speed, speed, this);
+                randomFigure = new Circle(x, y, minAbs(height,width), color,this);
             }
             return randomFigure;
+    }
+
+    private Figure getSelected() {
+        if (isSelected) {
+            return figures.get(figures.size() - 1);
+        }
+        else {
+            return null;
+        }
     }
 
     //Override methods
