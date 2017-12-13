@@ -40,7 +40,7 @@ import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
 
             Figure temp = figures.get(figures.size()-1);
             if (isSelected) {
-                temp.move(dx, dy);
+                temp.move();
                 repaint();
             }
             x += dx;
@@ -79,11 +79,21 @@ import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
     }
 
     public void playPause() {
+        try {
             Objects.requireNonNull(getSelected()).playPause();
+        }
+        catch (NullPointerException ignore) {
+
+        }
     }
 
     public void stop() {
+        try {
             Objects.requireNonNull(getSelected()).stop();
+        }
+        catch (NullPointerException ignore) {
+
+        }
     }
 
     public Figure randomFigure(int canvasWidth, int canvasHeight) {

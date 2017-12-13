@@ -20,14 +20,13 @@ abstract public class Figure implements Runnable {
     private Thread t;
 
     Figure(int x, int y, int width, int height, Color color, FigureCanvas location) {
+        this.location = location;
         validate(x, y, width, height);
-
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
-        this.location = location;
     }
 
     //Getters
@@ -61,24 +60,19 @@ abstract public class Figure implements Runnable {
         this.y = y;
     }
 
-    private int setDirectionX (int dx) {
+    private void setDirection () {
         if (this.getX() < 0 ) {
             dx = dx < 0 ? -dx : dx;
         }
         if (this.getX() + this.getWidth() >= location.getWidth() - 1) {
             dx = dx > 0 ? -dx : dx;
         }
-        return dx;
-    }
-
-    private int setDirectionY (int dy) {
         if (this.getY() <= 0) {
             dy = dy < 0 ? -dy : dy;
         }
         if (this.getY() + this.getHeight() >= location.getHeight() - 1) {
             dy = dy > 0? -dy: dy;
         }
-        return dy;
     }
 
     //Abstract methods
@@ -147,7 +141,7 @@ abstract public class Figure implements Runnable {
         }
     }
 
-    public void move(int dx, int dy) {
+    public void move() {
             setY(getY() + dy);
             setX(getX() + dx);
     }
@@ -204,13 +198,9 @@ abstract public class Figure implements Runnable {
                         wait();
                     }
                 }
-                dx = setDirectionX(dx); //It can be one method responsible for direction setDirectionX(dx) dx is redundant
-                dy = setDirectionY(dy);
-                move(dx, dy);
-                if(location != null) {
-                    //It should be thrown an Exception , this situation is impossible
-                    location.repaint();
-                }
+                setDirection();
+                move();
+                location.repaint();
                 Thread.sleep( 10);
             }
         } catch (InterruptedException e) {
