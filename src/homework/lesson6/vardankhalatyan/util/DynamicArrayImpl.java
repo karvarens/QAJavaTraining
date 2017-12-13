@@ -84,6 +84,31 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
         }
     }
 
+    private void switcher(int index, String direction) {
+        int s = size();
+        int val = values.length;
+        if (s == val){
+            Object[] copyArray = new Object[val * 3/2];
+            System.arraycopy(values, 0, copyArray, 0, val);
+            values = copyArray;
+        } else if (s == val/3){
+            Object[] copyArray = new Object[val/2];
+            System.arraycopy(values, 0, copyArray, 0, s);
+            values = copyArray;
+        }
+        if (direction == "Right") {
+            for (int i = s - 1; i >= index; s--) {
+                values[s] = values[s - 1];
+            }
+            values[index] = null;
+        } else if (direction == "Left") {
+            for (int i = index; i < s; i++) {
+                values[i] = values[i+1];
+            }
+        }
+    }
+
+
     @Override
     public boolean add(T e) {
         return false;
@@ -91,16 +116,23 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public void add(int index, T element) {
-
+        switcher(index, "Right");
+        values[index] = element;
     }
 
     @Override
     public T remove(int index) {
-        return null;
+        Object element = values[index];
+        switcher(index, "Left");
+        return (T) element;
     }
 
     @Override
     public boolean remove(T o) {
-        return false;
+        if (contains(o)){
+            remove(indexOf(o));
+            return true;
+        }
+        throw new NoSuchElementException("There is no such element to be removed");
     }
 }
