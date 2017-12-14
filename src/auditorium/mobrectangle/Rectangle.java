@@ -49,7 +49,6 @@ public class Rectangle {
 
     public void print() {  //TODO: override toString method.
 //        isValid(); Print method should not check fields values, it should just print the value
-
 //        for (int i = 0; i < height; i++) {
 //            if (i == 0 || i == height - 1) {
 //                fullRow();
