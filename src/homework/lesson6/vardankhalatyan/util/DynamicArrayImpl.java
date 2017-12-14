@@ -19,7 +19,6 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
         values = new Object[capacity];
     }
 
-
     @Override
     public int size() {
         return this.size;
@@ -27,12 +26,12 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return size() == 0;
     }
 
     @Override
     public boolean contains(T o) {
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size() - 1; i++) {
             if (o.equals(values[i])) return true;
         }
         return false;
@@ -40,9 +39,17 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public int indexOf(T o) {
-        for (int i = 0; i < size - 1; i++) {
-            if (o.equals(values[i])) {
-                return i;
+        if (o == null) {
+            for (int i = 0; i < values.length ; i++) {
+                if (values[i] == null) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = 0; i < size() - 1; i++) {
+                if (o.equals(values[i])) {
+                    return i;
+                }
             }
         }
         return -1;
@@ -50,7 +57,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public int lastIndexOf(T o) {
-        for (int i = size - 1; i <= 0; i++) {
+        for (int i = size() - 1; i <= 0; i++) {
             if (o.equals(values[i])) {
                 return i;
             }
@@ -59,7 +66,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     }
 
     private boolean getElement(int index){
-        if (index <= size && index >= 0){
+        if (index <= size() && index >= 0){
             return true;
         } else {
             throw new IndexOutOfBoundsException();
@@ -107,7 +114,6 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
             }
         }
     }
-
 
     @Override
     public boolean add(T e) {
