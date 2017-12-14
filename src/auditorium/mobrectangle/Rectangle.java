@@ -95,6 +95,7 @@ class outsideOfRectangle {
     Rectangle abc = new Rectangle(10, 20);
 
     public void main() {
+//        Rectangle.main(new String[0]);
         abc.print();
     }
 }
