@@ -111,19 +111,22 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public boolean add(T e) {
-        return false;
+        add(size(), e);
+        return true;
     }
 
     @Override
     public void add(int index, T element) {
         switcher(index, "Right");
-        values[index] = element;
+        set(index, element);
+        size++;
     }
 
     @Override
     public T remove(int index) {
-        Object element = values[index];
+        Object element = get(index);
         switcher(index, "Left");
+        size--;
         return (T) element;
     }
 
