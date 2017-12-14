@@ -31,18 +31,27 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     }
 
     @Override
-    public boolean contains(T o) {
-        for (int i = 0; i < size - 1; i++) {
-            if (o.equals(values[i])) return true;
-        }
-        return false;
+    public boolean contains(T o) { // TO avoid code duplication use indexOf method
+//        for (int i = 0; i < size - 1; i++) {
+//            if (o.equals(values[i])) return true;
+//        }
+        return indexOf(o) > -1;
     }
 
     @Override
     public int indexOf(T o) {
-        for (int i = 0; i < size - 1; i++) {
-            if (o.equals(values[i])) {
-                return i;
+        if(o == null) { // it will thrown NullPointerException
+            //TODO: find first null value in array
+            for (int i = 0; i < size - 1; i++) {
+                if (o.equals(values[i])) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = 0; i < size - 1; i++) {
+                if (o.equals(values[i])) {
+                    return i;
+                }
             }
         }
         return -1;
