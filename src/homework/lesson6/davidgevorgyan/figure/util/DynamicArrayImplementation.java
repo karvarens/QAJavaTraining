@@ -97,7 +97,7 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
 
 
 
-    public T remove (int index) {
+    public T remove(int index) {
         isValid(index, false, "Can't remove item");
         T temp = getElement(index);
         System.arraycopy(objects, index + 1, objects, index, size - index);
@@ -117,8 +117,8 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private T getElement (int index) {
-        return (T)objects[index];
+    private T getElement(int index) {
+        return (T) objects[index];
     }
 
     /**

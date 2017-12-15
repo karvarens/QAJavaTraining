@@ -10,13 +10,6 @@ import static homework.lesson6.davidgevorgyan.figure.FigureCanvas.*;
 
 public class FigureFrame extends JFrame {
 
-    public static void main(String[] args) {
-        new FigureFrame();
-    }
-
-
-    private FigureCanvas canvas;
-
     public FigureFrame() {
 
         JPanel controlPanel = new JPanel();
@@ -43,6 +36,12 @@ public class FigureFrame extends JFrame {
         setTitle("Figures");
         setVisible(true);
     }
+
+    public static void main(String[] args) {
+        new FigureFrame();
+    }
+
+    private FigureCanvas canvas;
 
     private void addActionPerformed (ActionEvent e) {
         homework.lesson6.davidgevorgyan.figure.Figure tempFigure;

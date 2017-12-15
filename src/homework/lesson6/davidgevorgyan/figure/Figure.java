@@ -21,7 +21,7 @@ abstract public class Figure implements Runnable {
 
     Figure(int x, int y, int width, int height, Color color, FigureCanvas location) {
         this.location = location;
-        validate(x, y, width, height);
+        isValid(x, y, width, height);
         this.x = x;
         this.y = y;
         this.width = width;
@@ -30,7 +30,6 @@ abstract public class Figure implements Runnable {
     }
 
     //Getters
-
     public int getX() {
         return x;
     }
@@ -135,7 +134,7 @@ abstract public class Figure implements Runnable {
     }
 
     //Other methods
-    private void validate(int x, int y, int width, int height){
+    private void isValid(int x, int y, int width, int height){
         if (!(x >= 0 && !(x > location.getWidth() - width) && y >= 0 && !(y > location.getHeight() - height) && width >= 1 && height >= 1)) {
             throw new IllegalArgumentException();
         }

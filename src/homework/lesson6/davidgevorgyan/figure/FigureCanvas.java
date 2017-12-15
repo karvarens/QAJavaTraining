@@ -1,7 +1,6 @@
 package homework.lesson6.davidgevorgyan.figure;
 
 import homework.lesson6.davidgevorgyan.figure.util.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -9,11 +8,11 @@ import java.awt.event.MouseEvent;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
-    public class FigureCanvas extends JPanel {
+
+public class FigureCanvas extends JPanel {
 
     public DynamicArray<Figure> figures = new DynamicArrayImplementation<>();
     private boolean isSelected;
-
 
     public FigureCanvas() {
         MovingAdapter ma = new MovingAdapter();
