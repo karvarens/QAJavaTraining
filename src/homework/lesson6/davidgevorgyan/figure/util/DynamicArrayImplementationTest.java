@@ -3,8 +3,9 @@ package homework.lesson6.davidgevorgyan.figure.util;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@SuppressWarnings("unchecked")
 public class DynamicArrayImplementationTest {
+
     @Test
     void size() {
         DynamicArrayImplementation dynamicArrayImplementation = createDynamicArray(5,"Test");
@@ -138,7 +139,4 @@ public class DynamicArrayImplementationTest {
         }
         return dynamicArray;
     }
-
-
-
 }

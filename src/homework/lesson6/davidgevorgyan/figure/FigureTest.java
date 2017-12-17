@@ -31,7 +31,7 @@ public class FigureTest {
     @Test
     void validatorValid() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Rectangle a = new Rectangle(10,10,10,10,Color.red, data());
-        Method method = Figure.class.getDeclaredMethod("validate", int.class, int.class, int.class, int.class);
+        Method method = Figure.class.getDeclaredMethod("isValid", int.class, int.class, int.class, int.class);
         method.setAccessible(true);
         assertEquals(null,  method.invoke(a, a.getX(),a.getY(),a.getWidth(),a.getHeight()));
   }

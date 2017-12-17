@@ -3,6 +3,15 @@ package homework.lesson6.davidgevorgyan.figure.util;
 import java.util.Arrays;
 
 public class DynamicArrayImplementation<T> implements DynamicArray<T> {
+    enum Error {
+        add("Can't add item"), remove("Can't remove item"), get("Can't get item"), set("Can't set item"), move("Can't move item");
+
+        private String message;
+        Error(String message) {
+            this.message = message;
+        }
+    }
+
     private Object objects[];
     private int size;
     private final static int DEFAULT_SIZE = 16;
@@ -69,12 +78,12 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     }
 
     public T get(int index) {
-        isValid(index, true, "Can't get item");
+        isValid(index, true, Error.get);
         return getElement(index);
     }
 
     public T set(int index, T object) {
-        isValid(index, true, "Can't set item");
+        isValid(index, true, Error.set);
         T temp = getElement(index);
         objects[index] = object;
         return temp;
@@ -87,7 +96,7 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
     }
 
     public void add(int index, T object) {
-        isValid(index, false, "Can't add item");
+        isValid(index, false, Error.add);
         objects = enlargeArraySize();
         System.arraycopy(objects, index, objects, index + 1, size - index);
         objects[index] = object;
@@ -98,7 +107,7 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
 
 
     public T remove(int index) {
-        isValid(index, false, "Can't remove item");
+        isValid(index, false, Error.remove);
         T temp = getElement(index);
         System.arraycopy(objects, index + 1, objects, index, size - index);
         objects[size - 1] = null;
@@ -160,15 +169,15 @@ public class DynamicArrayImplementation<T> implements DynamicArray<T> {
 
     }
 
-    private void isValid(int index, boolean withSize, String errorMessage){
+    private void isValid(int index, boolean withSize, Error errorMessage){
         if (index < 0) {
-            throw new NegativeArraySizeException("Index is negative: " + errorMessage);
+            throw new IndexOutOfBoundsException(errorMessage.message);
         }
         if (withSize && index >= size) {
-            throw new IndexOutOfBoundsException("Index is greater or equal to Size: " + errorMessage);
+            throw new IndexOutOfBoundsException(errorMessage.message);
         }
         if (!withSize && index > size) {
-            throw new IndexOutOfBoundsException("Index is greater than Size: " + errorMessage);
+            throw new IndexOutOfBoundsException(errorMessage.message);
         }
 
     }
