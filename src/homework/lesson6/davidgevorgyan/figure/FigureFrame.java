@@ -3,10 +3,6 @@ package homework.lesson6.davidgevorgyan.figure;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-
-import static homework.lesson6.davidgevorgyan.figure.FigureCanvas.*;
 
 public class FigureFrame extends JFrame {
 

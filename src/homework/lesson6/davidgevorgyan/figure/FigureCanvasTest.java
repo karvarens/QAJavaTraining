@@ -28,7 +28,7 @@ class FigureCanvasTest {
         main.add(b);
         main.add(c);
         main.add(b);
-        assertFalse(main.remove());
+        assertThrows(NullPointerException.class, ()-> main.remove());
     }
 
     @Test
@@ -42,7 +42,7 @@ class FigureCanvasTest {
         main.add(c);
         main.add(b);
         main.select(0,0);
-        assertFalse(main.remove());
+        assertThrows(NullPointerException.class, ()-> main.remove());
     }
     @Test
     void equalsTest(){

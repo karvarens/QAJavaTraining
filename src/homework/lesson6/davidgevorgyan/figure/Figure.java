@@ -1,5 +1,3 @@
-//TODO ask about removal method in canvas
-
 package homework.lesson6.davidgevorgyan.figure;
 
 import java.awt.*;

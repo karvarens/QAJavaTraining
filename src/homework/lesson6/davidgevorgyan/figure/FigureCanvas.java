@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import static homework.lesson2.davidgevorgyan.util.MathUtil.minAbs;
 
@@ -37,7 +36,7 @@ public class FigureCanvas extends JPanel {
             int dx = e.getX() - x;
             int dy = e.getY() - y;
 
-            Figure temp = figures.get(figures.size()-1);
+            Figure temp = getSelected();
             if (isSelected) {
                 temp.move();
                 repaint();
@@ -78,20 +77,14 @@ public class FigureCanvas extends JPanel {
     }
 
     public void playPause() {
-        try {
-            Objects.requireNonNull(getSelected()).playPause();
-        }
-        catch (NullPointerException ignore) {
-
+        if(isSelected) {
+            getSelected().playPause();
         }
     }
 
     public void stop() {
-        try {
-            Objects.requireNonNull(getSelected()).stop();
-        }
-        catch (NullPointerException ignore) {
-
+        if(isSelected) {
+            getSelected().stop();
         }
     }
 
@@ -116,7 +109,7 @@ public class FigureCanvas extends JPanel {
             return figures.get(figures.size() - 1);
         }
         else {
-            return null;
+            throw new NullPointerException("Figure is not selected");
         }
     }
 

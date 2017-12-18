@@ -11,7 +11,7 @@ public class ProducerConsumer{
     private int a = 0;
 
 
-    private  void producer() throws InterruptedException {
+    private  void produce() throws InterruptedException {
         while (true) {
             synchronized (this) {
                 while(queue.size() == MAXIMAL_SIZE) {
@@ -24,7 +24,7 @@ public class ProducerConsumer{
             }
         }
 
-    private  void consumer() throws InterruptedException {
+    private  void consume() throws InterruptedException {
         while (true) {
             synchronized (this) {
                 while (queue.size() < 1) {
@@ -45,7 +45,7 @@ public class ProducerConsumer{
             @Override
             public void run() {
                 try {
-                    a.producer();
+                    a.produce();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -55,7 +55,7 @@ public class ProducerConsumer{
             @Override
             public void run() {
                 try {
-                    a.consumer();
+                    a.consume();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
