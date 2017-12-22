@@ -3,6 +3,11 @@ package homework.lesson6.vardankhalatyan.util;
 import java.util.NoSuchElementException;
 
 public class DynamicArrayImpl<T> implements DynamicArray<T> {
+    enum Direction {
+        right("right"), left("left");
+        Direction(String right) {}
+    }
+
     private static final int DEFAULT_CAPACITY = 16;
 
     private Object[] values;
@@ -65,9 +70,9 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
         return -1;
     }
 
-    private boolean getElement(int index){
+    private T getElement(int index){
         if (index <= size() && index >= 0){
-            return true;
+            return (T)values[index];
         } else {
             throw new IndexOutOfBoundsException();
         }
@@ -75,23 +80,17 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public T get(int index) {
-        if (getElement(index)) {
-            return (T) values[index];
-        } else {
-            throw new NoSuchElementException("Something went wrong: There is no element in mentioned index");
-        }
+        return getElement(index);
     }
 
     @Override
     public T set(int index, T element) {
-        if (getElement(index)){
-            return (T) (values[index] = element);
-        } else {
-            throw new NoSuchElementException("Something went wrong: Can't set the mentioned index element");
-        }
+        T oldValue = getElement(index);
+        values[index] = element;
+        return oldValue;
     }
 
-    private void switcher(int index, String direction) {
+    private void switcher(int index, Direction direction) {
         int s = size();
         int val = values.length;
         if (s == val){
@@ -103,12 +102,12 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
             System.arraycopy(values, 0, copyArray, 0, s);
             values = copyArray;
         }
-        if (direction == "Right") {
+        if (direction == Direction.right) {
             for (int i = s - 1; i >= index; s--) {
                 values[s] = values[s - 1];
             }
             values[index] = null;
-        } else if (direction == "Left") {
+        } else if (direction == Direction.left) {
             for (int i = index; i < s; i++) {
                 values[i] = values[i+1];
             }
@@ -123,7 +122,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public void add(int index, T element) {
-        switcher(index, "Right");
+        switcher(index, Direction.right);
         set(index, element);
         size++;
     }
@@ -131,7 +130,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     @Override
     public T remove(int index) {
         Object element = get(index);
-        switcher(index, "Left");
+        switcher(index, Direction.left);
         size--;
         return (T) element;
     }
