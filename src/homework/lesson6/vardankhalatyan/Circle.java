@@ -2,13 +2,13 @@ package homework.lesson6.vardankhalatyan;
 
 import java.awt.*;
 
-abstract public class Circle extends Figure {
+public class Circle extends Figure {
     public Circle(int x, int y, int diameter, Color color) {
         super(x, y, diameter, diameter, color);
     }
 
 
-//    @Override
+    //    @Override
     public void draw(Graphics g) {
         g.setColor(color);
         g.drawOval(getX(), getY(), getWidth(), getHeight());
