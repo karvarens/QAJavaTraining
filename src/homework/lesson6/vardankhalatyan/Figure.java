@@ -41,6 +41,11 @@ abstract public class Figure {
         return color;
     }
 
+    public void move (int dx, int dy) {
+       x += dx;
+       y += dy;
+    }
+
     //    public static void main(String[] args) {
 //        Figure[] figures = new Figure[5];
 //

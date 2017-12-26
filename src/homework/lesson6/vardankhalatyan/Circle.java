@@ -16,8 +16,8 @@ public class Circle extends Figure {
 
     @Override
     public boolean isBelong(int x, int y) {
-        int cx = (2 * getX() + getWidth()) / 2;
-        int cy = (2 * getY() + getHeight()) / 2;
+        int cx = getX() + getWidth() / 2;
+        int cy = getY() + getHeight() / 2;
         int radius = getHeight() / 2;
         return (x - cx) * (x - cx) + (y - cy) * (y - cy) <= radius * radius;
     }
