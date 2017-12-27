@@ -90,7 +90,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
         return oldValue;
     }
 
-    private void switcher(int index, Direction direction) {
+    private void shiftTo(int index, Direction direction) {
         int s = size();
         int val = values.length;
         if (s == val){
@@ -122,7 +122,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public void add(int index, T element) {
-        switcher(index, Direction.right);
+        shiftTo(index, Direction.right);
         set(index, element);
         size++;
     }
@@ -130,7 +130,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     @Override
     public T remove(int index) {
         Object element = get(index);
-        switcher(index, Direction.left);
+        shiftTo(index, Direction.left);
         size--;
         return (T) element;
     }
