@@ -19,7 +19,19 @@ public class DynamicArrayTest {
         array.add("JaVa");
         array.add("Toshiba");
         array.add("Google");
-        array.remove("Ten");
+        System.out.println(array.size());
+        System.out.println(array.isEmpty());
+        System.out.println(array.contains("Edgar"));
+        System.out.println("index of Edgar " + array.indexOf("Edgar"));
+        System.out.println(array.lastIndexOf("Ten"));
+        System.out.println("12 element is " + array.get(12));
+        array.set(13,"JAVA");
+        array.add(10,"Sixteen");
+        array.remove(10);
+        System.out.println(array.indexOf("Edgar"));
+        array.remove("Edgar"); // in removing element returned array are smaller than it was??
         array.printArray();
+        System.out.println();
+        System.out.println(array.size());
     }
 }
