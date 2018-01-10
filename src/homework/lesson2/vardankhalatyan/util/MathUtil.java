@@ -3,6 +3,7 @@ package homework.lesson2.vardankhalatyan.util;
 
 public class MathUtil {
     public static void main(String[] args) {
+        System.out.println(fibunacci(3));
     }
 
     /**
@@ -77,4 +78,14 @@ public class MathUtil {
         return number;
     }
 
+
+    public static int fibunacci(int n){
+        if (n == 1){
+            return 1;
+        } else if (n == 2) {
+            return 1;
+        }
+        return fibunacci(n-1) + fibunacci(n-2);
+    }
 }
+

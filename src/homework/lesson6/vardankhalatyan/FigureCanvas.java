@@ -19,38 +19,46 @@ public class FigureCanvas extends JPanel {
 
     public FigureCanvas() {
         //TODO: add MouseListeners and MouseMotionListener
-//        JPanel canvas = new JPanel();
-//        canvas.setBounds(0,0,300,300);
-//        JButton addFigure = new JButton("Add Figure");
-//        JButton removeFigure = new JButton("Remove Figure");
-//        add(addFigure);
-//        add(removeFigure);
 
         addMouseListener(new MouseAdapter() {
+            private int mouseX;
+            private int mouseY;
+
             @Override
             public void mousePressed(MouseEvent e) {
-                //TODo call the handler method
+                mouseX = e.getX();
+                mouseY = e.getY();
+                select(mouseX, mouseY);
+                repaint();
             }
 
             @Override
             public void mouseDragged(MouseEvent e) {
-
+                int dx = e.getX() - mouseX;
+                int dy = e.getY() - mouseY;
+                figures.get(figures.size() - 1).move(dx, dy);
+                mouseX += dx;
+                mouseY += dy;
             }
         });
     }
 
     //TODO: add handler methods
 
+
     public void add (Figure figure) {
         figures.add(figure);
-        Figure fg = figures.get(size-1);
-        paint(getGraphics());
-        fg.draw(getGraphics());
+        repaint();
+
+//        Figure fg = figures.get(figures.size()-1);
+//        paint(getGraphics());
+//        fg.draw(getGraphics());
     }
 
     public boolean remove (Figure figure) {
-        //TODO
-        return true; // if the specified figure exists
+        boolean rmed = figures.remove(figure);
+        repaint();
+        return rmed; // if the specified figure exists
     }
 
     public void select (int x, int y) {
@@ -73,9 +81,7 @@ public class FigureCanvas extends JPanel {
     }
 
     public static void main(String[] args) {
-        Circle crcl = new Circle(100, 100, 10, Color.RED);
-        FigureCanvas fgc = new FigureCanvas();
-        fgc.add(crcl);
+
     }
 
 }

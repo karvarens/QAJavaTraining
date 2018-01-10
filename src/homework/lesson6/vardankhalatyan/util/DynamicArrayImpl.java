@@ -3,9 +3,15 @@ package homework.lesson6.vardankhalatyan.util;
 import java.util.NoSuchElementException;
 
 public class DynamicArrayImpl<T> implements DynamicArray<T> {
+
     enum Direction {
-        right("right"), left("left");
-        Direction(String right) {}
+        RIGHT("RIGHT"), LEFT("left");
+
+        Direction(String name) {
+            this.name = name;
+        }
+
+        private String name;
     }
 
     private static final int DEFAULT_CAPACITY = 16;
@@ -17,7 +23,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     private int size;
 
     public DynamicArrayImpl() {
-        new DynamicArrayImpl(DEFAULT_CAPACITY);
+        this(DEFAULT_CAPACITY);
     }
 
     public DynamicArrayImpl(int capacity) {
@@ -70,11 +76,12 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
         return -1;
     }
 
+    @SuppressWarnings("unchecked")
     private T getElement(int index){
-        if (index <= size() && index >= 0){
-            return (T)values[index];
-        } else {
+        if (index > size() || index < 0){
             throw new IndexOutOfBoundsException();
+        } else {
+            return (T)values[index];
         }
     }
 
@@ -102,12 +109,12 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
             System.arraycopy(values, 0, copyArray, 0, s);
             values = copyArray;
         }
-        if (direction == Direction.right) {
+        if (direction == Direction.RIGHT) {
             for (int i = s - 1; i >= index; s--) {
                 values[s] = values[s - 1];
             }
             values[index] = null;
-        } else if (direction == Direction.left) {
+        } else if (direction == Direction.LEFT) {
             for (int i = index; i < s; i++) {
                 values[i] = values[i+1];
             }
@@ -122,15 +129,21 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public void add(int index, T element) {
-        shiftTo(index, Direction.right);
+        if (isEmpty()) {
+            values[size()] = element;
+            size++;
+            return;
+        }
+        shiftTo(index, Direction.RIGHT);
         set(index, element);
         size++;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public T remove(int index) {
         Object element = get(index);
-        shiftTo(index, Direction.left);
+        shiftTo(index, Direction.LEFT);
         size--;
         return (T) element;
     }
