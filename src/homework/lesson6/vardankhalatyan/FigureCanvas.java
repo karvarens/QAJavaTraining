@@ -29,6 +29,7 @@ public class FigureCanvas extends JPanel {
                 mouseX = e.getX();
                 mouseY = e.getY();
                 select(mouseX, mouseY);
+                add(new Circle(mouseX, mouseY, mouseX - mouseY, Color.RED));
                 repaint();
             }
 
@@ -39,6 +40,7 @@ public class FigureCanvas extends JPanel {
                 figures.get(figures.size() - 1).move(dx, dy);
                 mouseX += dx;
                 mouseY += dy;
+                repaint();
             }
         });
     }
@@ -76,8 +78,15 @@ public class FigureCanvas extends JPanel {
 
     @Override
     public void paint (Graphics g) {
-
+        for (int i = 0; i < figures.size(); i++) {
+            figures.get(i).draw(g);;
+        }
 //        TODO: implement the method
+    }
+
+    @Override
+    public void paintComponents(Graphics g) {
+        super.paintComponents(g);
     }
 
     public static void main(String[] args) {

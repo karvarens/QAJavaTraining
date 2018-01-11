@@ -13,13 +13,13 @@ public class FigureFrame extends JFrame {
     private String removeButtonName = "Remove Figure";
 
     public FigureFrame() {
-        JFrame frames = new JFrame();
-        frames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frames.setSize(900,500);
-        frames.setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(900,500);
+        setLayout(null);
 
         JPanel panel = new JPanel();
-        panel.setBounds(0,0,frames.getWidth(),50);
+        panel.setBounds(0,0,getWidth(),50);
+        panel.setBackground(Color.RED);
         JButton addFigure = new JButton(getAddButtonName());
         JButton removeFigure = new JButton(getRemoveButtonName());
 
@@ -27,15 +27,15 @@ public class FigureFrame extends JFrame {
         panel.add(addFigure);
         panel.add(removeFigure);
 
-        FigureCanvas canvas = new FigureCanvas();
-        canvas.setBounds(0, panel.getHeight(),frames.getWidth(), frames.getHeight() - panel.getHeight());
+        canvas = new FigureCanvas();
+        canvas.setBounds(0, panel.getHeight(),getWidth(), getHeight() - panel.getHeight());
 
 
-        frames.add(panel);
-        frames.add(canvas, BorderLayout.CENTER);
-        frames.setTitle(getPanelName());
+        add(panel);
+        add(canvas);
+        setTitle(getPanelName());
 
-        frames.setVisible(true);
+        setVisible(true);
     }
 
     private void add(ActionEvent actionEvent) {
@@ -44,7 +44,7 @@ public class FigureFrame extends JFrame {
         repaint();
     }
 
-    private FigureCanvas canvas = new FigureCanvas();
+    private FigureCanvas canvas;
 
 
 
@@ -75,10 +75,10 @@ public class FigureFrame extends JFrame {
 
     public static void main(String[] args) {
         FigureFrame fgf = new FigureFrame();
-        Circle crcl = new Circle(300, 300, 33, Color.RED);
-        FigureCanvas fgc = new FigureCanvas();
-        fgc.add(crcl);
-        fgf.add(fgc);
+//        Circle crcl = new Circle(300, 300, 33, Color.RED);
+//        FigureCanvas fgc = new FigureCanvas();
+//        fgc.add(crcl);
+//        fgf.add(fgc);
     }
 
 }
