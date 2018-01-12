@@ -16,5 +16,33 @@ public class TreeSetDemo {
         Set<Student> students2 = new TreeSet<>(SortBy.AVERAGE_GRADE);
         students2.addAll(students1);
         System.out.println(students2);
+
+        StudentComparator comparator = new StudentComparator();
+        List<Student> list = new ArrayList<>();
+        list.addAll(students1);
+        Collections.sort(list, comparator);
+        //ToDO print
+        comparator.setSortingCriteria(StudentFieldName.AVERAGE_GRADE);
+        Collections.sort(list, comparator);
+        //ToDO print
+    }
+
+}
+
+enum StudentFieldName { NAME, LAST_NAME, AVERAGE_GRADE }
+
+
+
+class StudentComparator implements Comparator<Student> {
+
+    StudentFieldName sortingCriteria = StudentFieldName.NAME;
+
+    public void setSortingCriteria(StudentFieldName sortingCriteria) {
+        this.sortingCriteria = sortingCriteria;
+    }
+
+    @Override
+    public int compare(Student o1, Student o2) {
+        return 0;
     }
 }
