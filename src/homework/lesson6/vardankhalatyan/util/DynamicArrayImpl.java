@@ -4,15 +4,7 @@ import java.util.NoSuchElementException;
 
 public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
-    enum Direction {
-        RIGHT("RIGHT"), LEFT("left");
-
-        Direction(String name) {
-            this.name = name;
-        }
-
-        private String name;
-    }
+    enum Direction {RIGHT, LEFT;}
 
     private static final int DEFAULT_CAPACITY = 16;
 
@@ -78,11 +70,11 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @SuppressWarnings("unchecked")
     private T getElement(int index){
-        if (index > size() || index < 0){
+
+        if (index > size() || index < 0) { //TODO: it will be better to have validateIndex method
             throw new IndexOutOfBoundsException();
-        } else {
-            return (T)values[index];
         }
+        return (T)values[index];
     }
 
     @Override
@@ -95,6 +87,17 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
         T oldValue = getElement(index);
         values[index] = element;
         return oldValue;
+    }
+
+    private void validateIndex(int index) {
+        validateIndex(index, false);
+    }
+
+    private void validateIndex(int index, boolean isIndexAfterLastElementValid) {
+        int upperBound = isIndexAfterLastElementValid ? size() : size() -1;
+        if (index > upperBound || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     private void shiftTo(int index, Direction direction) {
@@ -129,6 +132,9 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public void add(int index, T element) {
+        validateIndex(index, true);
+        //ensureCapacity
+
         if (isEmpty()) {
             values[size()] = element;
             size++;
@@ -139,21 +145,32 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
         size++;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public T remove(int index) {
-        Object element = get(index);
+        T element = getElement(index);
         shiftTo(index, Direction.LEFT);
         size--;
-        return (T) element;
+        return element;
     }
 
     @Override
     public boolean remove(T o) {
-        if (contains(o)){
-            remove(indexOf(o));
-            return true;
+        if (!contains(o)) {
+            return false;
         }
-        throw new NoSuchElementException("There is no such element to be removed");
+        remove(indexOf(o));
+        return true;
+        //We should return false if the specified element is not exist in array
+//        throw new NoSuchElementException("There is no such element to be removed");
+    }
+}
+
+
+class Outer {
+    private class Inner {}
+
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        Inner inner = outer.new Inner();
     }
 }
