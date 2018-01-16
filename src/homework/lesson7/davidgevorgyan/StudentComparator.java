@@ -16,7 +16,7 @@ class StudentComparator implements Comparator<Student> {
 
 
 
-    public void setSortingCriteria(StudentFieldName sortingCriteria) {
+    private void setSortingCriteria(StudentFieldName sortingCriteria) {
         this.sortingCriteria = sortingCriteria;
     }
 
