@@ -5,14 +5,14 @@ import java.util.Arrays;
 public class DynamicArrayImpl<T> implements DynamicArray<T> {
     private static final int DEFAULT_SIZE = 16;
     private int size;
-    private Object[] ObjectsArray;
+    private Object[] objectsArray;
 
     public DynamicArrayImpl() {
         this(DEFAULT_SIZE);
     }
 
     DynamicArrayImpl(int capacity) {
-        this.ObjectsArray = new Object[capacity];
+        this.objectsArray = new Object[capacity];
         this.size = 0;
     }
 
@@ -35,14 +35,14 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     public int indexOf(T o) {
 
         if (o == null) {
-            for (int i = 0; i < ObjectsArray.length; i++) {
-                if (ObjectsArray[i] == null) {
+            for (int i = 0; i < size; i++) {
+                if (objectsArray[i] == null) {
                     return i;
                 }
             }
         } else {
-            for (int i = 0; i < ObjectsArray.length; i++) {
-                if (o.equals(ObjectsArray[i])) {
+            for (int i = 0; i < size; i++) {
+                if (o.equals(objectsArray[i])) {
                     return i;
                 }
             }
@@ -51,16 +51,16 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     }
 
     @Override
-    public int lastIndexOf(T o) throws IndexOutOfBoundsException {
+    public int lastIndexOf(T o)  {
         if (o == null) {
-            for (int i = ObjectsArray.length; i > 0; i--) {
-                if (ObjectsArray[i] == null) {
+            for (int i = size - 1; i > 0; i--) {
+                if (objectsArray[i] == null) {
                     return i;
                 }
             }
         } else {
-            for (int i = ObjectsArray.length - 1; i >= 0; i--) {
-                if (o.equals(ObjectsArray[i])) {
+            for (int i = size - 1; i >= 0; i--) {
+                if (o.equals(objectsArray[i])) {
                     return i;
                 }
             }
@@ -70,55 +70,50 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
     @Override
     public T get(int index) throws IndexOutOfBoundsException {
-        if (index >= 0 && index <= ObjectsArray.length) {
-            return (T) ObjectsArray[index];
-        }
-        throw new IndexOutOfBoundsException();
+        validateIndex(index);  /*if validate method trows exeption mthod get will continued compile?*/
+        return getEement(index);
     }
 
     @Override
-    public T set(int index, T element) throws IndexOutOfBoundsException{
-//        if (index >= 0 && index <= ObjectsArray.length) {
-////            this.ObjectsArray[index] = element;
-////            return (T) ObjectsArray;
-////        } else {
-////            throw new IndexOutOfBoundsException();
-////        }
-
-        while (validateIndex(index)){
-            T temp = getEement(index);
-            ObjectsArray[index] = element;
-            return temp;
-        }
-        return getEement(index);
+    public T set(int index, T element) {
+        validateIndex(index);
+        T temp = getEement(index);
+        objectsArray[index] = element;
+        return temp;
     }
 
     @Override
     public boolean add(T e) {
         ensureArrayCapacity();
-        ObjectsArray[size++] = e;
+        objectsArray[size++] = e;
         return true;
     }
     /*Here is a problem*/
     @Override
     public void add(int index, T element) {
-        if (validateIndex(index)){
-            ensureArrayCapacity();
-            T temp = getEement(index);
 
-            for (int j = size; j > index; j--) {
-                if (ObjectsArray[j] != null) {
-                    swap(ObjectsArray, j, j + 1);
-                }
-            }
-            set(index,element);
-            set(index+1,temp);
-            size++;
-            ObjectsArray = ensureToReduce();
-            if (index < 0 && index >= size) {
-                throw new IndexOutOfBoundsException();
-            }
-        }
+        validateIndex(index);
+        ensureArrayCapacity();
+        System.arraycopy(objectsArray, index, objectsArray, index + 1, size - index);
+        objectsArray[index] = element;
+        size++;
+//            validateIndex(index);
+//            ensureArrayCapacity();
+//            T temp = getEement(index);
+//
+//            for (int j = size; j > index; j--) {
+//                if (objectsArray[j] != null) {
+//                    swap(objectsArray, j, j + 1);
+//                }
+//            }
+//            set(index,element);
+//            set(index+1,temp);
+//            size++;
+//            objectsArray = ensureToReduce();
+//            if (index < 0 && index >= size) {
+//                throw new IndexOutOfBoundsException();
+//            }
+
     }
 
     private void swap(Object[] objectsArray, int a, int b) {
@@ -137,21 +132,27 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
      */
     @Override
     public T remove(int index) {
-        T temp = null;
-        ObjectsArray = ensureToReduce();
-        lab:
-        while (validateIndex(index)) {  // index >= 0 && index <= size
-            for (int i = 0; i < size; i++) {
-                if (index == i) {
-                    temp = getEement(i);  //getElement TODO
-                    ObjectsArray[i] = null;
-                    break lab;
-                }
-            }
-        }
-        ensureArrayCapacity();
-        System.arraycopy(ObjectsArray, index + 1, ObjectsArray, index, size - index);
+        validateIndex(index);
+        T temp = getEement(index);
+        System.arraycopy(objectsArray,index + 1, objectsArray,index,size -index);
+        objectsArray[index - 1] = null;
         size--;
+        ensureToReduce();
+//        T temp = null;
+//        objectsArray = ensureToReduce();
+//        lab:
+//        while (validateIndex(index)) {  // index >= 0 && index <= size
+//            for (int i = 0; i < size; i++) {
+//                if (index == i) {
+//                    temp = getEement(i);  //getElement TODO
+//                    objectsArray[i] = null;
+//                    break lab;
+//                }
+//            }
+//        }
+//        ensureArrayCapacity();
+//        System.arraycopy(objectsArray, index + 1, objectsArray, index, size - index);
+//        size--;
         return temp;
     }
 
@@ -165,44 +166,39 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     }
 
     public void printArray() {
-        ObjectsArray = ensureToReduce();
-        for (int i = 0; i < ObjectsArray.length; i++) {
-            System.out.print(ObjectsArray[i] + " ");
+        objectsArray = ensureToReduce();
+        for (int i = 0; i < objectsArray.length; i++) {
+            System.out.print(objectsArray[i] + " ");
         }
     }
 
     private Object [] ensureToReduce() {
 //        Object[] newObjectArray = new Object[size];
-////        System.arraycopy(ObjectsArray, 0, newObjectArray, 0, size);
-////        return (T[]) (ObjectsArray = newObjectArray);
-        if (size  < ObjectsArray.length && size > 3) {
-            return Arrays.copyOf(ObjectsArray, size);
+////        System.arraycopy(objectsArray, 0, newObjectArray, 0, size);
+////        return (T[]) (objectsArray = newObjectArray);
+        if (size  < objectsArray.length && size > 3) {
+            return Arrays.copyOf(objectsArray, size);
         }
         else {
-            return ObjectsArray;
+            return objectsArray;
         }
     }
 
     private void ensureArrayCapacity() {
-        if (size <= ObjectsArray.length - 1) {
+        if (size <= objectsArray.length - 1) {
             return;
         }
         Object[] newArray = new Object[size * 3 / 2];
-        System.arraycopy(ObjectsArray, 0, newArray, 0, ObjectsArray.length);
-        ObjectsArray = newArray;
+        System.arraycopy(objectsArray, 0, newArray, 0, objectsArray.length);
+        objectsArray = newArray;
     }
-
+@SuppressWarnings("uncheked")
     private T getEement(int index) {
-        if (validateIndex(index)) {
-            return  (T)ObjectsArray[index];  // what mean unchecked cast??
-        }else{
-            throw new IndexOutOfBoundsException();
-        }
+        return  (T) objectsArray[index];  // what mean unchecked cast??
     }
 
-    private boolean validateIndex(int index)throws IndexOutOfBoundsException {
+    private void validateIndex(int index) {
         if (index >= 0 && index <= size){
-            return true;
         }else{
             throw new IndexOutOfBoundsException();
         }
