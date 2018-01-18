@@ -94,6 +94,7 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 
         validateIndex(index);
         ensureArrayCapacity();
+
         System.arraycopy(objectsArray, index, objectsArray, index + 1, size - index);
         objectsArray[index] = element;
         size++;
@@ -102,9 +103,8 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
 //            T temp = getEement(index);
 //
 //            for (int j = size; j > index; j--) {
-//                if (objectsArray[j] != null) {
-//                    swap(objectsArray, j, j + 1);
-//                }
+//                objectsArray[j] = objectsArray[j-1];
+//
 //            }
 //            set(index,element);
 //            set(index+1,temp);
@@ -134,8 +134,9 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     public T remove(int index) {
         validateIndex(index);
         T temp = getEement(index);
-        System.arraycopy(objectsArray,index + 1, objectsArray,index,size -index);
-        objectsArray[index - 1] = null;
+
+        System.arraycopy(objectsArray,index + 1, objectsArray, index,size - index);
+        objectsArray[size - 1] = null;
         size--;
         ensureToReduce();
 //        T temp = null;
@@ -166,26 +167,24 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
     }
 
     public void printArray() {
-        objectsArray = ensureToReduce();
+        ensureToReduce();
         for (int i = 0; i < objectsArray.length; i++) {
             System.out.print(objectsArray[i] + " ");
         }
     }
-
-    private Object [] ensureToReduce() {
+private static final int MAX_ALLOWED_EMPTY_SIZE = 1000;
+    private void ensureToReduce() {
 //        Object[] newObjectArray = new Object[size];
 ////        System.arraycopy(objectsArray, 0, newObjectArray, 0, size);
 ////        return (T[]) (objectsArray = newObjectArray);
-        if (size  < objectsArray.length && size > 3) {
-            return Arrays.copyOf(objectsArray, size);
-        }
-        else {
-            return objectsArray;
+        if (size + MAX_ALLOWED_EMPTY_SIZE >= objectsArray.length ) {
+            //TODO: reduce
+
         }
     }
 
     private void ensureArrayCapacity() {
-        if (size <= objectsArray.length - 1) {
+        if (size < objectsArray.length)  {
             return;
         }
         Object[] newArray = new Object[size * 3 / 2];
@@ -202,5 +201,16 @@ public class DynamicArrayImpl<T> implements DynamicArray<T> {
         }else{
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for (int i = 0; i < size - 1; i++) {
+            sb.append(objectsArray[i]).append(", ");
+        }
+        sb.append(objectsArray[size - 1]).append("]");
+        return sb.toString();
     }
 }
